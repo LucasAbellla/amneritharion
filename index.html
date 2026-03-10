@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grimório de Nahvvatzal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Quattrocento+Sans:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased relative overflow-x-hidden">
+
+    <div id="loading-screen" class="fixed inset-0 z-[9999] bg-[#050508] flex flex-col items-center justify-center transition-opacity duration-1000">
+        <div class="text-red-900 text-8xl mb-6 animate-pulse" style="font-family: serif; text-shadow: 0 0 20px #4a1515;">⎊</div>
+        <div class="text-gray-500 tracking-[0.8em] text-sm uppercase animate-pulse" style="font-family: 'Cinzel', serif;">Despertando o Tomo...</div>
+    </div>
+
+    <div id="qoldjornesz-bg" class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden opacity-20"></div>
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-8 md:mb-12 mt-4">
+            <h1 class="text-4xl md:text-6xl font-bold text-header-main">Grimório Interativo Elemental</h1>
+            <p class="text-subheader mt-2 text-lg">Selecione duas runas para invocar suas fusões mágicas.</p>
+        </header>
+
+        <main>
+            <section id="explorer" class="rounded-2xl p-6 md:p-8 relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start"> 
+                    
+                    <div id="selector1" class="flex flex-col items-center">
+                        <h3 class="text-xl font-bold mb-4 font-cinzel text-content-light">Elemento Primário</h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col items-center order-first md:order-none space-y-6 w-full max-w-[600px] mx-auto">
+                         <div id="result-card-display" class="w-full">
+                            <div id="magic-circle"></div>
+                            
+                            <span id="placeholder-text" class="texto-aguardando">Aguardando Invocação...</span>
+                            <div id="complex-result-container" class="hidden">
+                                <h2 id="complex-element-name" class="result-text-entry"></h2>
+                                <p id="complex-element-combination" class="result-text-entry"></p>
+                                <p id="complex-element-description" class="result-text-entry"></p>
+                            </div>
+                        </div>
+                        <button id="reset-btn" class="btn-dissipar-pedra">DISSIPAR</button>
+                    </div>
+
+                    <div id="selector2" class="flex flex-col items-center">
+                        <h3 class="text-xl font-bold mb-4 font-cinzel text-content-light">Elemento Secundário</h3>
+                         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="details" class="mt-12 relative z-10">
+                <div class="space-y-6">
+                    <div>
+                        <h2 id="toggle-grimoire" class="text-2xl md:text-3xl font-bold text-center cursor-pointer p-4 transition-colors">
+                            Grimório das Runas Base <span class="section-toggle-arrow"><i class="fas fa-chevron-down"></i></span>
+                        </h2>
+                        <div id="content-grimoire" class="details-section section-bg p-6 md:p-8">
+                            <p class="text-center text-content-dim mb-6">Inspecione uma runa para revelar seus segredos e manifestações em Nahvvatzal.</p>
+                            <div id="grimoire-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h2 id="toggle-typings" class="text-2xl md:text-3xl font-bold text-center cursor-pointer p-4 transition-colors">
+                            Sistema de Tipagens Mágicas <span class="section-toggle-arrow"><i class="fas fa-chevron-down"></i></span>
+                        </h2>
+                        <div id="content-typings" class="details-section section-bg p-6 md:p-8">
+                             <p class="text-center text-content-dim mb-6">Explore como os magos adquirem seus poderes e como suas afinidades são classificadas.</p>
+                             <div id="acquisition-narrative-display" class="my-6 p-4 card-bg border border-slate-700 text-content-light hidden min-h-[60px]">
+                                <p id="narrative-text" class="italic"></p>
+                             </div>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                               <div>
+                                    <h3 class="text-xl font-bold mb-4 font-cinzel text-content-light">Meios de Aquisição</h3>
+                                    <div id="acquisition-methods" class="flex flex-wrap gap-3">
+                                    </div>
+                               </div>
+                               <div>
+                                    <h3 class="text-xl font-bold mb-4 font-cinzel text-content-light">Classificação das Tipagens</h3>
+                                    <div id="typing-classifications" class="space-y-3">
+                                    </div>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+         <footer class="text-center mt-16 py-8 border-t border-slate-800">
+            <p class="text-slate-600 text-sm">&copy; <span id="current-year"></span> Crisol de Apriori. Todos os segredos guardados.</p>
+        </footer>
+    </div>
+<div id="secret-modal" class="fixed inset-0 z-[9999] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
+        <div id="secret-modal-bg" class="absolute inset-0 bg-black/80 backdrop-blur-md"></div>
+        
+        <div id="secret-modal-content" class="relative bg-[#050508] border border-[#2a3040] p-8 max-w-2xl w-full mx-4 rounded-sm shadow-[0_0_50px_rgba(0,0,0,1)] transform scale-95 transition-transform duration-500">
+            
+            <button id="close-secret-modal" class="absolute top-4 right-4 text-slate-500 hover:text-red-600 transition-colors duration-300 z-50">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            
+            <h3 id="secret-modal-title" class="text-2xl font-cinzel text-red-900 mb-6 tracking-widest text-center" style="text-shadow: 0 0 10px rgba(255,0,0,0.2);">
+                </h3>
+            
+            <div id="secret-modal-body" class="text-slate-400 font-serif leading-relaxed space-y-4 text-sm min-h-[150px]">
+                <p id="secret-modal-subtitle" class="italic text-center opacity-70"></p>
+                <p id="secret-modal-text" class="mt-4"></p>
+            </div>
+            
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

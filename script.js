@@ -1,88 +1,81 @@
 const elementalData = {
     baseElements: {
         "Flama":   { 
-            desc: "Calor, combustão, destruição, fervor.", color: "#a61c1c", hoverColor: "#851616", manifestacoes: ["Controlar chamas", "Esferas de fogo", "Resistência ao calor"], 
-            lore: "Ira do <span class='madness-word' data-note='Ele devorou a própria prole antes de adormecer...'>Dragão Ancestral</span>.", imagem: "",
-            secretTitle: "A FOME ETERNA",
-            secretSubtitle: "\"O fogo não purifica. Ele apenas sente fome.\"",
-            secretText: "Os primeiros piromantes de Nahvvatzal não conjuravam chamas do ar, mas queimavam as próprias memórias para gerar calor. Muitos morreram sem saber os próprios nomes."
+            desc: "Al-azim", color: "#a61c1c", hoverColor: "#851616", manifestacoes: ["Controlar chamas", "Esferas de fogo", "Resistência ao calor"], 
+            lore: "Sangue jazido dos <span class='madness-word' data-note='Eles ainda queimam no fundo do poço...'>'Iitlaq</span>.", imagem: "img/flamasimbolo.png",
+            longDesc: "A manipulação das chamas transcende a simples destruição; é o ato de dar vida à entropia. Magos de Flama comumente carregam cicatrizes profundas e escondidas, pois o fogo primevo de Nahvvatzal exige parte da carne de seu conjurador como combustível antes de obedecer.",
+            secretTitle: "KCOTOLOX", secretSubtitle: "\"A Punição\"", secretText: "Os primeiros piromantes de Nahvvatzal não conjuravam chamas do ar, mas queimavam as próprias memórias para gerar calor. Muitos morreram sem saber os próprios nomes."
         },
         "Aqua":   { 
             desc: "Flua à minha mente, ou afogue-se na vastidão do meu ser.<br>-''Gyeang-ju''", color: "#3a4dff", hoverColor: "#2f3ecc", manifestacoes: ["Moldar água", "Respirar sob água", "Criar névoa"], 
-            lore: "Lágrima da <span class='madness-word' data-note='Ela chora sangue quando eclipsada.'>Deusa da Lua</span>.", imagem: "",
-            secretTitle: "O ABISMO VIVO",
-            secretSubtitle: "\"A água guarda os ecos de quem se afogou.\"",
-            secretText: "A Deusa da Lua não chora de tristeza. Suas lágrimas são compostas pelas almas daqueles que sucumbiram às profundezas. Beber dessa água é convidar os mortos para habitarem sua mente."
+            lore: "Lágrima da <span class='madness-word' data-note='Ela chora sangue quando eclipsada.'>Deusa da Lua</span>.", imagem: "img/aquasimbolo.png",
+            longDesc: "A água atua como um espelho para os terrores esquecidos. Ao conjurar Aqua, o mago não apenas manipula fluidos, mas ouve os ecos das almas que se afogaram nos mares antigos. Uma mente fraca pode facilmente se perder na vastidão de suas próprias memórias líquidas.",
+            secretTitle: "UTYLOF", secretSubtitle: "\"A Transformação\"", secretText: "A Deusa da Lua não chora de tristeza. Suas lágrimas são compostas pelas almas daqueles que sucumbiram às profundezas. Beber dessa água é convidar os mortos para habitarem sua mente."
         },
         "Eol":     { 
             desc: "Pense da menor reflexão de culpa à maior epifania noturna, esta é a liberdade.<br>-''Eristópheus''", color: "#00e689", hoverColor: "#00b86e", manifestacoes: ["Lufadas de vento", "Levitação breve", "Aumentar velocidade"], 
             lore: "Sussurros dos <span class='madness-word' data-note='Eles nunca se calam! Façam parar!'>Céus</span>.", imagem: "",
-            secretTitle: "OS SUSSURROS CORTANTES",
-            secretSubtitle: "\"O vento carrega a loucura dos deuses antigos.\"",
-            secretText: "Aqueles que escutam o vento por muito tempo perdem a própria voz. O ar em Gionyyl não é um elemento vazio, mas uma rede neural de confissões desesperadas."
+            longDesc: "O ar não é vazio, mas um condutor de lamentos. Dominar o Eol significa suportar o ruído constante dos deuses mortos sussurrando em seus ouvidos. Conjuradores experientes conseguem extrair o oxigênio dos pulmões de seus inimigos em absoluto e perturbador silêncio.",
+            secretTitle: "EFENLORU", secretSubtitle: "\"A Liberdade\"", secretText: "Aqueles que escutam o vento por muito tempo perdem a própria voz. O ar em Gionyyl não é um elemento vazio, mas uma rede neural de confissões desesperadas."
         },
         "Terrae":  { 
             desc: "Solidez, estabilidade, crescimento, fundação.", color: "#6c4d42", hoverColor: "#573e35", manifestacoes: ["Mover pedras", "Barreiras de terra", "Sentir tremores"], 
             lore: "Corpo da <span class='madness-word' data-note='Seus ossos formam as nossas prisões e túmulos.'>Mãe Antiga</span>.", imagem: "",
-            secretTitle: "A MÃE CARNÍVORA",
-            secretSubtitle: "\"A terra engole os vivos para nutrir os mortos.\"",
-            secretText: "A rocha não é cega. Cada pedra colocada nas fundações do Crisol de Apriori pulsa como um coração lento e exige sacrifícios de sangue a cada ciclo lunar."
+            longDesc: "As pedras fundacionais deste mundo estão manchadas de sacrifício. Terrae é a runa da estabilidade implacável, permitindo erguer barreiras intransponíveis ou enterrar exércitos vivos, unindo a vontade do mago ao ritmo geológico brutal do Crisol de Apriori.",
+            secretTitle: "HAVBAGAN", secretSubtitle: "\"A Formação\"", secretText: "A rocha não é cega. Cada pedra colocada nas fundações do Crisol de Apriori pulsa como um coração lento e exige sacrifícios de sangue a cada ciclo lunar."
         },
         "Fulmen":   { 
-            desc: "Ouça o estronddo de minha presença ao pronunciar meu nome.<br>-''Tyapu''", color: "#ffff00", hoverColor: "#e6e600", manifestacoes: ["Disparar raios", "Magnetizar objetos", "Aumentar reflexos"], 
+            desc: "Ouça o estrondo de minha presença ao pronunciar meu nome.<br>-''Tyapu''", color: "#ffff00", hoverColor: "#e6e600", manifestacoes: ["Disparar raios", "Magnetizar objetos", "Aumentar reflexos"], 
             lore: "Fúria do <span class='madness-word' data-note='Um usurpador cego pela própria luz.'>Deus da Tempestade</span>.", imagem: "",
-            secretTitle: "A LUZ CEGANTE",
-            secretSubtitle: "\"A iluminação traz a loucura.\"",
-            secretText: "Verdadeiro poder elétrico queima o nervo óptico. Magos experientes desta runa estão todos cegos, usando a estática do ar para tatear a realidade."
+            longDesc: "Uma fração de segundo de energia pura que frita sinapses e altera percepções. Fulmen concede uma velocidade divina, mas seus usuários frequentemente perdem a sensibilidade tátil e desenvolvem tremores crônicos após canalizarem as tormentas elétricas.",
+            secretTitle: "TEZNITAJ", secretSubtitle: "\"A Movimentação\"", secretText: "Verdadeiro poder elétrico queima o nervo óptico. Magos experientes desta runa estão todos cegos, usando a estática do ar para tatear a realidade."
         },
         "Crelix":   { 
             desc: "Frio, estagnação, preservação, rigidez.", color: "#56e5ff", hoverColor: "#45b7cc", manifestacoes: ["Congelar superfícies", "Armas de gelo", "Suportar frio"], 
-            lore: "Sopro Invernal do Gigante.", imagem: "",
-            secretTitle: "A PRISÃO VÍTREA",
-            secretSubtitle: "\"A eternidade é a pior das punições.\"",
-            secretText: "No coração do Zero Absoluto, o tempo não passa. Os primeiros traidores da ordem foram congelados vivos, e os seus pensamentos gritam no gelo há quatro milénios."
+            lore: "Sopro Invernal do <span class='madness-word' data-note='Ele está adormecido sob o gelo vermelho.'>Gigante</span>.", imagem: "",
+            longDesc: "O verdadeiro poder de Crelix não é o gelo, mas a paralisação do tempo em escala molecular. É a runa da preservação implacável. Magos de gelo enxergam a vida como uma anomalia caótica que deve ser cristalizada e silenciada para a ordem prevalecer.",
+            secretTitle: "ORGNOTAMOTR", secretSubtitle: "\"A Permanência\"", secretText: "No coração do Zero Absoluto, o tempo não passa. Os primeiros traidores da ordem foram congelados vivos, e os seus pensamentos gritam no gelo há quatro milênios."
         },
         "Lux":    { 
             desc: "Iluminação, verdade, pureza, visão.", color: "#fbe4ec", hoverColor: "#f9d7e3", manifestacoes: ["Criar luz", "Dissipar sombras", "Cura leve"], 
-            lore: "Bênção do Sol Eterno.", imagem: "",
-            secretTitle: "A VERDADE CORROSIVA",
-            secretSubtitle: "\"Cuidado com o que a luz revela.\"",
-            secretText: "Dizem que é cura, mas a luz queima as imperfeições. Usar este elemento repetidamente purifica tanto o mago que ele começa a perder os seus sentimentos humanos."
+            lore: "Bênção do <span class='madness-word' data-note='Sua luz queima as almas impuras.'>Sol Eterno</span>.", imagem: "",
+            longDesc: "Diferente dos contos antigos, a luz em Gionyyl é aterradora. A runa Lux arranca os véus da ilusão e expõe imperfeições. É um poder tão absoluto e puro que chega a queimar a própria sanidade dos conjuradores ao revelar horrores que as sombras gentilmente ocultavam.",
+            secretTitle: "RASTONTRI", secretSubtitle: "\"A Presença\"", secretText: "Dizem que é cura, mas a luz queima as imperfeições. Usar este elemento repetidamente purifica tanto o mago que ele começa a perder os seus sentimentos humanos."
         },
         "Umbra": { 
             desc: "Em meu manto repousa os maiores terrores e mistérios do universo.<br>-''Ibi'una''", color: "#303030", hoverColor: "#262626", manifestacoes: ["Furtividade", "Escuridão localizada", "Intimidar"], 
-            lore: "Manto da Noite Silenciosa.", imagem: "",
-            secretTitle: "O VAZIO QUE OBSERVA",
-            secretSubtitle: "\"As sombras têm olhos famintos.\"",
-            secretText: "Não há escuridão vazia. Toda sombra projetada pelo sol é um portal para a dimensão de Umbra, onde as entidades esquecidas aguardam que feches os olhos."
+            lore: "Manto da <span class='madness-word' data-note='Não olhe para a escuridão por muito tempo.'>Noite Silenciosa</span>.", imagem: "",
+            longDesc: "As sombras possuem textura e fome. Ao manipular Umbra, o feiticeiro permite ser abraçado pelo vazio. A furtividade perfeita que ela confere é o resultado de transportar o próprio corpo para uma dimensão paralela densa e asfixiante por breves e angustiantes períodos.",
+            secretTitle: "YRMEGTORE", secretSubtitle: "\"A Ausência\"", secretText: "Não há escuridão vazia. Toda sombra projetada pelo sol é um portal para a dimensão de Umbra, onde as entidades esquecidas aguardam que feche os olhos."
         },
         "Vitae":  { 
             desc: "Há formas de vida em todas as minhas criações e submissão às suas escolhas.<br>-''Yashima-no-Mikoto''", color: "#9d0e4f", hoverColor: "#7e0b3f", manifestacoes: ["Acelerar cura", "Estimular plantas", "Sentir auras"], 
-            lore: "Essência da Natureza Viva.", imagem: "",
-            secretTitle: "A CARNE AMUTINADA",
-            secretSubtitle: "\"A vida sempre encontra uma forma de corromper.\"",
-            secretText: "O excesso de magia vital causa o crescimento de órgãos redundantes no mago. É comum ver mestres desta runa escondendo múltiplos olhos debaixo das vestes."
+            lore: "Essência da <span class='madness-word' data-note='As raízes bebem dos nossos cadáveres.'>Natureza Viva</span>.", imagem: "",
+            longDesc: "Curar não é um milagre, é uma reescrita biológica violenta. A energia da Vitae força células a se multiplicarem rapidamente. É comum que aprendizes ineptos gerem tumores e anomalias corpóreas em seus aliados ao tentarem remendar ferimentos de batalha.",
+            secretTitle: "IGL'TRUTAE", secretSubtitle: "\"A Animação\"", secretText: "O excesso de magia vital causa o crescimento de órgãos redundantes no mago. É comum ver mestres desta runa escondendo múltiplos olhos debaixo das vestes."
         },
         "Toxi": { 
             desc: "Meu toque é o sussurro da entropia, a transformação inevitável e putrefata do todo.<br>-''Koscheniev''", color: "#76cf02", hoverColor: "#5ea602", manifestacoes: ["Criar venenos", "Causar náusea", "Resistência a doenças"], 
-            lore: "<span class='madness-word' data-note='O cheiro... o cheiro é insuportável na mente.'>Peste Rastejante</span>.", imagem: "",
-            secretTitle: "O TOQUE DA DECADÊNCIA",
-            secretSubtitle: "\"Todo o fim é um novo e repugnante começo.\"",
-            secretText: "A runa da toxina exige simbiose. Para canalizar o veneno verdadeiro, o mago hospeda parasitas na sua corrente sanguínea que devoram lentamente o seu pâncreas."
+            lore: "Peste <span class='madness-word' data-note='O cheiro... o cheiro é insuportável na mente.'>Rastejante</span>.", imagem: "",
+            longDesc: "Senhores da putrefação e mestres do miasma. A toxina dissolve lentamente os tecidos, corroendo armaduras e vontades com igual facilidade. Magos de Toxi costumam usar filtros purificadores severos para esconder as feridas deixadas por seus próprios vapores na garganta.",
+            secretTitle: "KARVPARLPAKS", secretSubtitle: "\"A Degradação\"", secretText: "A runa da toxina exige simbiose. Para canalizar o veneno verdadeiro, o mago hospeda parasitas na sua corrente sanguínea que devoram lentamente o seu pâncreas."
         },
         "Vis":{ 
             desc: "Força pura, movimento, poder bruto, potencial.", color: "#803631", hoverColor: "#662b27", manifestacoes: ["Empurrão telecinético", "Escudos de energia", "Aumentar força"], 
-            lore: "Fluxo Primordial.", imagem: "",
-            secretTitle: "A PRESSÃO ESMAGADORA",
-            secretSubtitle: "\"A gravidade não perdoa os fracos.\"",
-            secretText: "Conjurar energia bruta distorce os ossos do utilizador. As salas de treino da Vis no Crisol estão constantemente manchadas com o sangue de novatos que implodiram."
+            lore: "Fluxo <span class='madness-word' data-note='O peso da magia esmaga a sanidade.'>Primordial</span>.", imagem: "",
+            longDesc: "Desprovida de forma ou moralidade, a Vis é a energia cósmica crua. A pressão espacial gerada por esta runa pode defletir rochedos ou implodir o ar ao redor. Usar Vis exige um foco monumental, sob pena do usuário colapsar e estilhaçar sua própria estrutura óssea pelo impacto recuo.",
+            secretTitle: "TSOZDNEMARO", secretSubtitle: "\"A Energia\"", secretText: "Conjurar energia bruta distorce os ossos do utilizador. As salas de treino da Vis no Crisol estão constantemente manchadas com o sangue de novatos que implodiram."
         },
         "Ulrhtau": { 
             desc: "DADOS CORROMPIDOS // FALHA DE LEITURA", color: "#ff0000", hoverColor: "#ff0000", manifestacoes: ["Aberração espacial", "Distorção da realidade", "[ERRO]"], 
-            lore: "NÃO CLICAR. A <span class='madness-word' data-note='A DOR É INFINITA AQUI FORA A DOR É INFINITA'>runa esquecida</span> que corrói o grimório.", imagem: "",
-            secretTitle: "",
-            secretSubtitle: "",
-            secretText: ""
+            // CORREÇÃO: Sintaxe HTML na Lore corrigida (tag span fechada corretamente)
+            lore: "NÃO CLICAR. A <span class='madness-word' data-note='A DOR É INFINITA AQUI FORA A DOR É INFINITA'>runa esquecida</span> que corrói o grimório.",
+            // ATUALIZAÇÃO: Adicionado uma mensagem de erro vermelha como ilustração
+            imagem: "img/o-olho.jpg", 
+            // ATUALIZAÇÃO: Adicionado longDesc para Ulrhtau com texto de horror e anotações
+            longDesc: "A matéria grita ao ser tocada por esta anomalia. As leis fundamentais da física de Gionyyl são estraçalhadas. A <span class='madness-word' data-note='ELES_ESTÃO_ATRAS_DE_TI_..._FOGE_...'>DOR</span> é o único idioma conhecido por aqueles que sobrevivem ao manipular o Vazio Fragmentado. //NÃO_OLHE_PARA_TRÁS//",
+            // Mantém os segredos em branco, pois Ulrhtau usa o efeito do olho
+            secretTitle: "", secretSubtitle: "", secretText: ""
         }
     },
     combinations: {
@@ -542,7 +535,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const grimoireGrid = document.getElementById('grimoire-grid');
     Object.entries(elementalData.baseElements).forEach(([name, data]) => {
         const card = document.createElement('div');
-        card.className = 'grimoire-card p-5 cursor-pointer';
+        // ATUALIZAÇÃO NÚMERO 1: Adicionado a classe "self-start" para não esticar os cartões adjacentes!
+        card.className = 'grimoire-card p-5 cursor-pointer self-start';
         card.style.setProperty('--rune-color', data.color);
         
         if (name === "Ulrhtau") {
@@ -570,7 +564,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </h4>
                         <div class="text-content-dim text-sm italic mt-2 border-l-2 pl-3 space-y-2" style="border-color: ${data.color}55">
                             <p class="font-semibold" style="color: ${data.color};">${data.lore}</p>
-                            <p class="opacity-80">Aqui você pode adicionar dezenas de linhas de texto. Conte lendas sobre os primeiros magos a controlarem este elemento, ou descreva rituais complexos. O cartão se ajustará ao tamanho da sua história.</p>
+                            <p class="opacity-80">${data.longDesc}</p>
                         </div>
                     </div>
 
@@ -662,7 +656,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const secretBg = document.getElementById('secret-modal-bg');
     const secretModalContent = document.getElementById('secret-modal-content');
     
-    // Novo Sistema de Registo de Animações
     let activeGlitchIntervals = [];
 
     function clearAllIntervals() {
@@ -696,9 +689,7 @@ document.addEventListener('DOMContentLoaded', () => {
         activeGlitchIntervals.push(interval);
     }
 
-    // A Anomalia do Olho (NOVO DESENHO REALISTA)
     function animateEye(element) {
-        // Formato de um olho reptiliano/cósmico com íris e pupila detalhada
         const template = [
             "                          ████████                          ",
             "                  ██████████████████████                  ",
@@ -722,9 +713,9 @@ document.addEventListener('DOMContentLoaded', () => {
             for(let i=0; i<template.length; i++) {
                 const char = template[i];
                 if (char === " " || char === "\n") {
-                    result += char; // Mantém os espaços vazios para dar a forma do olho
+                    result += char; 
                 } else {
-                    result += chars[Math.floor(Math.random() * chars.length)]; // Substitui os blocos pelo glitch
+                    result += chars[Math.floor(Math.random() * chars.length)]; 
                 }
             }
             element.innerText = result;
@@ -735,7 +726,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if(secretModal) {
         function openSecretModal(elementName, data) {
-            clearAllIntervals(); // Limpa as interferências anteriores
+            clearAllIntervals(); 
 
             secretModalContent.style.setProperty('--modal-rune-color', data.color);
             secretModal.classList.add('active');
@@ -745,20 +736,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const textEl = document.getElementById('secret-modal-text');
 
             if (elementName === "Ulrhtau") {
-                // MODO HORROR: O Olho do Vazio
                 titleEl.className = "text-3xl font-cinzel text-red-600 mb-6 tracking-widest text-center font-bold";
                 subEl.innerText = "";
-                
-                // Formatação forçada para o ASCII manter a proporção
                 textEl.className = "ascii-eye";
                 
                 scrambleText(titleEl, "MILN JADITYL XCO", 2000);
                 animateEye(textEl);
 
             } else {
-                // MODO NORMAL: Leitura de Registos
                 titleEl.className = "text-2xl font-cinzel text-red-900 mb-6 tracking-widest text-center";
-                textEl.className = "mt-4"; // Restaura a classe de texto normal
+                textEl.className = "mt-4"; 
                 
                 const sTitle = data.secretTitle || "REGISTOS OBSCUROS";
                 const sSub = data.secretSubtitle || "\"As páginas que a ordem tentou queimar...\"";
@@ -772,7 +759,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function closeSecretModal() {
             secretModal.classList.remove('active');
-            clearAllIntervals(); // Desliga a "energia" ao fechar a janela
+            clearAllIntervals(); 
         }
 
         closeSecretBtn.addEventListener('click', closeSecretModal);

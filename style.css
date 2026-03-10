@@ -84,6 +84,47 @@ h1, h2, h3, .font-cinzel { font-family: 'Cinzel', serif; }
     text-shadow: 0 0 15px rgba(255, 68, 68, 0.4);
 }
 
+/* =========================================
+   ECOS DE QOLDJORNESZ E ANOTAÇÕES DA LOUCURA
+   ========================================= */
+.qold-rune {
+    position: absolute;
+    color: #4a5568;
+    font-family: serif;
+    user-select: none;
+    transition: transform 0.1s linear; 
+    text-shadow: 0 0 5px rgba(255,255,255,0.05);
+}
+
+.madness-word {
+    text-decoration: none; 
+    background-image: linear-gradient(90deg, #ff4444, #ffaa00, #ff4444);
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: gradient-shift 2.5s linear infinite;
+    cursor: help;
+    position: relative;
+    display: inline-block;
+    font-weight: 700;
+    transition: transform 0.2s ease;
+    /* Adicionado z-index inicial para criar contexto de empilhamento */
+    z-index: 1; 
+}
+
+@keyframes gradient-shift {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+.madness-word:hover {
+    transform: scale(1.05);
+    text-shadow: 0 0 15px rgba(255, 68, 68, 0.4);
+    /* Garante que a palavra flutue acima de outras linhas de texto ao redor */
+    z-index: 10; 
+}
+
 .madness-word::after {
     content: attr(data-note);
     position: absolute;
@@ -106,7 +147,8 @@ h1, h2, h3, .font-cinzel { font-family: 'Cinzel', serif; }
     opacity: 0;
     visibility: hidden;
     transition: all 0.2s ease;
-    z-index: 50;
+    /* ATUALIZAÇÃO CRÍTICA: Aumentado para flutuar acima de TUDO na grade do grimório */
+    z-index: 9999; 
     pointer-events: none;
     text-align: left;
     line-height: 1.4;
@@ -117,6 +159,8 @@ h1, h2, h3, .font-cinzel { font-family: 'Cinzel', serif; }
     opacity: 1;
     visibility: visible;
     transform: translateY(-5px); 
+    /* Permite interatividade caso o tooltip tenha links ou botões no futuro */
+    pointer-events: auto; 
 }
 
 /* =========================================

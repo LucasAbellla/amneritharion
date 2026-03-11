@@ -235,6 +235,15 @@ h1, h2, h3, .font-cinzel { font-family: 'Cinzel', serif; }
     border: 1px solid rgba(255, 255, 255, 0.03) !important; 
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8) !important; 
     border-radius: 8px !important; 
+    -webkit-app-region: drag;
+}
+
+/* NOVO: Como o painel superior é arrastável, temos de garantir que botões e seletores 
+   dentro dele NÃO sejam arrastáveis, senão eles não podem ser clicados! */
+#explorer button,
+#explorer selector,
+.element-btn {
+    -webkit-app-region: no-drag; 
 }
 
 /* =========================================

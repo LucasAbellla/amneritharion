@@ -1,0 +1,47 @@
+{
+  "name": "grimorio-nahvvatzal",
+  "productName": "Grimorio Nahvvatzal",
+  "version": "1.0.0",
+  "description": "O Tomo de Gionyyl",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --windows"
+  },
+  "build": {
+    "appId": "com.abellathebeauty.grimorio",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "icon": "icon.png",
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "icon.png",
+      "uninstallerIcon": "icon.png",
+      "uninstallDisplayName": "Desinstalar Grimorio Nahvvatzal",
+      "license": "LICENSE.txt"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbellaTheBeauty/grim-rio-tipagem.git"
+  },
+  "keywords": [
+    "grimorio",
+    "nahvvatzal",
+    "magia"
+  ],
+  "author": "Abella",
+  "license": "MIT",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "^40.8.0",
+    "electron-builder": "^25.1.8"
+  }
+}

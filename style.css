@@ -48,43 +48,6 @@ h1, h2, h3, .font-cinzel { font-family: 'Cinzel', serif; }
 }
 
 /* =========================================
-   ECOS DE QOLDJORNESZ & ANOTAÇÕES DA LOUCURA
-   ========================================= */
-.qold-rune {
-    position: absolute;
-    color: #4a5568;
-    font-family: serif;
-    user-select: none;
-    transition: transform 0.1s linear; 
-    text-shadow: 0 0 5px rgba(255,255,255,0.05);
-}
-
-.madness-word {
-    text-decoration: none; 
-    background-image: linear-gradient(90deg, #ff4444, #ffaa00, #ff4444);
-    background-size: 200% auto;
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-    animation: gradient-shift 2.5s linear infinite;
-    cursor: help;
-    position: relative;
-    display: inline-block;
-    font-weight: 700;
-    transition: transform 0.2s ease;
-}
-
-@keyframes gradient-shift {
-    0% { background-position: 0% center; }
-    100% { background-position: 200% center; }
-}
-
-.madness-word:hover {
-    transform: scale(1.05);
-    text-shadow: 0 0 15px rgba(255, 68, 68, 0.4);
-}
-
-/* =========================================
    ECOS DE QOLDJORNESZ E ANOTAÇÕES DA LOUCURA
    ========================================= */
 .qold-rune {
@@ -109,7 +72,6 @@ h1, h2, h3, .font-cinzel { font-family: 'Cinzel', serif; }
     display: inline-block;
     font-weight: 700;
     transition: transform 0.2s ease;
-    /* Adicionado z-index inicial para criar contexto de empilhamento */
     z-index: 1; 
 }
 
@@ -121,7 +83,6 @@ h1, h2, h3, .font-cinzel { font-family: 'Cinzel', serif; }
 .madness-word:hover {
     transform: scale(1.05);
     text-shadow: 0 0 15px rgba(255, 68, 68, 0.4);
-    /* Garante que a palavra flutue acima de outras linhas de texto ao redor */
     z-index: 10; 
 }
 
@@ -147,7 +108,6 @@ h1, h2, h3, .font-cinzel { font-family: 'Cinzel', serif; }
     opacity: 0;
     visibility: hidden;
     transition: all 0.2s ease;
-    /* ATUALIZAÇÃO CRÍTICA: Aumentado para flutuar acima de TUDO na grade do grimório */
     z-index: 9999; 
     pointer-events: none;
     text-align: left;
@@ -159,7 +119,6 @@ h1, h2, h3, .font-cinzel { font-family: 'Cinzel', serif; }
     opacity: 1;
     visibility: visible;
     transform: translateY(-5px); 
-    /* Permite interatividade caso o tooltip tenha links ou botões no futuro */
     pointer-events: auto; 
 }
 
@@ -235,15 +194,26 @@ h1, h2, h3, .font-cinzel { font-family: 'Cinzel', serif; }
     border: 1px solid rgba(255, 255, 255, 0.03) !important; 
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8) !important; 
     border-radius: 8px !important; 
-    -webkit-app-region: drag;
+    
+    /* Faz todo o painel superior ser o "puxador" para arrastar a janela nativa! */
+    -webkit-app-region: drag; 
 }
 
-/* NOVO: Como o painel superior é arrastável, temos de garantir que botões e seletores 
-   dentro dele NÃO sejam arrastáveis, senão eles não podem ser clicados! */
+/* Botões e seletores não podem ser arrastáveis para se poder clicar! */
 #explorer button,
 #explorer selector,
-.element-btn {
+.element-btn,
+.window-controls button {  
     -webkit-app-region: no-drag; 
+}
+
+/* Efeito de brilho maligno ao passar o rato no botão de fechar */
+#btn-close:hover {
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+    transform: scale(1.1);
+}
+#btn-minimize:hover {
+    transform: scale(1.1);
 }
 
 /* =========================================
@@ -541,6 +511,50 @@ body.anomalia-realidade::after {
 
 
 /* =========================================
+   SISTEMA DE MÚLTIPLAS ABAS (SPA)
+   ========================================= */
+.view-section {
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    top: 0; left: 0;
+}
+
+.view-section.active {
+    opacity: 1;
+    pointer-events: auto;
+    position: relative;
+}
+
+/* =========================================
+   CARTÕES DO ÍNDICE DOS SÁBIOS
+   ========================================= */
+.fusion-card {
+    background: linear-gradient(90deg, rgba(20,20,25,0.9) 0%, rgba(10,10,15,0.9) 100%);
+    border-left: 3px solid #d69e9e;
+}
+.fusion-card:hover {
+    background: linear-gradient(90deg, rgba(30,30,40,0.9) 0%, rgba(10,10,15,0.9) 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.locked-card {
+    background: rgba(10, 10, 15, 0.4);
+    border: 1px dashed #2a3040;
+    transition: all 0.3s ease;
+}
+.locked-card:hover {
+    background: rgba(20, 20, 25, 0.6);
+    border-color: #4a5568;
+}
+.locked-card i {
+    text-shadow: 0 0 10px rgba(0,0,0,0.9);
+}
+
+/* =========================================
    O BOTÃO FANTASMA E A JANELA SECRETA GLITCHADA
    ========================================= */
 .secret-btn {
@@ -614,11 +628,11 @@ body.anomalia-realidade::after {
     }
 }
 
-/* NOVO: A formatação do Olho Macabro Ajustada */
+/* A formatação do Olho Macabro Ajustada */
 .ascii-eye {
     font-family: monospace;
     line-height: 1.1;
-    letter-spacing: 3px; /* Reduzido levemente para caber os cantos do olho */
+    letter-spacing: 3px; 
     white-space: pre;
     color: #ff0000;
     text-shadow: 0 0 10px #ff0000, 0 0 20px #8b0000;
@@ -626,11 +640,39 @@ body.anomalia-realidade::after {
     display: flex;
     justify-content: center;
     font-weight: bold;
-    font-size: 12px; /* Fonte ajustada para o desenho caber na tela */
+    font-size: 12px; 
     overflow-x: hidden;
 }
 
 @keyframes eye-pulse {
     0% { opacity: 0.8; transform: scale(1); }
     100% { opacity: 1; transform: scale(1.05); }
+}
+
+/* =========================================
+   A MAGIA DO MODAL DE FUSÃO (Pergaminho)
+   ========================================= */
+.unlocked-fusion-card {
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.unlocked-fusion-card:hover {
+    transform: scale(1.05) translateY(-5px);
+    z-index: 10;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 20px color-mix(in srgb, var(--card-color1) 30%, transparent);
+    border-color: var(--card-color1) !important;
+}
+
+#fusion-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#fusion-modal.active #fusion-modal-content {
+    transform: scale(1);
+    border-color: color-mix(in srgb, var(--modal-c1) 50%, #2a3040);
+    box-shadow: inset 0 0 100px color-mix(in srgb, var(--modal-c1) 10%, transparent), 
+                inset 0 0 100px color-mix(in srgb, var(--modal-c2) 10%, transparent),
+                0 0 100px rgba(0,0,0,1);
 }

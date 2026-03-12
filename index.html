@@ -9,10 +9,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Quattrocento+Sans:wght@400;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="antialiased relative overflow-x-hidden">
+
+    <div class="window-controls fixed top-4 right-4 flex gap-4 z-[9999]">
+        <button id="btn-minimize" class="text-slate-500 hover:text-white transition-colors duration-300">
+            <i class="fas fa-minus"></i>
+        </button>
+        <button id="btn-close" class="text-slate-500 hover:text-red-600 transition-colors duration-300" style="text-shadow: 0 0 10px transparent;">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
 
     <div id="loading-screen" class="fixed inset-0 z-[9999] bg-[#050508] flex flex-col items-center justify-center transition-opacity duration-1000">
         <div class="text-red-900 text-8xl mb-6 animate-pulse" style="font-family: serif; text-shadow: 0 0 20px #4a1515;">⎊</div>
@@ -21,90 +29,112 @@
 
     <div id="qoldjornesz-bg" class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden opacity-20"></div>
 
-    <div class="container mx-auto p-4 md:p-8">
+    <div id="view-altar" class="view-section active">
+        <div class="container mx-auto p-4 md:p-8">
 
-        <header class="text-center mb-8 md:mb-12 mt-4">
-            <h1 class="text-4xl md:text-6xl font-bold text-header-main">Grimório Interativo Elemental</h1>
-            <p class="text-subheader mt-2 text-lg">Selecione duas runas para invocar suas fusões mágicas.</p>
-        </header>
+            <header class="text-center mb-8 md:mb-12 mt-4">
+                <h1 class="text-4xl md:text-6xl font-bold text-header-main">Grimório Interativo Elemental</h1>
+                <p class="text-subheader mt-2 text-lg">Selecione duas runas para invocar suas fusões mágicas.</p>
+            </header>
 
-        <main>
-            <section id="explorer" class="rounded-2xl p-6 md:p-8 relative z-10">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start"> 
+            <main>
+                <section id="explorer" class="rounded-2xl p-6 md:p-8 relative z-10">
                     
-                    <div id="selector1" class="flex flex-col items-center">
-                        <h3 class="text-xl font-bold mb-4 font-cinzel text-content-light">Elemento Primário</h3>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                        </div>
-                    </div>
-                    
-                    <div class="flex flex-col items-center order-first md:order-none space-y-6 w-full max-w-[600px] mx-auto">
-                         <div id="result-card-display" class="w-full">
-                            <div id="magic-circle"></div>
-                            
-                            <span id="placeholder-text" class="texto-aguardando">Aguardando Invocação...</span>
-                            <div id="complex-result-container" class="hidden">
-                                <h2 id="complex-element-name" class="result-text-entry"></h2>
-                                <p id="complex-element-combination" class="result-text-entry"></p>
-                                <p id="complex-element-description" class="result-text-entry"></p>
+                    <button id="btn-open-arquivo" class="absolute top-4 left-4 text-[#d69e9e] font-cinzel text-sm border border-[#d69e9e]/30 px-4 py-1 rounded hover:bg-[#d69e9e] hover:text-black transition z-[9999]" style="-webkit-app-region: no-drag;">
+                        <i class="fas fa-book mr-2"></i> Arquivo de Fissões
+                    </button>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start mt-8"> 
+                        
+                        <div id="selector1" class="flex flex-col items-center">
+                            <h3 class="text-xl font-bold mb-4 font-cinzel text-content-light">Elemento Primário</h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
                             </div>
                         </div>
-                        <button id="reset-btn" class="btn-dissipar-pedra">DISSIPAR</button>
-                    </div>
-
-                    <div id="selector2" class="flex flex-col items-center">
-                        <h3 class="text-xl font-bold mb-4 font-cinzel text-content-light">Elemento Secundário</h3>
-                         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        
+                        <div class="flex flex-col items-center order-first md:order-none space-y-6 w-full max-w-[600px] mx-auto">
+                            <div id="result-card-display" class="w-full">
+                                <div id="magic-circle"></div>
+                                
+                                <span id="placeholder-text" class="texto-aguardando">Aguardando Invocação...</span>
+                                <div id="complex-result-container" class="hidden">
+                                    <h2 id="complex-element-name" class="result-text-entry"></h2>
+                                    <p id="complex-element-combination" class="result-text-entry"></p>
+                                    <p id="complex-element-description" class="result-text-entry"></p>
+                                </div>
+                            </div>
+                            <button id="reset-btn" class="btn-dissipar-pedra">DISSIPAR</button>
                         </div>
-                    </div>
-                </div>
-            </section>
 
-            <section id="details" class="mt-12 relative z-10">
-                <div class="space-y-6">
-                    <div>
-                        <h2 id="toggle-grimoire" class="text-2xl md:text-3xl font-bold text-center cursor-pointer p-4 transition-colors">
-                            Grimório das Runas Base <span class="section-toggle-arrow"><i class="fas fa-chevron-down"></i></span>
-                        </h2>
-                        <div id="content-grimoire" class="details-section section-bg p-6 md:p-8">
-                            <p class="text-center text-content-dim mb-6">Inspecione uma runa para revelar seus segredos e manifestações em Nahvvatzal.</p>
-                            <div id="grimoire-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div id="selector2" class="flex flex-col items-center">
+                            <h3 class="text-xl font-bold mb-4 font-cinzel text-content-light">Elemento Secundário</h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
                             </div>
                         </div>
                     </div>
-                    
-                    <div>
-                        <h2 id="toggle-typings" class="text-2xl md:text-3xl font-bold text-center cursor-pointer p-4 transition-colors">
-                            Sistema de Tipagens Mágicas <span class="section-toggle-arrow"><i class="fas fa-chevron-down"></i></span>
-                        </h2>
-                        <div id="content-typings" class="details-section section-bg p-6 md:p-8">
-                             <p class="text-center text-content-dim mb-6">Explore como os magos adquirem seus poderes e como suas afinidades são classificadas.</p>
-                             <div id="acquisition-narrative-display" class="my-6 p-4 card-bg border border-slate-700 text-content-light hidden min-h-[60px]">
-                                <p id="narrative-text" class="italic"></p>
-                             </div>
-                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                               <div>
-                                    <h3 class="text-xl font-bold mb-4 font-cinzel text-content-light">Meios de Aquisição</h3>
-                                    <div id="acquisition-methods" class="flex flex-wrap gap-3">
-                                    </div>
-                               </div>
-                               <div>
-                                    <h3 class="text-xl font-bold mb-4 font-cinzel text-content-light">Classificação das Tipagens</h3>
-                                    <div id="typing-classifications" class="space-y-3">
-                                    </div>
-                               </div>
+                </section>
+
+                <section id="details" class="mt-12 relative z-10">
+                    <div class="space-y-6">
+                        <div>
+                            <h2 id="toggle-grimoire" class="text-2xl md:text-3xl font-bold text-center cursor-pointer p-4 transition-colors">
+                                Grimório das Runas Base <span class="section-toggle-arrow"><i class="fas fa-chevron-down"></i></span>
+                            </h2>
+                            <div id="content-grimoire" class="details-section section-bg p-6 md:p-8">
+                                <p class="text-center text-content-dim mb-6">Inspecione uma runa para revelar seus segredos e manifestações em Nahvvatzal.</p>
+                                <div id="grimoire-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h2 id="toggle-typings" class="text-2xl md:text-3xl font-bold text-center cursor-pointer p-4 transition-colors">
+                                Sistema de Tipagens Mágicas <span class="section-toggle-arrow"><i class="fas fa-chevron-down"></i></span>
+                            </h2>
+                            <div id="content-typings" class="details-section section-bg p-6 md:p-8">
+                                <p class="text-center text-content-dim mb-6">Explore como os magos adquirem seus poderes e como suas afinidades são classificadas.</p>
+                                <div id="acquisition-narrative-display" class="my-6 p-4 card-bg border border-slate-700 text-content-light hidden min-h-[60px]">
+                                    <p id="narrative-text" class="italic"></p>
+                                </div>
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                <div>
+                                        <h3 class="text-xl font-bold mb-4 font-cinzel text-content-light">Meios de Aquisição</h3>
+                                        <div id="acquisition-methods" class="flex flex-wrap gap-3">
+                                        </div>
+                                </div>
+                                <div>
+                                        <h3 class="text-xl font-bold mb-4 font-cinzel text-content-light">Classificação das Tipagens</h3>
+                                        <div id="typing-classifications" class="space-y-3">
+                                        </div>
+                                </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-        </main>
+                </section>
+            </main>
 
-         <footer class="text-center mt-16 py-8 border-t border-slate-800">
-            <p class="text-slate-600 text-sm">&copy; <span id="current-year"></span> Crisol de Apriori. Todos os segredos guardados.</p>
-        </footer>
-    </div>
-<div id="secret-modal" class="fixed inset-0 z-[9999] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
+            <footer class="text-center mt-16 py-8 border-t border-slate-800">
+                <p class="text-slate-600 text-sm">&copy; <span id="current-year"></span> Crisol de Apriori. Todos os segredos guardados.</p>
+            </footer>
+        </div>
+    </div> <div id="view-complex" class="view-section hidden pt-24 px-8 pb-12 max-w-7xl mx-auto relative z-20">
+        
+        <div class="flex justify-between items-center mb-12 border-b border-[#2a3040] pb-6">
+            <button id="btn-back-altar" class="text-slate-400 hover:text-white font-cinzel tracking-widest transition px-6 py-2 border border-transparent hover:border-slate-700 bg-[#0a0a0f]/80 rounded">
+                <i class="fas fa-arrow-left mr-2"></i> Retornar ao Altar
+            </button>
+            <h2 class="text-4xl font-cinzel text-[#d69e9e] tracking-widest text-center" style="text-shadow: 0 0 15px rgba(214,158,158,0.3);">
+                O Índice dos Sábios
+            </h2>
+            <div class="w-40 text-right text-slate-600 font-serif text-sm">
+                <span id="fusion-counter">0</span> / 121 Descobertas
+            </div>
+        </div>
+        
+        <div id="complex-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            </div>
+    </div> <div id="secret-modal" class="fixed inset-0 z-[9999] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
         <div id="secret-modal-bg" class="absolute inset-0 bg-black/80 backdrop-blur-md"></div>
         
         <div id="secret-modal-content" class="relative bg-[#050508] border border-[#2a3040] p-8 max-w-2xl w-full mx-4 rounded-sm shadow-[0_0_50px_rgba(0,0,0,1)] transform scale-95 transition-transform duration-500">
@@ -114,12 +144,37 @@
             </button>
             
             <h3 id="secret-modal-title" class="text-2xl font-cinzel text-red-900 mb-6 tracking-widest text-center" style="text-shadow: 0 0 10px rgba(255,0,0,0.2);">
-                </h3>
+            </h3>
             
             <div id="secret-modal-body" class="text-slate-400 font-serif leading-relaxed space-y-4 text-sm min-h-[150px]">
                 <p id="secret-modal-subtitle" class="italic text-center opacity-70"></p>
                 <p id="secret-modal-text" class="mt-4"></p>
             </div>
+            
+        </div>
+    </div>
+
+    <div id="fusion-modal" class="fixed inset-0 z-[9999] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
+        <div id="fusion-modal-bg" class="absolute inset-0 bg-black/95 backdrop-blur-xl"></div>
+        
+        <div id="fusion-modal-content" class="relative bg-[#050508] border border-[#2a3040] p-10 md:p-16 max-w-5xl w-full mx-4 min-h-[60vh] rounded-sm transform scale-95 transition-all duration-700 flex flex-col items-center text-center overflow-hidden">
+            
+            <div class="absolute inset-0 opacity-20 pointer-events-none mix-blend-screen" id="fusion-modal-glow" style="background: radial-gradient(circle at top left, var(--modal-c1) 0%, transparent 60%), radial-gradient(circle at bottom right, var(--modal-c2) 0%, transparent 60%);"></div>
+            
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-white/5 rounded-full pointer-events-none animate-[giro-arcano_20s_linear_infinite]"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-dashed border-white/10 rounded-full pointer-events-none animate-[giro-arcano-reverso_15s_linear_infinite]"></div>
+
+            <button id="close-fusion-modal" class="absolute top-6 right-6 text-slate-500 hover:text-white transition-colors duration-300 z-50">
+                <i class="fas fa-times text-3xl"></i>
+            </button>
+            
+            <h4 id="fusion-modal-parents" class="text-xs md:text-sm font-bold uppercase tracking-[0.4em] text-slate-300 mb-6 z-10 border border-white/10 bg-black/60 px-6 py-2 rounded-sm shadow-[0_0_15px_rgba(0,0,0,0.8)]"></h4>
+            
+            <h2 id="fusion-modal-title" class="text-5xl md:text-7xl font-cinzel text-white tracking-widest mb-10 z-10 uppercase" style="text-shadow: 0 0 30px var(--modal-c1), 0 0 60px var(--modal-c2);"></h2>
+            
+            <div class="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-10 z-10"></div>
+            
+            <p id="fusion-modal-desc" class="text-xl md:text-2xl text-[#cbd5e0] font-serif leading-relaxed max-w-3xl z-10" style="text-shadow: 0 2px 4px rgba(0,0,0,0.8);"></p>
             
         </div>
     </div>

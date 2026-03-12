@@ -1,14 +1,87 @@
+// =========================================
+// CONEXÃO COM O MOTOR DO ELECTRON
+// =========================================
+const isElectron = typeof require !== 'undefined';
+let ipcRenderer = null;
+
+if (isElectron) {
+    ipcRenderer = require('electron').ipcRenderer;
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    const btnMinimize = document.getElementById('btn-minimize');
+    const btnClose = document.getElementById('btn-close');
+
+    if (isElectron && btnMinimize && btnClose) {
+        btnMinimize.addEventListener('click', () => ipcRenderer.send('minimize-window'));
+        btnClose.addEventListener('click', () => ipcRenderer.send('close-window'));
+    } else if (btnMinimize && btnClose) {
+        const controls = document.querySelector('.window-controls');
+        if(controls) controls.style.display = 'none';
+    }
+});
+
+// =========================================
+// O SOM DO VAZIO (Gerenciador de Áudio)
+// =========================================
+const audioManager = {
+    ambient: new Audio('audio/ambient.mp3'),
+    click: new Audio('audio/click.mp3'),
+    fusion: new Audio('audio/fusion.mp3'),
+    glitch: new Audio('audio/glitch.mp3'),
+    started: false,
+    
+    init: function() {
+        this.ambient.loop = true;
+        this.ambient.volume = 0.15; // Volume bem baixo para a música de fundo
+        this.click.volume = 0.5;
+        this.fusion.volume = 0.7;
+        this.glitch.volume = 0.6;
+        this.glitch.loop = true; // A estática vai tocar enquanto a anomalia estiver na tela
+
+        // O Electron/Navegador exige um clique do utilizador antes de tocar música
+        document.body.addEventListener('click', () => {
+            if (!this.started) {
+                this.ambient.play().catch(e => console.log("Aguardando interação para o áudio..."));
+                this.started = true;
+            }
+        });
+    },
+    
+    playClick: function() {
+        this.click.currentTime = 0; // Reinicia o som se clicar rápido
+        this.click.play().catch(e => {});
+    },
+    
+    playFusion: function() {
+        this.fusion.currentTime = 0;
+        this.fusion.play().catch(e => {});
+    },
+    
+    playGlitch: function(state) {
+        if (state) {
+            this.glitch.play().catch(e => {});
+            this.ambient.volume = 0.05; // Baixa a música ambiente quando a anomalia surge
+        } else {
+            this.glitch.pause();
+            this.ambient.volume = 0.15; // Restaura a música ambiente
+        }
+    }
+};
+
+audioManager.init(); // Liga o motor de áudio
+
 const elementalData = {
     baseElements: {
         "Flama":   { 
             desc: "Al-azim", color: "#a61c1c", hoverColor: "#851616", manifestacoes: ["Controlar chamas", "Esferas de fogo", "Resistência ao calor"], 
-            lore: "Sangue jazido dos <span class='madness-word' data-note='Eles ainda queimam no fundo do poço...'>'Iitlaq</span>.", imagem: "img/flamasimbolo.png",
+            lore: "Sangue jazido dos <span class='madness-word' data-note='Eles ainda queimam no fundo do poço...'>'Iitlaq</span>.", imagem: "",
             longDesc: "A manipulação das chamas transcende a simples destruição; é o ato de dar vida à entropia. Magos de Flama comumente carregam cicatrizes profundas e escondidas, pois o fogo primevo de Nahvvatzal exige parte da carne de seu conjurador como combustível antes de obedecer.",
             secretTitle: "KCOTOLOX", secretSubtitle: "\"A Punição\"", secretText: "Os primeiros piromantes de Nahvvatzal não conjuravam chamas do ar, mas queimavam as próprias memórias para gerar calor. Muitos morreram sem saber os próprios nomes."
         },
         "Aqua":   { 
             desc: "Flua à minha mente, ou afogue-se na vastidão do meu ser.<br>-''Gyeang-ju''", color: "#3a4dff", hoverColor: "#2f3ecc", manifestacoes: ["Moldar água", "Respirar sob água", "Criar névoa"], 
-            lore: "Lágrima da <span class='madness-word' data-note='Ela chora sangue quando eclipsada.'>Deusa da Lua</span>.", imagem: "img/aquasimbolo.png",
+            lore: "Lágrima da <span class='madness-word' data-note='Ela chora sangue quando eclipsada.'>Deusa da Lua</span>.", imagem: "",
             longDesc: "A água atua como um espelho para os terrores esquecidos. Ao conjurar Aqua, o mago não apenas manipula fluidos, mas ouve os ecos das almas que se afogaram nos mares antigos. Uma mente fraca pode facilmente se perder na vastidão de suas próprias memórias líquidas.",
             secretTitle: "UTYLOF", secretSubtitle: "\"A Transformação\"", secretText: "A Deusa da Lua não chora de tristeza. Suas lágrimas são compostas pelas almas daqueles que sucumbiram às profundezas. Beber dessa água é convidar os mortos para habitarem sua mente."
         },
@@ -68,13 +141,8 @@ const elementalData = {
         },
         "Ulrhtau": { 
             desc: "DADOS CORROMPIDOS // FALHA DE LEITURA", color: "#ff0000", hoverColor: "#ff0000", manifestacoes: ["Aberração espacial", "Distorção da realidade", "[ERRO]"], 
-            // CORREÇÃO: Sintaxe HTML na Lore corrigida (tag span fechada corretamente)
-            lore: "NÃO CLICAR. A <span class='madness-word' data-note='A DOR É INFINITA AQUI FORA A DOR É INFINITA'>runa esquecida</span> que corrói o grimório.",
-            // ATUALIZAÇÃO: Adicionado uma mensagem de erro vermelha como ilustração
-            imagem: "img/o-olho.jpg", 
-            // ATUALIZAÇÃO: Adicionado longDesc para Ulrhtau com texto de horror e anotações
+            lore: "NÃO CLICAR. A <span class='madness-word' data-note='A DOR É INFINITA AQUI FORA A DOR É INFINITA'>runa esquecida</span> que corrói o grimório.", imagem: "fas fa-skull text-6xl text-red-600", 
             longDesc: "A matéria grita ao ser tocada por esta anomalia. As leis fundamentais da física de Gionyyl são estraçalhadas. A <span class='madness-word' data-note='ELES_ESTÃO_ATRAS_DE_TI_..._FOGE_...'>DOR</span> é o único idioma conhecido por aqueles que sobrevivem ao manipular o Vazio Fragmentado. //NÃO_OLHE_PARA_TRÁS//",
-            // Mantém os segredos em branco, pois Ulrhtau usa o efeito do olho
             secretTitle: "", secretSubtitle: "", secretText: ""
         }
     },
@@ -92,7 +160,7 @@ const elementalData = {
         "Vis": {"Flama": "Explosão", "Aqua": "Corrente", "Eol": "Tornado", "Terrae": "Tremor", "Fulmen": "Descarga", "Crelix": "Congelação", "Lux": "Facho", "Umbra": "Pulso", "Vitae": "Vigor", "Toxi": "Contágio", "Vis": "Força Gravitacional"}
     },
     complexElementDescriptions: {
-        "Fogo Fátuo": "Chamas etéreas que dançam com vida própria, guiando ou enganando os incautos.",
+        "Flama Fátuo": "Chamas etéreas que dançam com vida própria, guiando ou enganando os incautos.",
         "Vapor": "Uma névoa escaldante que obscurece a visão e queima ao toque, nascida do conflito elemental.",
         "Incêndio": "Chamas vorazes alimentadas pelo ar, espalhando-se com fúria indomável e consumindo tudo.",
         "Magma": "Rocha derretida em fúria rubra, capaz de consumir e remodelar a própria terra.",
@@ -187,6 +255,11 @@ window.addEventListener('load', () => {
         }, 2000); 
     }
 });
+
+// A MEMÓRIA DA PEDRA (Carrega as fusões salvas do computador do usuário)
+let discoveredFusions = JSON.parse(localStorage.getItem('nahvvatzal_fusions')) || {};
+// Dicionário invisível para armazenar todas as fusões geradas no Índice
+let allFusionsData = {}; 
 
 document.addEventListener('DOMContentLoaded', () => {
     const selector1El = document.querySelector('#selector1 .grid');
@@ -390,6 +463,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleSelection(event) {
+        audioManager.playClick(); // NOVO: Toca o som de pedra a raspar
         const button = event.currentTarget;
         const { element, selector } = button.dataset;
         
@@ -431,6 +505,14 @@ document.addEventListener('DOMContentLoaded', () => {
             el.classList.remove('visible');
         });
 
+        if (hasGlitch) {
+            document.body.classList.add('anomalia-realidade');
+            audioManager.playGlitch(true); // NOVO: Liga o ruído de horror
+        } else {
+            document.body.classList.remove('anomalia-realidade');
+            audioManager.playGlitch(false); // NOVO: Desliga o ruído
+        }
+
         let color1 = selected1 ? elementalData.baseElements[selected1].color : null;
         let color2 = selected2 ? elementalData.baseElements[selected2].color : null;
         let hasGlitch = false;
@@ -467,6 +549,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else if (elementalData.combinations[selected1] && elementalData.combinations[selected1][selected2]) {
                     complexElementName = elementalData.combinations[selected1][selected2];
                     description = elementalData.complexElementDescriptions[complexElementName] || "Descrição não disponível.";
+                    
+                    audioManager.playFusion(); // NOVO: Toca o estrondo da fusão mágica!
+
+                    // GRAVA A DESCOBERTA E ATUALIZA A ABA
+                    if (!discoveredFusions[complexElementName]) {
+                        discoveredFusions[complexElementName] = true;
+                        localStorage.setItem('nahvvatzal_fusions', JSON.stringify(discoveredFusions));
+                        // Re-renderiza a grade de complexos em tempo real
+                        renderComplexGrid(); 
+                    }
+
                 } else {
                     complexElementName = "Desconhecido";
                     description = "Combinação não catalogada.";
@@ -535,7 +628,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const grimoireGrid = document.getElementById('grimoire-grid');
     Object.entries(elementalData.baseElements).forEach(([name, data]) => {
         const card = document.createElement('div');
-        // ATUALIZAÇÃO NÚMERO 1: Adicionado a classe "self-start" para não esticar os cartões adjacentes!
         card.className = 'grimoire-card p-5 cursor-pointer self-start';
         card.style.setProperty('--rune-color', data.color);
         
@@ -648,8 +740,133 @@ document.addEventListener('DOMContentLoaded', () => {
         typingClassificationsContainer.appendChild(card);
     });
 
+
     // =========================================
-    // LÓGICA DA JANELA SECRETA E DECODIFICAÇÃO
+    // LÓGICA DA NOVA ABA (ARQUIVO DE FISSÕES) E MODAL DE EXPANSÃO
+    // =========================================
+    const btnOpenArquivo = document.getElementById('btn-open-arquivo');
+    const btnBackAltar = document.getElementById('btn-back-altar');
+    const viewAltar = document.getElementById('view-altar');
+    const viewComplex = document.getElementById('view-complex');
+    const complexGrid = document.getElementById('complex-grid');
+    const fusionCounter = document.getElementById('fusion-counter');
+
+    // Troca de Telas
+    if(btnOpenArquivo && btnBackAltar) {
+        btnOpenArquivo.addEventListener('click', () => {
+            viewAltar.classList.remove('active');
+            setTimeout(() => {
+                viewAltar.classList.add('hidden');
+                viewComplex.classList.remove('hidden');
+                setTimeout(() => viewComplex.classList.add('active'), 50);
+            }, 500); 
+        });
+
+        btnBackAltar.addEventListener('click', () => {
+            viewComplex.classList.remove('active');
+            setTimeout(() => {
+                viewComplex.classList.add('hidden');
+                viewAltar.classList.remove('hidden');
+                setTimeout(() => viewAltar.classList.add('active'), 50);
+            }, 500); 
+        });
+    }
+
+    // Renderiza e atualiza os cartões na grade
+    function renderComplexGrid() {
+        if (!complexGrid) return;
+        complexGrid.innerHTML = '';
+        
+        // Extrai todas as 121 fusões para o Dicionário Global
+        for (const el1 in elementalData.combinations) {
+            for (const el2 in elementalData.combinations[el1]) {
+                const fusionName = elementalData.combinations[el1][el2];
+                if (!allFusionsData[fusionName]) {
+                    allFusionsData[fusionName] = {
+                        name: fusionName,
+                        parent1: el1,
+                        parent2: el2,
+                        color1: elementalData.baseElements[el1].color,
+                        color2: elementalData.baseElements[el2].color,
+                        desc: elementalData.complexElementDescriptions[fusionName] || "Descrição oculta."
+                    };
+                }
+            }
+        }
+        
+        const fusionsArray = Object.values(allFusionsData).sort((a, b) => a.name.localeCompare(b.name));
+        let countUnlocked = 0;
+
+        fusionsArray.forEach((data, index) => {
+            const isDiscovered = discoveredFusions[data.name];
+            
+            if (isDiscovered) {
+                countUnlocked++;
+                // Cartão Descoberto (Agora com classe especial para clicar)
+                complexGrid.innerHTML += `
+                    <div class="fusion-card unlocked-fusion-card p-5 border rounded-sm flex flex-col relative overflow-hidden" style="--card-color1: ${data.color1}; border-color: ${data.color1}55;" data-fusion="${data.name}">
+                        <div class="absolute top-0 right-0 bottom-0 w-48 opacity-10 pointer-events-none" style="background: linear-gradient(90deg, transparent, ${data.color1}, ${data.color2});"></div>
+                        <div class="flex justify-between items-end mb-3 relative z-10">
+                            <h4 class="font-cinzel text-xl text-white tracking-widest uppercase" style="text-shadow: 0 0 10px ${data.color1};">${data.name}</h4>
+                            <span class="text-[9px] font-bold uppercase tracking-widest text-slate-400 bg-black/80 border border-[#2a3040] px-2 py-1 rounded">${data.parent1} + ${data.parent2}</span>
+                        </div>
+                        <p class="text-[#cbd5e0] text-sm font-serif relative z-10 leading-relaxed border-t border-slate-800 pt-3 opacity-60 line-clamp-2">${data.desc}</p>
+                    </div>
+                `;
+            } else {
+                // Cartão Trancado
+                complexGrid.innerHTML += `
+                    <div class="locked-card p-5 rounded-sm flex flex-col items-center justify-center relative overflow-hidden h-36 opacity-60">
+                        <span class="absolute top-2 left-2 text-[10px] text-slate-700 font-mono">#${(index + 1).toString().padStart(3, '0')}</span>
+                        <i class="fas fa-lock text-3xl text-[#2a3040] mb-3"></i>
+                        <h4 class="font-cinzel text-sm text-[#4a5568] tracking-widest uppercase">Essência Selada</h4>
+                    </div>
+                `;
+            }
+        });
+
+        if (fusionCounter) fusionCounter.innerText = countUnlocked;
+    }
+
+    renderComplexGrid();
+
+
+    // =========================================
+    // LÓGICA DO MODAL MAJESTOSO DAS FUSÕES
+    // =========================================
+    const fusionModal = document.getElementById('fusion-modal');
+    const fusionModalBg = document.getElementById('fusion-modal-bg');
+    const closeFusionBtn = document.getElementById('close-fusion-modal');
+    const fusionModalContent = document.getElementById('fusion-modal-content');
+    
+    // Escuta cliques apenas nos cartões que já foram destrancados
+    if (complexGrid) {
+        complexGrid.addEventListener('click', (e) => {
+            const card = e.target.closest('.unlocked-fusion-card');
+            if (!card) return; 
+            
+            const fusionName = card.dataset.fusion;
+            const data = allFusionsData[fusionName];
+            
+            document.getElementById('fusion-modal-title').innerText = data.name;
+            document.getElementById('fusion-modal-parents').innerText = `${data.parent1} + ${data.parent2}`;
+            document.getElementById('fusion-modal-desc').innerText = data.desc;
+            
+            fusionModalContent.style.setProperty('--modal-c1', data.color1);
+            fusionModalContent.style.setProperty('--modal-c2', data.color2);
+            
+            fusionModal.classList.add('active');
+        });
+    }
+    
+    if (fusionModal) {
+        closeFusionBtn.addEventListener('click', () => fusionModal.classList.remove('active'));
+        fusionModalBg.addEventListener('click', () => fusionModal.classList.remove('active'));
+    }
+
+
+    // =========================================
+    // LÓGICA DA JANELA SECRETA (EASTER EGGS DE HORROR)
     // =========================================
     const secretModal = document.getElementById('secret-modal');
     const closeSecretBtn = document.getElementById('close-secret-modal');

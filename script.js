@@ -1,6 +1,3 @@
-// =========================================
-// CONEXÃO COM O MOTOR DO ELECTRON
-// =========================================
 const isElectron = typeof require !== 'undefined';
 let ipcRenderer = null;
 
@@ -21,9 +18,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// =========================================
-// O SOM DO VAZIO (Gerenciador de Áudio)
-// =========================================
 const audioManager = {
     ambient: new Audio('audio/ambient.mp3'),
     click: new Audio('audio/click.mp3'),
@@ -33,13 +27,12 @@ const audioManager = {
     
     init: function() {
         this.ambient.loop = true;
-        this.ambient.volume = 0.15; // Volume bem baixo para a música de fundo
+        this.ambient.volume = 0.15; 
         this.click.volume = 0.5;
         this.fusion.volume = 0.7;
         this.glitch.volume = 0.6;
-        this.glitch.loop = true; // A estática vai tocar enquanto a anomalia estiver na tela
+        this.glitch.loop = true; 
 
-        // O Electron/Navegador exige um clique do utilizador antes de tocar música
         document.body.addEventListener('click', () => {
             if (!this.started) {
                 this.ambient.play().catch(e => console.log("Aguardando interação para o áudio..."));
@@ -49,7 +42,7 @@ const audioManager = {
     },
     
     playClick: function() {
-        this.click.currentTime = 0; // Reinicia o som se clicar rápido
+        this.click.currentTime = 0; 
         this.click.play().catch(e => {});
     },
     
@@ -61,90 +54,30 @@ const audioManager = {
     playGlitch: function(state) {
         if (state) {
             this.glitch.play().catch(e => {});
-            this.ambient.volume = 0.05; // Baixa a música ambiente quando a anomalia surge
+            this.ambient.volume = 0.05; 
         } else {
             this.glitch.pause();
-            this.ambient.volume = 0.15; // Restaura a música ambiente
+            this.ambient.volume = 0.15; 
         }
     }
 };
 
-audioManager.init(); // Liga o motor de áudio
+audioManager.init(); 
 
 const elementalData = {
     baseElements: {
-        "Flama":   { 
-            desc: "Al-azim", color: "#a61c1c", hoverColor: "#851616", manifestacoes: ["Controlar chamas", "Esferas de fogo", "Resistência ao calor"], 
-            lore: "Sangue jazido dos <span class='madness-word' data-note='Eles ainda queimam no fundo do poço...'>'Iitlaq</span>.", imagem: "",
-            longDesc: "A manipulação das chamas transcende a simples destruição; é o ato de dar vida à entropia. Magos de Flama comumente carregam cicatrizes profundas e escondidas, pois o fogo primevo de Nahvvatzal exige parte da carne de seu conjurador como combustível antes de obedecer.",
-            secretTitle: "KCOTOLOX", secretSubtitle: "\"A Punição\"", secretText: "Os primeiros piromantes de Nahvvatzal não conjuravam chamas do ar, mas queimavam as próprias memórias para gerar calor. Muitos morreram sem saber os próprios nomes."
-        },
-        "Aqua":   { 
-            desc: "Flua à minha mente, ou afogue-se na vastidão do meu ser.<br>-''Gyeang-ju''", color: "#3a4dff", hoverColor: "#2f3ecc", manifestacoes: ["Moldar água", "Respirar sob água", "Criar névoa"], 
-            lore: "Lágrima da <span class='madness-word' data-note='Ela chora sangue quando eclipsada.'>Deusa da Lua</span>.", imagem: "",
-            longDesc: "A água atua como um espelho para os terrores esquecidos. Ao conjurar Aqua, o mago não apenas manipula fluidos, mas ouve os ecos das almas que se afogaram nos mares antigos. Uma mente fraca pode facilmente se perder na vastidão de suas próprias memórias líquidas.",
-            secretTitle: "UTYLOF", secretSubtitle: "\"A Transformação\"", secretText: "A Deusa da Lua não chora de tristeza. Suas lágrimas são compostas pelas almas daqueles que sucumbiram às profundezas. Beber dessa água é convidar os mortos para habitarem sua mente."
-        },
-        "Eol":     { 
-            desc: "Pense da menor reflexão de culpa à maior epifania noturna, esta é a liberdade.<br>-''Eristópheus''", color: "#00e689", hoverColor: "#00b86e", manifestacoes: ["Lufadas de vento", "Levitação breve", "Aumentar velocidade"], 
-            lore: "Sussurros dos <span class='madness-word' data-note='Eles nunca se calam! Façam parar!'>Céus</span>.", imagem: "",
-            longDesc: "O ar não é vazio, mas um condutor de lamentos. Dominar o Eol significa suportar o ruído constante dos deuses mortos sussurrando em seus ouvidos. Conjuradores experientes conseguem extrair o oxigênio dos pulmões de seus inimigos em absoluto e perturbador silêncio.",
-            secretTitle: "EFENLORU", secretSubtitle: "\"A Liberdade\"", secretText: "Aqueles que escutam o vento por muito tempo perdem a própria voz. O ar em Gionyyl não é um elemento vazio, mas uma rede neural de confissões desesperadas."
-        },
-        "Terrae":  { 
-            desc: "Solidez, estabilidade, crescimento, fundação.", color: "#6c4d42", hoverColor: "#573e35", manifestacoes: ["Mover pedras", "Barreiras de terra", "Sentir tremores"], 
-            lore: "Corpo da <span class='madness-word' data-note='Seus ossos formam as nossas prisões e túmulos.'>Mãe Antiga</span>.", imagem: "",
-            longDesc: "As pedras fundacionais deste mundo estão manchadas de sacrifício. Terrae é a runa da estabilidade implacável, permitindo erguer barreiras intransponíveis ou enterrar exércitos vivos, unindo a vontade do mago ao ritmo geológico brutal do Crisol de Apriori.",
-            secretTitle: "HAVBAGAN", secretSubtitle: "\"A Formação\"", secretText: "A rocha não é cega. Cada pedra colocada nas fundações do Crisol de Apriori pulsa como um coração lento e exige sacrifícios de sangue a cada ciclo lunar."
-        },
-        "Fulmen":   { 
-            desc: "Ouça o estrondo de minha presença ao pronunciar meu nome.<br>-''Tyapu''", color: "#ffff00", hoverColor: "#e6e600", manifestacoes: ["Disparar raios", "Magnetizar objetos", "Aumentar reflexos"], 
-            lore: "Fúria do <span class='madness-word' data-note='Um usurpador cego pela própria luz.'>Deus da Tempestade</span>.", imagem: "",
-            longDesc: "Uma fração de segundo de energia pura que frita sinapses e altera percepções. Fulmen concede uma velocidade divina, mas seus usuários frequentemente perdem a sensibilidade tátil e desenvolvem tremores crônicos após canalizarem as tormentas elétricas.",
-            secretTitle: "TEZNITAJ", secretSubtitle: "\"A Movimentação\"", secretText: "Verdadeiro poder elétrico queima o nervo óptico. Magos experientes desta runa estão todos cegos, usando a estática do ar para tatear a realidade."
-        },
-        "Crelix":   { 
-            desc: "Frio, estagnação, preservação, rigidez.", color: "#56e5ff", hoverColor: "#45b7cc", manifestacoes: ["Congelar superfícies", "Armas de gelo", "Suportar frio"], 
-            lore: "Sopro Invernal do <span class='madness-word' data-note='Ele está adormecido sob o gelo vermelho.'>Gigante</span>.", imagem: "",
-            longDesc: "O verdadeiro poder de Crelix não é o gelo, mas a paralisação do tempo em escala molecular. É a runa da preservação implacável. Magos de gelo enxergam a vida como uma anomalia caótica que deve ser cristalizada e silenciada para a ordem prevalecer.",
-            secretTitle: "ORGNOTAMOTR", secretSubtitle: "\"A Permanência\"", secretText: "No coração do Zero Absoluto, o tempo não passa. Os primeiros traidores da ordem foram congelados vivos, e os seus pensamentos gritam no gelo há quatro milênios."
-        },
-        "Lux":    { 
-            desc: "Iluminação, verdade, pureza, visão.", color: "#fbe4ec", hoverColor: "#f9d7e3", manifestacoes: ["Criar luz", "Dissipar sombras", "Cura leve"], 
-            lore: "Bênção do <span class='madness-word' data-note='Sua luz queima as almas impuras.'>Sol Eterno</span>.", imagem: "",
-            longDesc: "Diferente dos contos antigos, a luz em Gionyyl é aterradora. A runa Lux arranca os véus da ilusão e expõe imperfeições. É um poder tão absoluto e puro que chega a queimar a própria sanidade dos conjuradores ao revelar horrores que as sombras gentilmente ocultavam.",
-            secretTitle: "RASTONTRI", secretSubtitle: "\"A Presença\"", secretText: "Dizem que é cura, mas a luz queima as imperfeições. Usar este elemento repetidamente purifica tanto o mago que ele começa a perder os seus sentimentos humanos."
-        },
-        "Umbra": { 
-            desc: "Em meu manto repousa os maiores terrores e mistérios do universo.<br>-''Ibi'una''", color: "#303030", hoverColor: "#262626", manifestacoes: ["Furtividade", "Escuridão localizada", "Intimidar"], 
-            lore: "Manto da <span class='madness-word' data-note='Não olhe para a escuridão por muito tempo.'>Noite Silenciosa</span>.", imagem: "",
-            longDesc: "As sombras possuem textura e fome. Ao manipular Umbra, o feiticeiro permite ser abraçado pelo vazio. A furtividade perfeita que ela confere é o resultado de transportar o próprio corpo para uma dimensão paralela densa e asfixiante por breves e angustiantes períodos.",
-            secretTitle: "YRMEGTORE", secretSubtitle: "\"A Ausência\"", secretText: "Não há escuridão vazia. Toda sombra projetada pelo sol é um portal para a dimensão de Umbra, onde as entidades esquecidas aguardam que feche os olhos."
-        },
-        "Vitae":  { 
-            desc: "Há formas de vida em todas as minhas criações e submissão às suas escolhas.<br>-''Yashima-no-Mikoto''", color: "#9d0e4f", hoverColor: "#7e0b3f", manifestacoes: ["Acelerar cura", "Estimular plantas", "Sentir auras"], 
-            lore: "Essência da <span class='madness-word' data-note='As raízes bebem dos nossos cadáveres.'>Natureza Viva</span>.", imagem: "",
-            longDesc: "Curar não é um milagre, é uma reescrita biológica violenta. A energia da Vitae força células a se multiplicarem rapidamente. É comum que aprendizes ineptos gerem tumores e anomalias corpóreas em seus aliados ao tentarem remendar ferimentos de batalha.",
-            secretTitle: "IGL'TRUTAE", secretSubtitle: "\"A Animação\"", secretText: "O excesso de magia vital causa o crescimento de órgãos redundantes no mago. É comum ver mestres desta runa escondendo múltiplos olhos debaixo das vestes."
-        },
-        "Toxi": { 
-            desc: "Meu toque é o sussurro da entropia, a transformação inevitável e putrefata do todo.<br>-''Koscheniev''", color: "#76cf02", hoverColor: "#5ea602", manifestacoes: ["Criar venenos", "Causar náusea", "Resistência a doenças"], 
-            lore: "Peste <span class='madness-word' data-note='O cheiro... o cheiro é insuportável na mente.'>Rastejante</span>.", imagem: "",
-            longDesc: "Senhores da putrefação e mestres do miasma. A toxina dissolve lentamente os tecidos, corroendo armaduras e vontades com igual facilidade. Magos de Toxi costumam usar filtros purificadores severos para esconder as feridas deixadas por seus próprios vapores na garganta.",
-            secretTitle: "KARVPARLPAKS", secretSubtitle: "\"A Degradação\"", secretText: "A runa da toxina exige simbiose. Para canalizar o veneno verdadeiro, o mago hospeda parasitas na sua corrente sanguínea que devoram lentamente o seu pâncreas."
-        },
-        "Vis":{ 
-            desc: "Força pura, movimento, poder bruto, potencial.", color: "#803631", hoverColor: "#662b27", manifestacoes: ["Empurrão telecinético", "Escudos de energia", "Aumentar força"], 
-            lore: "Fluxo <span class='madness-word' data-note='O peso da magia esmaga a sanidade.'>Primordial</span>.", imagem: "",
-            longDesc: "Desprovida de forma ou moralidade, a Vis é a energia cósmica crua. A pressão espacial gerada por esta runa pode defletir rochedos ou implodir o ar ao redor. Usar Vis exige um foco monumental, sob pena do usuário colapsar e estilhaçar sua própria estrutura óssea pelo impacto recuo.",
-            secretTitle: "TSOZDNEMARO", secretSubtitle: "\"A Energia\"", secretText: "Conjurar energia bruta distorce os ossos do utilizador. As salas de treino da Vis no Crisol estão constantemente manchadas com o sangue de novatos que implodiram."
-        },
-        "Ulrhtau": { 
-            desc: "DADOS CORROMPIDOS // FALHA DE LEITURA", color: "#ff0000", hoverColor: "#ff0000", manifestacoes: ["Aberração espacial", "Distorção da realidade", "[ERRO]"], 
-            lore: "NÃO CLICAR. A <span class='madness-word' data-note='A DOR É INFINITA AQUI FORA A DOR É INFINITA'>runa esquecida</span> que corrói o grimório.", imagem: "fas fa-skull text-6xl text-red-600", 
-            longDesc: "A matéria grita ao ser tocada por esta anomalia. As leis fundamentais da física de Gionyyl são estraçalhadas. A <span class='madness-word' data-note='ELES_ESTÃO_ATRAS_DE_TI_..._FOGE_...'>DOR</span> é o único idioma conhecido por aqueles que sobrevivem ao manipular o Vazio Fragmentado. //NÃO_OLHE_PARA_TRÁS//",
-            secretTitle: "", secretSubtitle: "", secretText: ""
-        }
+        "Flama":   { desc: "Al-azim", color: "#a61c1c", hoverColor: "#851616", manifestacoes: ["Controlar chamas", "Esferas de fogo", "Resistência ao calor"], lore: "Sangue jazido dos <span class='madness-word' data-note='Eles ainda queimam no fundo do poço...'>'Iitlaq</span>.", imagem: "", longDesc: "A manipulação das chamas transcende a simples destruição; é o ato de dar vida à entropia.", secretTitle: "KCOTOLOX", secretSubtitle: "\"A Punição\"", secretText: "Os primeiros piromantes de Nahvvatzal não conjuravam chamas do ar, mas queimavam as próprias memórias para gerar calor." },
+        "Aqua":   { desc: "Flua à minha mente, ou afogue-se na vastidão do meu ser.<br>-''Gyeang-ju''", color: "#3a4dff", hoverColor: "#2f3ecc", manifestacoes: ["Moldar água", "Respirar sob água", "Criar névoa"], lore: "Lágrima da <span class='madness-word' data-note='Ela chora sangue quando eclipsada.'>Deusa da Lua</span>.", imagem: "", longDesc: "A água atua como um espelho para os terrores esquecidos.", secretTitle: "UTYLOF", secretSubtitle: "\"A Transformação\"", secretText: "A Deusa da Lua não chora de tristeza. Suas lágrimas são compostas pelas almas daqueles que sucumbiram às profundezas." },
+        "Eol":     { desc: "Pense da menor reflexão de culpa à maior epifania noturna, esta é a liberdade.<br>-''Eristópheus''", color: "#00e689", hoverColor: "#00b86e", manifestacoes: ["Lufadas de vento", "Levitação breve", "Aumentar velocidade"], lore: "Sussurros dos <span class='madness-word' data-note='Eles nunca se calam! Façam parar!'>Céus</span>.", imagem: "", longDesc: "O ar não é vazio, mas um condutor de lamentos.", secretTitle: "EFENLORU", secretSubtitle: "\"A Liberdade\"", secretText: "Aqueles que escutam o vento por muito tempo perdem a própria voz." },
+        "Terrae":  { desc: "Solidez, estabilidade, crescimento, fundação.", color: "#6c4d42", hoverColor: "#573e35", manifestacoes: ["Mover pedras", "Barreiras de terra", "Sentir tremores"], lore: "Corpo da <span class='madness-word' data-note='Seus ossos formam as nossas prisões e túmulos.'>Mãe Antiga</span>.", imagem: "", longDesc: "As pedras fundacionais deste mundo estão manchadas de sacrifício.", secretTitle: "HAVBAGAN", secretSubtitle: "\"A Formação\"", secretText: "A rocha não é cega. Cada pedra colocada nas fundações do Crisol de Apriori pulsa como um coração lento." },
+        "Fulmen":   { desc: "Ouça o estrondo de minha presença ao pronunciar meu nome.<br>-''Tyapu''", color: "#ffff00", hoverColor: "#e6e600", manifestacoes: ["Disparar raios", "Magnetizar objetos", "Aumentar reflexos"], lore: "Fúria do <span class='madness-word' data-note='Um usurpador cego pela própria luz.'>Deus da Tempestade</span>.", imagem: "", longDesc: "Uma fração de segundo de energia pura que frita sinapses e altera percepções.", secretTitle: "TEZNITAJ", secretSubtitle: "\"A Movimentação\"", secretText: "Verdadeiro poder elétrico queima o nervo óptico. Magos experientes desta runa estão todos cegos." },
+        "Crelix":   { desc: "Frio, estagnação, preservação, rigidez.", color: "#56e5ff", hoverColor: "#45b7cc", manifestacoes: ["Congelar superfícies", "Armas de gelo", "Suportar frio"], lore: "Sopro Invernal do <span class='madness-word' data-note='Ele está adormecido sob o gelo vermelho.'>Gigante</span>.", imagem: "", longDesc: "O verdadeiro poder de Crelix não é o gelo, mas a paralisação do tempo em escala molecular.", secretTitle: "ORGNOTAMOTR", secretSubtitle: "\"A Permanência\"", secretText: "No coração do Zero Absoluto, o tempo não passa." },
+        "Lux":    { desc: "Iluminação, verdade, pureza, visão.", color: "#fbe4ec", hoverColor: "#f9d7e3", manifestacoes: ["Criar luz", "Dissipar sombras", "Cura leve"], lore: "Bênção do <span class='madness-word' data-note='Sua luz queima as almas impuras.'>Sol Eterno</span>.", imagem: "", longDesc: "A runa Lux arranca os véus da ilusão e expõe imperfeições.", secretTitle: "RASTONTRI", secretSubtitle: "\"A Presença\"", secretText: "Dizem que é cura, mas a luz queima as imperfeições." },
+        "Umbra": { desc: "Em meu manto repousa os maiores terrores e mistérios do universo.<br>-''Ibi'una''", color: "#303030", hoverColor: "#262626", manifestacoes: ["Furtividade", "Escuridão localizada", "Intimidar"], lore: "Manto da <span class='madness-word' data-note='Não olhe para a escuridão por muito tempo.'>Noite Silenciosa</span>.", imagem: "", longDesc: "As sombras possuem textura e fome.", secretTitle: "YRMEGTORE", secretSubtitle: "\"A Ausência\"", secretText: "Não há escuridão vazia. Toda sombra projetada pelo sol é um portal." },
+        "Vitae":  { desc: "Há formas de vida em todas as minhas criações e submissão às suas escolhas.<br>-''Yashima-no-Mikoto''", color: "#9d0e4f", hoverColor: "#7e0b3f", manifestacoes: ["Invocações", "Estimulação", "Sensibilidade a essências"], lore: "Essência da <span class='madness-word' data-note='As raízes bebem dos nossos cadáveres.'>Natureza Viva</span>.", imagem: "", longDesc: "A energia da Vitae força células a se multiplicarem rapidamente.", secretTitle: "IGL'TRUTAE", secretSubtitle: "\"A Animação\"", secretText: "O excesso de magia vital causa o crescimento de órgãos redundantes no mago." },
+        "Toxi": { desc: "Meu toque é o sussurro da entropia, a transformação inevitável e putrefata do todo.", color: "#76cf02", hoverColor: "#5ea602", manifestacoes: ["Danos Contínuos", "Criação de Venenos/Antídotos", "Resistência a doenças"], lore: "<span class='madness-word' data-note='Uma imensa máquina subterrânea que parece estar atravessando algumas Leis do Acaso.'>Núcleo Strolova</span>.", imagem: "", longDesc: "Senhores da putrefação e mestres do miasma.", secretTitle: "KARVPARLPAKS", secretSubtitle: "\"A Degradação\"", secretText: "A runa da toxina exige simbiose. O mago hospeda parasitas na sua corrente sanguínea." },
+        "Vis":{ desc: "Força pura, movimento, poder bruto, potencial.", color: "#803631", hoverColor: "#662b27", manifestacoes: ["Cinética", "Escudos de energia", "Aumentar força"], lore: "Fluxo <span class='madness-word' data-note='O peso da magia esmaga a sanidade.'>Primordial</span>.", imagem: "", longDesc: "Desprovida de forma ou moralidade, a Vis é a energia cósmica crua.", secretTitle: "TSOZDNEMARO", secretSubtitle: "\"A Energia\"", secretText: "Conjurar energia bruta distorce os ossos do utilizador." },
+        "Ulrhtau": { desc: "DADOS CORROMPIDOS // FALHA DE LEITURA", color: "#ff0000", hoverColor: "#ff0000", manifestacoes: ["Aberração existeencial", "Distorção da realidade", "[ERRO]"], lore: "NÃO CLICAR. A <span class='madness-word' data-note='A DOR É INFINITA AQUI FORA A DOR É INFINITA'>runa esquecida</span> que corrói o grimório.", imagem: "fas fa-skull text-6xl text-red-600", longDesc: "A matéria grita ao ser tocada por esta anomalia. A DOR é o único idioma conhecido. //NÃO_OLHE_PARA_TRÁS//", secretTitle: "", secretSubtitle: "", secretText: "" }
     },
     combinations: {
         "Flama": {"Flama": "Flama Fátuo", "Aqua": "Vapor", "Eol": "Incêndio", "Terrae": "Magma", "Fulmen": "Faísca", "Crelix": "Névoa", "Lux": "Radiação", "Umbra": "Fumaça", "Vitae": "Alma", "Toxi": "Fuligem", "Vis": "Explosão"},
@@ -160,91 +93,169 @@ const elementalData = {
         "Vis": {"Flama": "Explosão", "Aqua": "Corrente", "Eol": "Tornado", "Terrae": "Tremor", "Fulmen": "Descarga", "Crelix": "Congelação", "Lux": "Facho", "Umbra": "Pulso", "Vitae": "Vigor", "Toxi": "Contágio", "Vis": "Força Gravitacional"}
     },
     complexElementDescriptions: {
-        "Flama Fátuo": "Chamas etéreas que dançam com vida própria, guiando ou enganando os incautos.",
+        "Flama Fátuo": "Chamas incontroláveis que queimam a alma e perduram instrinsecamente na existência.",
         "Vapor": "Uma névoa escaldante que obscurece a visão e queima ao toque, nascida do conflito elemental.",
-        "Incêndio": "Chamas vorazes alimentadas pelo ar, espalhando-se com fúria indomável e consumindo tudo.",
-        "Magma": "Rocha derretida em fúria rubra, capaz de consumir e remodelar a própria terra.",
-        "Faísca": "Estalos de energia pura, o prenúncio de uma descarga maior ou uma chama súbita.",
-        "Névoa": "Uma cortina opaca onde o calor encontra o frio, ou onde o ar se mistura com sombras, criando um ambiente de visibilidade reduzida e perigo.",
-        "Radiação": "O calor da luz concentrado, capaz de queimar e purificar com sua intensidade luminosa.",
-        "Fumaça": "Partículas densas e escuras que sufocam a luz e o ar, um subproduto da combustão incompleta.",
-        "Alma": "A essência espiritual imbuída de fervor ardente, manifestando a força da vida em chamas etéreas.",
-        "Fuligem": "Resíduos tóxicos da queima, impregnando o ambiente com impureza e dificuldade de respirar.",
-        "Explosão": "Uma liberação súbita e violenta de energia ígnea, devastando a área circundante.",
-        "Purificação Reminiscente": "Água imbuída de uma calma profunda, capaz de limpar impurezas e acalmar espíritos.",
-        "Bruma": "Gotículas de água suspensas no ar, criando uma atmosfera úmida e misteriosa.",
-        "Lama": "Terra saturada de água, um terreno instável que aprisiona e dificulta o movimento.",
-        "Supercondução": "Água energizada pelo raio, tornando-se um condutor perfeito de eletricidade e poder.",
-        "Cristal": "Água congelada em formas geométricas perfeitas, refletindo e refratando a luz com beleza gélida.",
-        "Ilusão": "A luz refletida e distorcida pela água, criando imagens falsas e confundindo os sentidos.",
-        "Miragem": "Sombras dançantes sobre a água, criando visões efêmeras e enganosas à distância.",
-        "Sangue": "O fluido vital que carrega a essência da vida, pulsando com poder aquático e orgânico.",
-        "Ácido": "Água corrompida por toxinas, tornando-se uma substância corrosiva e perigosa.",
-        "Corrente": "A força da água em movimento constante, carregando energia cinética e poder de arrasto.",
-        "Turbilhão Vendaval": "Massas de ar em rotação violenta, um testemunho do poder bruto e indomável do ar.",
-        "Areia": "Partículas de terra erodidas e transportadas pelo vento, capazes de cegar e açoitar.",
-        "Trovão": "A onda de choque sonora que acompanha o raio, um estrondo que reverbera com a fúria do céu.",
-        "Nevoeiro": "Ar frio e úmido condensado, reduzindo a visibilidade e criando um ambiente gélido.",
-        "Fulgor": "Luz dispersa e intensificada pelo ar, criando um brilho difuso e ofuscante.",
-        "Sopro": "O fluxo vital do ar, essencial para a respiração e capaz de carregar a própria essência da vida.",
-        "Gás": "Ar impregnado de substâncias tóxicas, invisível e letal, espalhando-se silenciosamente.",
-        "Tornado": "Uma coluna de ar e energia em rotação destrutiva, um vórtice de poder caótico.",
-        "Rocha Eterna": "A solidez inabalável da terra, representando resistência, estabilidade e permanência.",
-        "Magnetismo": "A força invisível da terra que atrai e repele metais, carregada pela energia do raio.",
-        "Geada": "Cristais de gelo que se formam sobre a terra fria, um toque gélido da natureza.",
-        "Domínio": "A terra imbuída de luz, conferindo controle e autoridade sobre o terreno consagrado.",
-        "Assombração": "A energia sombria que se apega à terra, manifestando presenças espectrais e medo.",
-        "Fertilidade": "A terra nutrida pela força vital, capaz de gerar e sustentar vida abundante.",
-        "Erosão": "A terra desgastada e corroída por toxinas, um processo lento de decadência e destruição.",
-        "Tremor": "A terra chacoalhando com energia acumulada, um prenúncio de abalos sísmicos e instabilidade.",
-        "Intempérie Estrondosa": "Uma tempestade elétrica de poder avassalador, onde raios dançam com fúria.",
-        "Granizo": "Pedaços de gelo que caem do céu eletrificado, um bombardeio gélido e perigoso.",
-        "Clarão": "Um feixe de luz ofuscante e súbito, liberado pela energia elétrica concentrada.",
-        "Crepúsculo": "O momento de transição entre luz e sombra, carregado com a energia residual do raio.",
-        "Choque": "Uma descarga elétrica que percorre o corpo vital, paralisando e causando dor intensa.",
-        "Ionização": "O ar carregado eletricamente por toxinas, tornando-se instável e condutor de energia.",
-        "Descarga": "Uma liberação controlada ou caótica de energia elétrica pura, com potencial destrutivo.",
-        "Zero Absoluto": "A ausência total de calor, onde o próprio movimento cessa em um frio paralisante.",
-        "Prisma": "Gelo que refrata a luz em um espectro de cores, revelando a beleza oculta da luz.",
-        "Escuridão": "A ausência de luz intensificada pelo frio, um vazio gélido e opressor.",
-        "Hibernação": "Um estado de dormência induzido pelo frio, preservando a energia vital em suspensão.",
-        "Congelamento": "O frio extremo que solidifica toxinas, neutralizando seu perigo ou aprisionando-as.",
-        "Congelação": "A energia do frio absoluto, capaz de parar o movimento e cristalizar a matéria.",
-        "Difração Infinita": "A luz pura em sua forma mais absoluta, capaz de se dobrar e se espalhar em todas as direções.",
-        "Contraste": "A interação nítida entre luz e sombra, definindo formas e revelando ou ocultando a verdade.",
-        "Aurora": "A luz da vida que surge no horizonte, trazendo esperança, renovação e calor vital.",
-        "UV": "Luz invisível e tóxica, capaz de queimar e corromper com sua radiação nociva.",
-        "Facho": "Um feixe de luz concentrado e energizado, com poder de perfuração e iluminação intensa.",
-        "Vazio Profundo": "A escuridão absoluta, um abismo de nada onde a luz não ousa penetrar.",
-        "Fantasma": "Uma alma ou eco vital preso nas sombras, uma manifestação etérea e melancólica.",
-        "Veneno": "Uma toxina sombria que age furtivamente, corrompendo e destruindo por dentro.",
-        "Pulso": "Uma onda de energia sombria que emana, perturbando e drenando a força vital.",
-        "Vida Plena": "A força vital em sua expressão máxima, irradiando saúde, vigor e resiliência.",
-        "Doença": "A força vital corrompida por toxinas, levando à fraqueza, degeneração e sofrimento.",
-        "Vigor": "A energia vital concentrada, conferindo força, resistência e poder de recuperação.",
-        "Praga Letal": "Uma toxina virulenta em sua forma mais pura, espalhando doença e morte rapidamente.",
-        "Contágio": "A capacidade de uma toxina ou energia se espalhar e infectar outros rapidamente.",
-        "Força Gravitacional": "A manifestação pura da energia controlando a atração fundamental entre as massas."
+        "Incêndio": "Uma reação catastrófica de enormes chamas.",
+        "Magma": "Rocha derretida em fúria rubra, remodelando o mundo.",
+        "Faísca": "Um pequeno e súbito estalo de energia, o prenúncio de uma tempestade.",
+        "Névoa": "Uma cortina opaca onde o calor encontra o frio.",
+        "Radiação": "O calor da luz concentrado e nocivo.",
+        "Fumaça": "Partículas densas que sufocam a luz.",
+        "Alma": "A essência espiritual em fervor ardente.",
+        "Fuligem": "Resíduos tóxicos impregnando o ambiente.",
+        "Explosão": "Uma liberação violenta de energia e matéria.",
+        "Purificação Reminiscente": "Água imbuída na dualidade perfeita de ódio e amor.",
+        "Bruma": "Vapor de água suspenso, obscurecendo caminhos.",
+        "Lama": "Terra saturada de água, um terreno instável.",
+        "Supercondução": "Água eletrizada em fluxo perpétuo.",
+        "Cristal": "Água congelada em formas geométricas perfeitas.",
+        "Ilusão": "Visões falsas criadas pela refração da luz na água.",
+        "Miragem": "Imagens efêmeras dançando sobre a água.",
+        "Sangue": "O fluido vital de Nahvvatzal.",
+        "Ácido": "Substância corrosiva e virulenta.",
+        "Corrente": "A força da água em movimento perpétuo.",
+        "Turbilhão Vendaval": "Violentas massas de ar que destroem o que tocam.",
+        "Areia": "Terra erodida transportada pelo vento.",
+        "Trovão": "A onda de choque sonora do Fulmen.",
+        "Nevoeiro": "Ar gélido condensado e opaco.",
+        "Fulgor": "Luz ofuscante concentrada pelo vento.",
+        "Sopro": "O fluxo vital do ar.",
+        "Gás": "Ar impregnado de vapores invisíveis e letais.",
+        "Tornado": "Uma coluna de vento e energia em rotação destrutiva.",
+        "Rocha Eterna": "Solidez inabalável que petrifica a pele e abre montanhas.",
+        "Magnetismo": "A força invisível atraindo e repelindo metais.",
+        "Geada": "Cristais de gelo cobrindo a terra.",
+        "Domínio": "Terra consagrada imbuída de luz.",
+        "Assombração": "Energia sombria se apegando à terra.",
+        "Fertilidade": "Crescimento acelerado pela vida primordial.",
+        "Erosão": "Decadência lenta da terra por toxinas.",
+        "Tremor": "A terra chacoalhando com energia Vis.",
+        "Intempérie Estrondosa": "Inúmeras tempestates furiosas onde não há espacatória.",
+        "Granizo": "Bombardeio de gelo energizado pelo Fulmen.",
+        "Clarão": "Um feixe de luz súbito e ofuscante.",
+        "Crepúsculo": "O limite entre a luz residual e as sombras.",
+        "Choque": "Descarga elétrica paralisante.",
+        "Ionização": "O ar energizado em estado instável.",
+        "Descarga": "Liberação caótica de poder Fulmen puro.",
+        "Zero Absoluto": "A ausência total de movimento podendo aprisionar completamente uma nação.",
+        "Prisma": "Gelo que refrata a luz em cores cósmicas.",
+        "Escuridão": "Vazio gelado opressor.",
+        "Hibernação": "Estado de sono vital induzido pelo frio.",
+        "Congelamento": "Putrefação paralisada e neutralizada.",
+        "Congelação": "Energia do frio parando a matéria.",
+        "Difração Infinita": "Luz pura dobrando e se expandindo infinitamente.",
+        "Contraste": "A borda afiada entre luz e sombra total.",
+        "Aurora": "A luz da vida nascendo no horizonte.",
+        "UV": "Luz invisível tóxica gerada por Vis.",
+        "Facho": "Feixe concentrado de luz e energia.",
+        "Vazio Profundo": "O abismo de nada absoluto.",
+        "Fantasma": "Uma alma ou eco vital preso nas sombras.",
+        "Veneno": "Toxina mística que age furtivamente.",
+        "Pulso": "Uma onda de energia sombria asfixiante.",
+        "Vida Plena": "A força vital em sua expressão máxima.",
+        "Doença": "Putrefação vital acelerada.",
+        "Vigor": "Energia vital concentrada.",
+        "Praga Letal": "Putrefação que se espalha incontrolavelmente.",
+        "Contágio": "Transmissão virulenta de toxinas e energia.",
+        "Força Gravitacional": "Manifestação pura da energia distorcendo o espaço."
+    },
+    complexElementTypes: {
+        "Flama Fátuo": "Combinatória.", "Vapor": "Combinatória.", "Incêndio": "Reacionária.", "Magma": "Combinatória.", "Faísca": "Reacionária.", "Névoa": "Combinatória.", "Radiação": "Reacionária.", "Fumaça": "Combinatória.", "Alma": "Combinatória.", "Fuligem": "Reacionária.", "Explosão": "Reacionária.",
+        "Purificação Reminiscente": "Combinatória.", "Bruma": "Combinatória.", "Lama": "Combinatória.", "Supercondução": "Combinatória.", "Cristal": "Combinatória.", "Ilusão": "Combinatória.", "Miragem": "Combinatória.", "Sangue": "Combinatória.", "Ácido": "Reacionária.", "Corrente": "Combinatória.",
+        "Turbilhão Vendaval": "Combinatória.", "Areia": "Combinatória.", "Trovão": "Reacionária.", "Nevoeiro": "Combinatória.", "Fulgor": "Reacionária.", "Sopro": "Combinatória.", "Gás": "Reacionária.", "Tornado": "Combinatória.",
+        "Rocha Eterna": "Combinatória.", "Magnetismo": "Combinatória.", "Geada": "Combinatória.", "Domínio": "Combinatória.", "Assombração": "Reacionária.", "Fertilidade": "Combinatória.", "Erosão": "Reacionária.", "Tremor": "Reacionária.",
+        "Intempérie Estrondosa": "Reacionária.", "Granizo": "Reacionária.", "Clarão": "Reacionária.", "Crepúsculo": "Combinatória.", "Choque": "Reacionária.", "Ionização": "Reacionária.", "Descarga": "Reacionária.",
+        "Zero Absoluto": "Reacionária.", "Prisma": "Combinatória.", "Escuridão": "Combinatória.", "Hibernação": "Combinatória.", "Congelamento": "Combinatória.", "Congelação": "Combinatória.",
+        "Difração Infinita": "Reacionária.", "Contraste": "Combinatória.", "Aurora": "Reacionária.", "UV": "Reacionária.", "Facho": "Combinatória.",
+        "Vazio Profundo": "Combinatória.", "Fantasma": "Combinatória.", "Veneno": "Combinatória.", "Pulso": "Reacionária.",
+        "Vida Plena": "Combinatória.", "Doença": "Reacionária.", "Vigor": "Combinatória.",
+        "Praga Letal": "Reacionária.", "Contágio": "Reacionária.",
+        "Força Gravitacional": "Combinatória."
+    },
+    complexElementPowers: {
+        "Flama Fátuo": "Nível de Poder: Médio.", "Vapor": "Nível de Poder: Baixo.", "Incêndio": "Nível de Poder: Alto.", "Magma": "Nível de Poder: Muito Alto.", "Faísca": "Nível de Poder: Baixo.", "Névoa": "Nível de Poder: Baixo.", "Radiação": "Nível de Poder: Alto.", "Fumaça": "Nível de Poder: Médio.", "Alma": "Nível de Poder: Alto.", "Fuligem": "Nível de Poder: Médio.", "Explosão": "Nível de Poder: Muito Alto.",
+        "Purificação Reminiscente": "Nível de Poder: Médio.", "Bruma": "Nível de Poder: Baixo.", "Lama": "Nível de Poder: Médio.", "Supercondução": "Nível de Poder: Alto.", "Cristal": "Nível de Poder: Alto.", "Ilusão": "Nível de Poder: Médio.", "Miragem": "Nível de Poder: Baixo.", "Sangue": "Nível de Poder: Alto.", "Ácido": "Nível de Poder: Alto.", "Corrente": "Nível de Poder: Médio.",
+        "Turbilhão Vendaval": "Nível de Poder: Alto.", "Areia": "Nível de Poder: Médio.", "Trovão": "Nível de Poder: Alto.", "Nevoeiro": "Nível de Poder: Médio.", "Fulgor": "Nível de Poder: Alto.", "Sopro": "Nível de Poder: Baixo.", "Gás": "Nível de Poder: Alto.", "Tornado": "Nível de Poder: Muito Alto.",
+        "Rocha Eterna": "Nível de Poder: Alto.", "Magnetismo": "Nível de Poder: Médio.", "Geada": "Nível de Poder: Médio.", "Domínio": "Nível de Poder: Muito Alto.", "Assombração": "Nível de Poder: Alto.", "Fertilidade": "Nível de Poder: Alto.", "Erosão": "Nível de Poder: Médio.", "Tremor": "Nível de Poder: Alto.",
+        "Intempérie Estrondosa": "Nível de Poder: Muito Alto.", "Granizo": "Nível de Poder: Médio.", "Clarão": "Nível de Poder: Alto.", "Crepúsculo": "Nível de Poder: Alto.", "Choque": "Nível de Poder: Alto.", "Ionização": "Nível de Poder: Alto.", "Descarga": "Nível de Poder: Alto.",
+        "Zero Absoluto": "Nível de Poder: Extremo.", "Prisma": "Nível de Poder: Alto.", "Escuridão": "Nível de Poder: Muito Alto.", "Hibernação": "Nível de Poder: Alto.", "Congelamento": "Nível de Poder: Alto.", "Congelação": "Nível de Poder: Muito Alto.",
+        "Difração Infinita": "Nível de Poder: Extremo.", "Contraste": "Nível de Poder: Muito Alto.", "Aurora": "Nível de Poder: Alto.", "UV": "Nível de Poder: Alto.", "Facho": "Nível de Poder: Muito Alto.",
+        "Vazio Profundo": "Nível de Poder: Muito Alto.", "Fantasma": "Nível de Poder: Alto.", "Veneno": "Nível de Poder: Muito Alto.", "Pulso": "Nível de Poder: Alto.",
+        "Vida Plena": "Nível de Poder: Muito Alto.", "Doença": "Nível de Poder: Alto.", "Vigor": "Nível de Poder: Muito Alto.",
+        "Praga Letal": "Nível de Poder: Muito Alto.", "Contágio": "Nível de Poder: Alto.",
+        "Força Gravitacional": "Nível de Poder: Extremo."
     },
     typings: {
         acquisition: {
-            "Benção": { desc: "Concedida por uma entidade superior como um presente.", related: ["Única", "Múltipla", "Masterizadora", "Própria", "Atravessadora"], mini_narrativa: "A Deusa da Floresta tocou sua testa, e o poder da vida selvagem fluiu em suas veias." },
-            "Treino": { desc: "Adquirida por prática intensiva e disciplina.", related: ["Única", "Múltipla", "Masterizadora"], mini_narrativa: "Anos de meditação no topo da Montanha Gélida despertaram sua afinidade com o frio eterno." },
-            "Estudo": { desc: "Obtida por conhecimento teórico e pesquisa.", related: ["Única", "Múltipla", "Masterizadora", "Própria"], mini_narrativa: "Ao decifrar o Tomo Proibido, linhas de energia crepitaram em seus dedos pela primeira vez." },
-            "Maldição": { desc: "Imposta contra a vontade, class: como punição ou efeito colateral.", related: ["Única", "Múltipla", "Masterizadora", "Própria", "Atravessadora"], mini_narrativa: "Por profanar o túmulo ancestral, as sombras se agarraram à sua alma, tornando-se parte dele." },
-            "Herança": { desc: "Passada por laços de sangue ou tradições familiares.", related: ["Única", "Múltipla", "Masterizadora", "Própria", "Atravessadora"], mini_narrativa: "O sangue dos Reis Trovejantes corria em sua família; a primeira tempestade revelou seu legado." },
-            "Pacto": { desc: "Resultado de um acordo com uma entidade mágica.", related: ["Única", "Múltipla", "Masterizadora", "Própria", "Atravessadora"], mini_narrativa: "Em troca de sua memória mais querida, um Djinn do deserto concedeu-lhe o domínio sobre as areias." },
-            "Sacrifício": { desc: "Obtida ao oferecer algo de grande valor pessoal.", related: ["Múltipla", "Masterizadora", "Própria", "Atravessadora"], mini_narrativa: "Ao oferecer seu próprio olho esquerdo à Fonte do Conhecimento, as runas da toxina se gravaram em sua mente." }
+            "Benção": { desc: "Concedida por uma entidade superior.", related: ["Única", "Múltipla", "Masterizadora"], mini_narrativa: "A Deusa tocou sua testa..." },
+            "Treino": { desc: "Adquirida por prática intensiva.", related: ["Única"], mini_narrativa: "Anos de meditação no gelo..." }
         },
         classification: {
-            "Única": { desc: "Afinidade com um único Elemento Base. Não pode usar Elementos Complexos ou Puros.", arquétipo: "O Piromante Novato, focado apenas nas chamas." },
-            "Múltipla": { desc: "Capacidade de manipular dois ou mais Elementos Base. Permite o uso de Elementos Complexos.", arquétipo: "O Geomante Aquático, que combina terra e água com versatilidade." },
-            "Masterizadora": { desc: "Domínio excepcional de um ou mais Elementos Base, permitindo o uso do Elemento Puro.", arquétipo: "A Arquimaga da Luz, cuja pureza luminosa dissipa qualquer escuridão." },
-            "Própria": { desc: "Afinidade com um elemento único e exclusivo, fora dos 11 Elementos Base comuns.", arquétipo: "O Cronomante, manipulador do tempo, um poder além da compreensão comum." },
-            "Atravessadora": { desc: "Capacidade de usar uma linha/coluna inteira da Tabela Elemental.", arquétipo: "O Avatar da Tempestade, que comanda raios, trovões, ventos e suas fusões." }
+            "Única": { desc: "Afinidade com um único Elemento Base.", arquétipo: "O Piromante Novato" },
+            "Múltipla": { desc: "Capacidade de manipular dois ou mais Elementos.", arquétipo: "O Geomante Aquático" }
         }
     }
 };
+
+// NOVO: Base de Dados Expansiva do Bestiário
+const bestiaryData = [
+    { 
+        name: "Sombra Rastejante", 
+        habitat: "Ruínas de Iitlaq", 
+        lifeExpectancy: "Efêmera (depende do consumo de memórias)",
+        reproductionRate: "Alto (em áreas de trauma mental)",
+        reproductionMethod: "Por meios mágicos (Fissão de trauma)",
+        vulnerability: "Lux (Luz pura), Fulmen", 
+        resistance: "Umbra, Toxi, Ataques físicos", 
+        peculiarity: "Totalmente invisíveis a olho nu. Só podem ser detetadas pelo rasto de ar gélido que deixam ou utilizando feitiços reveladores de Lux.",
+        desc: "Parasitas incorpóreos que devoram as memórias e a sanidade dos magos.",
+        fullDesc: "Seres formados a partir de resquícios de magia corrompida durante as antigas guerras de Iitlaq. Não possuem forma física definida, assemelhando-se a uma fumaça negra muito densa. Eles alimentam-se exclusivamente das lembranças de conjuradores desavisados, sugando a força mental até deixarem as suas vítimas num estado catatônico de amnésia paralisante permanente.",
+        image: "",
+        icon: "fas fa-ghost"
+    },
+    { 
+        name: "Colosso de Geada", 
+        habitat: "Picos do Gigante", 
+        lifeExpectancy: "Milênios",
+        reproductionRate: "Nulo",
+        reproductionMethod: "Por meios mágicos (Criação artificial antiga)",
+        vulnerability: "Flama intensificada, Magma", 
+        resistance: "Crelix absoluto, Areia, Tremores", 
+        peculiarity: "O seu núcleo emana um frio tão absoluto que congela instantaneamente a humidade do ar ao seu redor, criando uma armadura de gelo espessa e autorregenerativa.",
+        desc: "Constructos adormecidos que despertam com o uso abusivo de magia.",
+        fullDesc: "Armas de cerco gigantescas criadas numa era esquecida por mestres renegados de Crelix e Terrae. Os colossos são aglomerados massivos de rocha viva e gelo perene. Eles permanecem adormecidos como montanhas literais, e só despertam quando detetam picos extremos de manipulação mágica na sua vizinhança. Uma vez despertos, marcham em silêncio absoluto para erradicar a fonte do distúrbio com força brutal.",
+        image: "img/teste imagem.jpg",
+        icon: "img/teste imagem.jpg"
+    },
+    { 
+        name: "Iturfratzse", 
+        habitat: "Fnerhyszostzer", 
+        lifeExpectancy: "80 - 130 anos",
+        reproductionRate: "Média",
+        reproductionMethod: "Sexuada e criação artificial antiga",
+        vulnerability: "Flama intensificada, Magma", 
+        resistance: "Ulrhtau", 
+        peculiarity: "O seu núcleo emana um frio tão absoluto que congela instantaneamente a humidade do ar ao seu redor, criando uma armadura de gelo espessa e autorregenerativa.",
+        desc: "Constructos adormecidos que despertam com o uso abusivo de magia.",
+        fullDesc: "Armas de cerco gigantescas criadas numa era esquecida por mestres renegados de Crelix e Terrae. Os colossos são aglomerados massivos de rocha viva e gelo perene. Eles permanecem adormecidos como montanhas literais, e só despertam quando detetam picos extremos de manipulação mágica na sua vizinhança. Uma vez despertos, marcham em silêncio absoluto para erradicar a fonte do distúrbio com força brutal.",
+        image: "img/teste-iturfratsze.jpg",
+        icon: "img/teste-iturfratsze.jpg"
+    },
+    { 
+        name: "Devorador de Essência", 
+        habitat: "Vazio Fragmentado (Fendas dimensionais)", 
+        lifeExpectancy: "Desconhecida",
+        reproductionRate: "Baixo",
+        reproductionMethod: "Assexuada (Brotamento parasítico em cadáveres)",
+        vulnerability: "Ulrhtau (Energia instável do vazio), Lux concentrada", 
+        resistance: "Vitae, Sangue, Toxi", 
+        peculiarity: "Consegue mimetizar perfeitamente a assinatura mágica de feitiços de cura (Vitae) para atrair presas que estejam gravemente feridas e à procura de socorro.",
+        desc: "Abominações predatórias que são atraídas pelo cheiro da cura.",
+        fullDesc: "Criaturas monstruosas e cegas com múltiplos membros espasmódicos e uma bocarra desproporcional cheia de dentes como agulhas. Eles deslizam e contorcem-se pelas falhas na realidade provocadas por anomalias de Ulrhtau. São inteiramente imunes a toxinas, e qualquer tentativa de usar magia vital (Vitae) neles apenas os regenera e fortalece, tornando-os um pesadelo absoluto para clérigos e curandeiros nos campos de batalha.",
+        image: "",
+        icon: "fas fa-pastafarianism"
+    }
+];
 
 window.addEventListener('load', () => {
     const loader = document.getElementById('loading-screen');
@@ -256,10 +267,29 @@ window.addEventListener('load', () => {
     }
 });
 
-// A MEMÓRIA DA PEDRA (Carrega as fusões salvas do computador do usuário)
 let discoveredFusions = JSON.parse(localStorage.getItem('nahvvatzal_fusions')) || {};
-// Dicionário invisível para armazenar todas as fusões geradas no Índice
 let allFusionsData = {}; 
+
+function initFusionsData() {
+    for (const el1 in elementalData.combinations) {
+        for (const el2 in elementalData.combinations[el1]) {
+            const fusionName = elementalData.combinations[el1][el2];
+            if (!allFusionsData[fusionName]) {
+                allFusionsData[fusionName] = {
+                    name: fusionName,
+                    parent1: el1,
+                    parent2: el2,
+                    color1: elementalData.baseElements[el1].color,
+                    color2: elementalData.baseElements[el2].color,
+                    desc: elementalData.complexElementDescriptions[fusionName] || "Descrição oculta.",
+                    type: elementalData.complexElementTypes[fusionName] || "Tipo desconhecido.",
+                    power: elementalData.complexElementPowers[fusionName] || "Poder oculto."
+                };
+            }
+        }
+    }
+}
+initFusionsData(); 
 
 document.addEventListener('DOMContentLoaded', () => {
     const selector1El = document.querySelector('#selector1 .grid');
@@ -463,7 +493,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleSelection(event) {
-        audioManager.playClick(); // NOVO: Toca o som de pedra a raspar
+        audioManager.playClick(); 
         const button = event.currentTarget;
         const { element, selector } = button.dataset;
         
@@ -505,14 +535,6 @@ document.addEventListener('DOMContentLoaded', () => {
             el.classList.remove('visible');
         });
 
-        if (hasGlitch) {
-            document.body.classList.add('anomalia-realidade');
-            audioManager.playGlitch(true); // NOVO: Liga o ruído de horror
-        } else {
-            document.body.classList.remove('anomalia-realidade');
-            audioManager.playGlitch(false); // NOVO: Desliga o ruído
-        }
-
         let color1 = selected1 ? elementalData.baseElements[selected1].color : null;
         let color2 = selected2 ? elementalData.baseElements[selected2].color : null;
         let hasGlitch = false;
@@ -528,8 +550,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (hasGlitch) {
             document.body.classList.add('anomalia-realidade');
+            audioManager.playGlitch(true);
         } else {
             document.body.classList.remove('anomalia-realidade');
+            audioManager.playGlitch(false);
+        }
+        
+        const ambientGlow = document.getElementById('ambient-glow');
+        if (ambientGlow) {
+            ambientGlow.style.setProperty('--aura-c1', color1 || 'transparent');
+            ambientGlow.style.setProperty('--aura-c2', color2 || 'transparent');
         }
         
         setGlitchTitle(hasGlitch);
@@ -550,14 +580,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     complexElementName = elementalData.combinations[selected1][selected2];
                     description = elementalData.complexElementDescriptions[complexElementName] || "Descrição não disponível.";
                     
-                    audioManager.playFusion(); // NOVO: Toca o estrondo da fusão mágica!
+                    audioManager.playFusion();
 
-                    // GRAVA A DESCOBERTA E ATUALIZA A ABA
+                    // NOVO: Sistema de gravação preparado para Diário de Campo
                     if (!discoveredFusions[complexElementName]) {
-                        discoveredFusions[complexElementName] = true;
+                        discoveredFusions[complexElementName] = { discovered: true, notes: "" };
                         localStorage.setItem('nahvvatzal_fusions', JSON.stringify(discoveredFusions));
-                        // Re-renderiza a grade de complexos em tempo real
                         renderComplexGrid(); 
+                        const selNode = document.querySelector('#genealogy-selector button.selected-node');
+                        if (selNode) renderGenealogyTree(selNode.textContent);
                     }
 
                 } else {
@@ -612,23 +643,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     resetBtn.addEventListener('click', resetSelections);
-    
-    const sectionToggles = [
-        { button: document.getElementById('toggle-grimoire'), content: document.getElementById('content-grimoire') },
-        { button: document.getElementById('toggle-typings'), content: document.getElementById('content-typings') }
-    ];
-
-    sectionToggles.forEach(toggle => {
-        toggle.button.addEventListener('click', () => {
-            const isOpen = toggle.content.classList.toggle('open');
-            toggle.button.classList.toggle('active-toggle', isOpen); 
-        });
-    });
 
     const grimoireGrid = document.getElementById('grimoire-grid');
     Object.entries(elementalData.baseElements).forEach(([name, data]) => {
         const card = document.createElement('div');
-        card.className = 'grimoire-card p-5 cursor-pointer self-start';
+        card.className = 'grimoire-card p-5 cursor-default self-start expanded'; 
         card.style.setProperty('--rune-color', data.color);
         
         if (name === "Ulrhtau") {
@@ -640,17 +659,15 @@ document.addEventListener('DOMContentLoaded', () => {
             : `<i class="fas fa-gem text-4xl opacity-40 transition-transform duration-700 group-hover:scale-125" style="color: ${data.color};"></i>`;
 
         const detailsHtml = `
-            <div class="grimoire-card-details mt-0">
+            <div class="grimoire-card-details mt-4">
                 <div class="w-full h-px mt-4 mb-4" style="background: linear-gradient(90deg, transparent, ${data.color}55, transparent);"></div>
                 
                 <div class="flex flex-col md:flex-row gap-6">
-                    
                     <div class="flex-1">
                         <h4 class="font-bold text-content-light uppercase tracking-wider text-xs">Manifestações Típicas:</h4>
                         <ul class="list-disc list-inside text-content-dim text-sm pl-2 mt-1 mb-5">
                             ${data.manifestacoes.map(m => `<li>${m}</li>`).join('')}
                         </ul>
-                        
                         <h4 class="font-bold text-content-light uppercase tracking-wider text-xs flex items-center gap-2">
                             <i class="fas fa-book-open text-[10px]" style="color: ${data.color};"></i> Registro do Tomo:
                         </h4>
@@ -659,45 +676,18 @@ document.addEventListener('DOMContentLoaded', () => {
                             <p class="opacity-80">${data.longDesc}</p>
                         </div>
                     </div>
-
                     <div class="w-full md:w-32 lg:w-40 flex-shrink-0 flex flex-col items-center justify-start mt-2 md:mt-0">
                         <div class="rune-image-placeholder relative flex items-center justify-center w-full aspect-[3/4] rounded-sm overflow-hidden group cursor-crosshair">
                             <div class="absolute inset-0 opacity-20 group-hover:opacity-50 transition-opacity duration-700" style="background: radial-gradient(circle at center, ${data.color} 0%, transparent 70%);"></div>
-                            
                             ${conteudoIlustracao}
-                            
                             <div class="absolute inset-0 border border-slate-700/50 mix-blend-overlay pointer-events-none"></div>
-                            <span class="absolute bottom-2 text-[9px] text-slate-500 uppercase tracking-widest opacity-60 pointer-events-none">Ilustração</span>
                         </div>
-                        
                         <button class="secret-btn" data-element="${name}">???</button>
                     </div>
-                    
                 </div>
             </div>
         `;
-        
-        card.innerHTML = `
-            <div class="flex justify-between items-center">
-                <h3 class="font-bold text-xl uppercase tracking-widest" style="color: ${data.color};">${name}</h3>
-                <span class="text-sm text-slate-500 opacity-50 transition-transform duration-300 icon-expand inline-block"><i class="fas fa-chevron-down"></i></span>
-            </div>
-            <p class="text-content-dim text-sm mt-2">${data.desc}</p>
-            ${detailsHtml}
-        `;
-        
-        card.addEventListener('click', (e) => {
-            if (window.getSelection().toString().length > 0) return;
-
-            if (e.target.closest('.grimoire-card') === card) {
-                card.classList.toggle('expanded');
-                const iconContainer = card.querySelector('.icon-expand');
-                if (iconContainer) {
-                    iconContainer.style.transform = card.classList.contains('expanded') ? 'rotate(180deg)' : 'rotate(0deg)';
-                }
-            }
-        });
-        
+        card.innerHTML = `<div class="flex justify-between items-center"><h3 class="font-bold text-xl uppercase tracking-widest" style="color: ${data.color};">${name}</h3></div><p class="text-content-dim text-sm mt-2">${data.desc}</p>${detailsHtml}`;
         grimoireGrid.appendChild(card);
     });
 
@@ -711,20 +701,12 @@ document.addEventListener('DOMContentLoaded', () => {
         button.className = 'button-secondary p-2 px-4 rounded-lg shadow-md transition-all text-sm';
         button.textContent = name;
         button.addEventListener('click', () => {
-            acquisitionMethodsContainer.querySelectorAll('button').forEach(btn => {
-                btn.classList.remove('active-filter');
-            });
+            acquisitionMethodsContainer.querySelectorAll('button').forEach(btn => btn.classList.remove('active-filter'));
             button.classList.add('active-filter');
-
             narrativeText.textContent = data.mini_narrativa || "Detalhes sobre este meio de aquisição.";
             narrativeDisplay.classList.remove('hidden');
-
             document.querySelectorAll('#typing-classifications > div').forEach(cardDiv => {
-                if (data.related.includes(cardDiv.dataset.typing)) {
-                    cardDiv.classList.add('highlight');
-                } else {
-                    cardDiv.classList.remove('highlight');
-                }
+                if (data.related.includes(cardDiv.dataset.typing)) { cardDiv.classList.add('highlight'); } else { cardDiv.classList.remove('highlight'); }
             });
         });
         acquisitionMethodsContainer.appendChild(button);
@@ -740,69 +722,120 @@ document.addEventListener('DOMContentLoaded', () => {
         typingClassificationsContainer.appendChild(card);
     });
 
-
     // =========================================
-    // LÓGICA DA NOVA ABA (ARQUIVO DE FISSÕES) E MODAL DE EXPANSÃO
+    // NAVEGAÇÃO DE ABAS E MODAIS
     // =========================================
-    const btnOpenArquivo = document.getElementById('btn-open-arquivo');
-    const btnBackAltar = document.getElementById('btn-back-altar');
     const viewAltar = document.getElementById('view-altar');
     const viewComplex = document.getElementById('view-complex');
+    const viewTypings = document.getElementById('view-typings');
+    const viewGenealogy = document.getElementById('view-genealogy');
+    const viewBestiary = document.getElementById('view-bestiary');
+    
+    // Transição genérica de ecrãs
+    function switchView(fromView, toView) {
+        if(!fromView || !toView) return;
+        fromView.classList.remove('active');
+        setTimeout(() => {
+            fromView.classList.add('hidden');
+            toView.classList.remove('hidden');
+            setTimeout(() => toView.classList.add('active'), 50);
+        }, 500); 
+    }
+
+    // Botões de Abertura
+    document.getElementById('btn-open-arquivo')?.addEventListener('click', () => switchView(viewAltar, viewComplex));
+    document.getElementById('btn-open-typings')?.addEventListener('click', () => switchView(viewAltar, viewTypings));
+    document.getElementById('btn-open-genealogy')?.addEventListener('click', () => switchView(viewAltar, viewGenealogy));
+    document.getElementById('btn-open-bestiary')?.addEventListener('click', () => switchView(viewAltar, viewBestiary));
+
+    // Botões de Voltar ao Altar
+    document.querySelectorAll('.btn-back-altar').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const currentView = e.target.closest('.view-section');
+            switchView(currentView, viewAltar);
+        });
+    });
+
+    // =========================================
+    // BESTIÁRIO DE GIONYYL - RENDERIZAÇÃO E MODAL
+    // =========================================
+    const bestiaryGrid = document.getElementById('bestiary-grid');
+    if (bestiaryGrid) {
+        bestiaryGrid.innerHTML = '';
+        bestiaryData.forEach((creature, index) => {
+            bestiaryGrid.innerHTML += `
+                <div class="p-6 border border-slate-800 rounded bg-[#0a0a0f]/80 hover:border-[#d69e9e]/50 hover:bg-[#1a1a24] transition-all cursor-pointer group shadow-lg" data-bestiary-id="${index}">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-full bg-[#050508] border border-slate-700 flex items-center justify-center group-hover:border-[#d69e9e] transition-colors">
+                            <i class="${creature.icon || 'fas fa-skull'} text-slate-500 group-hover:text-[#d69e9e]"></i>
+                        </div>
+                        <h3 class="font-cinzel text-xl text-[#d69e9e] uppercase tracking-widest">${creature.name}</h3>
+                    </div>
+                    <p class="text-xs text-slate-500 uppercase tracking-widest mb-4"><i class="fas fa-map-marker-alt mr-1"></i> ${creature.habitat}</p>
+                    <p class="text-sm text-slate-400 font-serif line-clamp-2">${creature.desc}</p>
+                </div>
+            `;
+        });
+
+        // Lógica de Clique e Modal do Bestiário
+        const bestiaryModal = document.getElementById('bestiary-modal');
+        const bestiaryModalBg = document.getElementById('bestiary-modal-bg');
+        const closeBestiaryBtn = document.getElementById('close-bestiary-modal');
+
+        bestiaryGrid.addEventListener('click', (e) => {
+            const card = e.target.closest('[data-bestiary-id]');
+            if (!card) return;
+            
+            const index = card.dataset.bestiaryId;
+            const data = bestiaryData[index];
+
+            document.getElementById('bestiary-modal-title').innerText = data.name;
+            document.getElementById('bestiary-modal-habitat').innerText = data.habitat;
+            document.getElementById('bestiary-modal-life').innerText = data.lifeExpectancy;
+            document.getElementById('bestiary-modal-repro-rate').innerText = data.reproductionRate;
+            document.getElementById('bestiary-modal-repro-method').innerText = data.reproductionMethod;
+            document.getElementById('bestiary-modal-vuln').innerText = data.vulnerability;
+            document.getElementById('bestiary-modal-resist').innerText = data.resistance;
+            document.getElementById('bestiary-modal-peculiarity').innerText = data.peculiarity;
+            document.getElementById('bestiary-modal-desc').innerText = data.fullDesc;
+
+            // Manipula a exibição da Imagem vs Ícone
+            const imgEl = document.getElementById('bestiary-modal-image');
+            const iconEl = document.getElementById('bestiary-modal-icon');
+            if (data.image) {
+                imgEl.src = data.image;
+                imgEl.classList.remove('hidden');
+                iconEl.classList.add('hidden');
+            } else {
+                imgEl.classList.add('hidden');
+                iconEl.className = `${data.icon || 'fas fa-spider'} text-6xl text-slate-800 absolute transition-transform duration-500 group-hover:scale-110`;
+                iconEl.classList.remove('hidden');
+            }
+
+            bestiaryModal.classList.add('active');
+        });
+
+        if(closeBestiaryBtn) closeBestiaryBtn.addEventListener('click', () => bestiaryModal.classList.remove('active'));
+        if(bestiaryModalBg) bestiaryModalBg.addEventListener('click', () => bestiaryModal.classList.remove('active'));
+    }
+
+
+    // =========================================
+    // ÍNDICE DOS SÁBIOS
+    // =========================================
     const complexGrid = document.getElementById('complex-grid');
     const fusionCounter = document.getElementById('fusion-counter');
 
-    // Troca de Telas
-    if(btnOpenArquivo && btnBackAltar) {
-        btnOpenArquivo.addEventListener('click', () => {
-            viewAltar.classList.remove('active');
-            setTimeout(() => {
-                viewAltar.classList.add('hidden');
-                viewComplex.classList.remove('hidden');
-                setTimeout(() => viewComplex.classList.add('active'), 50);
-            }, 500); 
-        });
-
-        btnBackAltar.addEventListener('click', () => {
-            viewComplex.classList.remove('active');
-            setTimeout(() => {
-                viewComplex.classList.add('hidden');
-                viewAltar.classList.remove('hidden');
-                setTimeout(() => viewAltar.classList.add('active'), 50);
-            }, 500); 
-        });
-    }
-
-    // Renderiza e atualiza os cartões na grade
     function renderComplexGrid() {
         if (!complexGrid) return;
         complexGrid.innerHTML = '';
-        
-        // Extrai todas as 121 fusões para o Dicionário Global
-        for (const el1 in elementalData.combinations) {
-            for (const el2 in elementalData.combinations[el1]) {
-                const fusionName = elementalData.combinations[el1][el2];
-                if (!allFusionsData[fusionName]) {
-                    allFusionsData[fusionName] = {
-                        name: fusionName,
-                        parent1: el1,
-                        parent2: el2,
-                        color1: elementalData.baseElements[el1].color,
-                        color2: elementalData.baseElements[el2].color,
-                        desc: elementalData.complexElementDescriptions[fusionName] || "Descrição oculta."
-                    };
-                }
-            }
-        }
-        
         const fusionsArray = Object.values(allFusionsData).sort((a, b) => a.name.localeCompare(b.name));
         let countUnlocked = 0;
 
         fusionsArray.forEach((data, index) => {
             const isDiscovered = discoveredFusions[data.name];
-            
             if (isDiscovered) {
                 countUnlocked++;
-                // Cartão Descoberto (Agora com classe especial para clicar)
                 complexGrid.innerHTML += `
                     <div class="fusion-card unlocked-fusion-card p-5 border rounded-sm flex flex-col relative overflow-hidden" style="--card-color1: ${data.color1}; border-color: ${data.color1}55;" data-fusion="${data.name}">
                         <div class="absolute top-0 right-0 bottom-0 w-48 opacity-10 pointer-events-none" style="background: linear-gradient(90deg, transparent, ${data.color1}, ${data.color2});"></div>
@@ -814,7 +847,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 `;
             } else {
-                // Cartão Trancado
                 complexGrid.innerHTML += `
                     <div class="locked-card p-5 rounded-sm flex flex-col items-center justify-center relative overflow-hidden h-36 opacity-60">
                         <span class="absolute top-2 left-2 text-[10px] text-slate-700 font-mono">#${(index + 1).toString().padStart(3, '0')}</span>
@@ -824,38 +856,176 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
             }
         });
-
         if (fusionCounter) fusionCounter.innerText = countUnlocked;
     }
-
     renderComplexGrid();
 
+    // =========================================
+    // ÁRVORE DE GENEALOGIA ELEMENTAL
+    // =========================================
+    const genealogySelector = document.getElementById('genealogy-selector');
+    const genealogyTree = document.getElementById('genealogy-tree');
+
+    function renderGenealogySelectors() {
+        if (!genealogySelector) return;
+        genealogySelector.innerHTML = '';
+        Object.keys(elementalData.baseElements).forEach(name => {
+            const data = elementalData.baseElements[name];
+            const btn = document.createElement('button');
+            btn.className = 'px-4 py-2 border border-slate-700 rounded font-cinzel text-sm uppercase tracking-widest text-slate-400 hover:text-white transition-all';
+            btn.textContent = name;
+            
+            btn.addEventListener('mouseenter', () => {
+                btn.style.borderColor = data.color;
+                btn.style.textShadow = `0 0 8px ${data.color}`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                if(!btn.classList.contains('selected-node')) {
+                    btn.style.borderColor = '#334155'; 
+                    btn.style.textShadow = 'none';
+                }
+            });
+            btn.addEventListener('click', () => {
+                Array.from(genealogySelector.children).forEach(child => {
+                    child.classList.remove('selected-node');
+                    child.style.borderColor = '#334155';
+                    child.style.textShadow = 'none';
+                    child.style.backgroundColor = 'transparent';
+                });
+                btn.classList.add('selected-node');
+                btn.style.borderColor = data.color;
+                btn.style.textShadow = `0 0 8px ${data.color}`;
+                btn.style.backgroundColor = `${data.color}22`; 
+                
+                renderGenealogyTree(name);
+            });
+            genealogySelector.appendChild(btn);
+        });
+    }
+
+    function renderGenealogyTree(baseElementName) {
+        if (!genealogyTree) return;
+        const baseData = elementalData.baseElements[baseElementName];
+        const combos = elementalData.combinations[baseElementName];
+
+        let html = `
+            <div class="flex flex-col items-center w-full relative z-10">
+                <div class="genealogy-center-node p-8 border-2 rounded-full mb-16 flex flex-col items-center justify-center shadow-[0_0_30px_rgba(0,0,0,0.8)] z-20 bg-[#050508] relative" style="border-color: ${baseData.color}; box-shadow: 0 0 50px ${baseData.color}44; --node-color: ${baseData.color};">
+                    <h3 class="font-cinzel text-4xl font-bold uppercase tracking-widest" style="color: ${baseData.color}; text-shadow: 0 0 15px ${baseData.color};">${baseElementName}</h3>
+                    <span class="text-xs text-slate-400 mt-2 tracking-[0.3em] uppercase">Matriz Primordial</span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full relative">
+        `;
+
+        let delay = 0;
+        for (const [otherBase, complexName] of Object.entries(combos)) {
+            const isDiscovered = discoveredFusions[complexName];
+            const otherData = elementalData.baseElements[otherBase];
+            const complexData = allFusionsData[complexName] || { color1: baseData.color, color2: otherData.color, type: "Desconhecido" };
+
+            if (isDiscovered) {
+                html += `
+                    <div class="genealogy-branch p-5 border rounded bg-[#0a0a0f]/90 flex flex-col items-center text-center transition-all relative overflow-hidden group cursor-pointer hover:border-[${complexData.color1}]" style="border-color: ${complexData.color1}55; animation-delay: ${delay}ms;" data-fusion="${complexName}">
+                        <div class="absolute inset-0 opacity-10 group-hover:opacity-30 transition-opacity duration-500" style="background: linear-gradient(135deg, ${complexData.color1}, ${complexData.color2});"></div>
+                        <div class="flex items-center justify-center gap-2 mb-4 z-10">
+                            <span class="text-[10px] uppercase tracking-widest text-slate-500">Fundido com</span>
+                            <span class="font-cinzel font-bold text-sm" style="color: ${otherData.color}; text-shadow: 0 0 5px ${otherData.color};">${otherBase}</span>
+                        </div>
+                        <i class="fas fa-arrow-down text-slate-600 mb-4 text-xs opacity-50 z-10"></i>
+                        <h4 class="font-cinzel text-xl text-white tracking-widest uppercase mb-2 z-10">${complexName}</h4>
+                        <span class="text-[9px] uppercase tracking-widest text-slate-400 border border-slate-700 px-2 py-1 rounded bg-black/50 z-10">${complexData.type.split('.')[0]}</span>
+                    </div>
+                `;
+            } else {
+                html += `
+                    <div class="genealogy-branch p-5 border border-slate-800 border-dashed rounded bg-[#050508]/50 flex flex-col items-center justify-center text-center opacity-40" style="animation-delay: ${delay}ms;">
+                        <i class="fas fa-lock text-2xl text-slate-700 mb-3"></i>
+                        <span class="text-[10px] text-slate-500 font-cinzel tracking-widest uppercase">Descendência Selada</span>
+                        <div class="mt-2 text-[8px] text-slate-700 font-mono tracking-widest">Requer ${otherBase}</div>
+                    </div>
+                `;
+            }
+            delay += 50;
+        }
+        html += `</div></div>`;
+        genealogyTree.innerHTML = html;
+        
+        const unlockedBranches = genealogyTree.querySelectorAll('.genealogy-branch[data-fusion]');
+        unlockedBranches.forEach(branch => {
+            branch.addEventListener('click', () => {
+                const fusionName = branch.dataset.fusion;
+                openMajesticScroll(fusionName);
+            });
+        });
+    }
+    renderGenealogySelectors();
 
     // =========================================
-    // LÓGICA DO MODAL MAJESTOSO DAS FUSÕES
+    // LÓGICA DO MODAL MAJESTOSO DAS FUSÕES E DIÁRIO
     // =========================================
     const fusionModal = document.getElementById('fusion-modal');
     const fusionModalBg = document.getElementById('fusion-modal-bg');
     const closeFusionBtn = document.getElementById('close-fusion-modal');
     const fusionModalContent = document.getElementById('fusion-modal-content');
     
-    // Escuta cliques apenas nos cartões que já foram destrancados
+    function openMajesticScroll(fusionName) {
+        const data = allFusionsData[fusionName];
+        if (!data) return;
+        
+        document.getElementById('fusion-modal-title').innerText = data.name;
+        document.getElementById('fusion-modal-parents').innerText = `${data.parent1} + ${data.parent2}`;
+        document.getElementById('fusion-modal-desc-content').innerText = data.desc;
+        document.getElementById('fusion-modal-type-content').innerText = data.type;
+        document.getElementById('fusion-modal-power-content').innerText = data.power;
+        
+        // CARREGA AS ANOTAÇÕES DO ALQUIMISTA
+        const savedData = discoveredFusions[fusionName];
+        const notesField = document.getElementById('fusion-notes');
+        
+        if (notesField) {
+            // Retrocompatibilidade
+            if (typeof savedData === 'boolean') {
+                discoveredFusions[fusionName] = { discovered: true, notes: "" };
+            }
+            notesField.value = discoveredFusions[fusionName].notes || "";
+            // Atrela a fusão atual ao botão de salvar
+            const saveNotesBtn = document.getElementById('save-notes-btn');
+            if (saveNotesBtn) saveNotesBtn.dataset.fusionTarget = fusionName;
+        }
+        
+        fusionModalContent.style.setProperty('--modal-c1', data.color1);
+        fusionModalContent.style.setProperty('--modal-c2', data.color2);
+        fusionModal.classList.add('active');
+    }
+
+    // AÇÃO DE SALVAR ANOTAÇÕES DO DIÁRIO
+    const saveNotesBtn = document.getElementById('save-notes-btn');
+    if (saveNotesBtn) {
+        saveNotesBtn.addEventListener('click', () => {
+            const targetFusion = saveNotesBtn.dataset.fusionTarget;
+            const textContent = document.getElementById('fusion-notes').value;
+            
+            if(typeof discoveredFusions[targetFusion] === 'boolean') {
+                discoveredFusions[targetFusion] = { discovered: true, notes: textContent };
+            } else {
+                discoveredFusions[targetFusion].notes = textContent;
+            }
+            
+            localStorage.setItem('nahvvatzal_fusions', JSON.stringify(discoveredFusions));
+            
+            const feedback = document.getElementById('save-feedback');
+            if(feedback) {
+                feedback.style.opacity = '1';
+                setTimeout(() => feedback.style.opacity = '0', 2500);
+            }
+        });
+    }
+
     if (complexGrid) {
         complexGrid.addEventListener('click', (e) => {
             const card = e.target.closest('.unlocked-fusion-card');
-            if (!card) return; 
-            
-            const fusionName = card.dataset.fusion;
-            const data = allFusionsData[fusionName];
-            
-            document.getElementById('fusion-modal-title').innerText = data.name;
-            document.getElementById('fusion-modal-parents').innerText = `${data.parent1} + ${data.parent2}`;
-            document.getElementById('fusion-modal-desc').innerText = data.desc;
-            
-            fusionModalContent.style.setProperty('--modal-c1', data.color1);
-            fusionModalContent.style.setProperty('--modal-c2', data.color2);
-            
-            fusionModal.classList.add('active');
+            if (card) openMajesticScroll(card.dataset.fusion);
         });
     }
     
@@ -864,7 +1034,6 @@ document.addEventListener('DOMContentLoaded', () => {
         fusionModalBg.addEventListener('click', () => fusionModal.classList.remove('active'));
     }
 
-
     // =========================================
     // LÓGICA DA JANELA SECRETA (EASTER EGGS DE HORROR)
     // =========================================
@@ -872,7 +1041,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeSecretBtn = document.getElementById('close-secret-modal');
     const secretBg = document.getElementById('secret-modal-bg');
     const secretModalContent = document.getElementById('secret-modal-content');
-    
     let activeGlitchIntervals = [];
 
     function clearAllIntervals() {
@@ -884,25 +1052,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const chars = "⍙⎍⍜⍎⍑⍋⍝⍯⍮⍫⍡⍪⍤⍥⍨⍢⍣⍗⍒⍞⍟§‡ℵERROR10101010";
         let iterations = 0;
         const maxIterations = duration / 30; 
-        
         element.innerText = ""; 
-
         const interval = setInterval(() => {
             element.innerText = finalString.split('').map((letter, index) => {
                 if (letter === " " || letter === "\n") return letter; 
-                if (index < iterations / (maxIterations / finalString.length)) {
-                    return finalString[index]; 
-                }
+                if (index < iterations / (maxIterations / finalString.length)) return finalString[index]; 
                 return chars[Math.floor(Math.random() * chars.length)]; 
             }).join('');
-            
             iterations++;
-            if (iterations >= maxIterations) {
-                clearInterval(interval);
-                element.innerText = finalString; 
-            }
+            if (iterations >= maxIterations) { clearInterval(interval); element.innerText = finalString; }
         }, 30);
-        
         activeGlitchIntervals.push(interval);
     }
 
@@ -922,29 +1081,22 @@ document.addEventListener('DOMContentLoaded', () => {
             "                  ██████████████████████                  ",
             "                          ████████                          "
         ].join('\n');
-        
         const chars = "⍙⎍⍜⍎⍑⍋⍝⍯⍮⍫⍡⍪⍤⍥⍨⍢⍣⍗⍒⍞⍟§‡ℵ";
-        
         const interval = setInterval(() => {
             let result = "";
             for(let i=0; i<template.length; i++) {
                 const char = template[i];
-                if (char === " " || char === "\n") {
-                    result += char; 
-                } else {
-                    result += chars[Math.floor(Math.random() * chars.length)]; 
-                }
+                if (char === " " || char === "\n") result += char; 
+                else result += chars[Math.floor(Math.random() * chars.length)]; 
             }
             element.innerText = result;
         }, 50); 
-        
         activeGlitchIntervals.push(interval);
     }
 
     if(secretModal) {
         function openSecretModal(elementName, data) {
             clearAllIntervals(); 
-
             secretModalContent.style.setProperty('--modal-rune-color', data.color);
             secretModal.classList.add('active');
             
@@ -956,18 +1108,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 titleEl.className = "text-3xl font-cinzel text-red-600 mb-6 tracking-widest text-center font-bold";
                 subEl.innerText = "";
                 textEl.className = "ascii-eye";
-                
                 scrambleText(titleEl, "MILN JADITYL XCO", 2000);
                 animateEye(textEl);
-
             } else {
                 titleEl.className = "text-2xl font-cinzel text-red-900 mb-6 tracking-widest text-center";
                 textEl.className = "mt-4"; 
-                
                 const sTitle = data.secretTitle || "REGISTOS OBSCUROS";
                 const sSub = data.secretSubtitle || "\"As páginas que a ordem tentou queimar...\"";
                 const sText = data.secretText || "Nenhum registo proibido encontrado para esta anomalia.";
-
                 if(titleEl) scrambleText(titleEl, sTitle, 1500); 
                 if(subEl) scrambleText(subEl, sSub, 2500); 
                 if(textEl) scrambleText(textEl, sText, 4000); 

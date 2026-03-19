@@ -66,7 +66,7 @@ audioManager.init();
 
 const elementalData = {
     baseElements: {
-        "Flama":   { desc: "Al-azim", color: "#a61c1c", hoverColor: "#851616", manifestacoes: ["Controlar chamas", "Esferas de fogo", "Resistência ao calor"], lore: "Sangue jazido dos <span class='madness-word' data-note='Eles ainda queimam no fundo do poço...'>'Iitlaq</span>.", imagem: "", longDesc: "A manipulação das chamas transcende a simples destruição; é o ato de dar vida à entropia.", secretTitle: "KCOTOLOX", secretSubtitle: "\"A Punição\"", secretText: "Os primeiros piromantes de Nahvvatzal não conjuravam chamas do ar, mas queimavam as próprias memórias para gerar calor." },
+        "Flama":   { desc: "Al-azim", color: "#a61c1c", hoverColor: "#851616", manifestacoes: ["Controlar chamas", "Esferas de fogo", "Resistência ao calor"], lore: "Sangue jazido dos <span class='madness-word' data-note='Dizem que foram o primeiro povo de Sur-yaal e os criadores da Chama Sekhmet'>'Iitlaq</span>.", imagem: "", longDesc: "A manipulação das chamas transcende a simples destruição; é o ato de dar vida à entropia.", secretTitle: "KCOTOLOX", secretSubtitle: "\"A Punição\"", secretText: "Os primeiros piromantes de Nahvvatzal não conjuravam chamas do ar, mas queimavam as próprias memórias para gerar calor." },
         "Aqua":   { desc: "Flua à minha mente, ou afogue-se na vastidão do meu ser.<br>-''Gyeang-ju''", color: "#3a4dff", hoverColor: "#2f3ecc", manifestacoes: ["Moldar água", "Respirar sob água", "Criar névoa"], lore: "Lágrima da <span class='madness-word' data-note='Ela chora sangue quando eclipsada.'>Deusa da Lua</span>.", imagem: "", longDesc: "A água atua como um espelho para os terrores esquecidos.", secretTitle: "UTYLOF", secretSubtitle: "\"A Transformação\"", secretText: "A Deusa da Lua não chora de tristeza. Suas lágrimas são compostas pelas almas daqueles que sucumbiram às profundezas." },
         "Eol":     { desc: "Pense da menor reflexão de culpa à maior epifania noturna, esta é a liberdade.<br>-''Eristópheus''", color: "#00e689", hoverColor: "#00b86e", manifestacoes: ["Lufadas de vento", "Levitação breve", "Aumentar velocidade"], lore: "Sussurros dos <span class='madness-word' data-note='Eles nunca se calam! Façam parar!'>Céus</span>.", imagem: "", longDesc: "O ar não é vazio, mas um condutor de lamentos.", secretTitle: "EFENLORU", secretSubtitle: "\"A Liberdade\"", secretText: "Aqueles que escutam o vento por muito tempo perdem a própria voz." },
         "Terrae":  { desc: "Solidez, estabilidade, crescimento, fundação.", color: "#6c4d42", hoverColor: "#573e35", manifestacoes: ["Mover pedras", "Barreiras de terra", "Sentir tremores"], lore: "Corpo da <span class='madness-word' data-note='Seus ossos formam as nossas prisões e túmulos.'>Mãe Antiga</span>.", imagem: "", longDesc: "As pedras fundacionais deste mundo estão manchadas de sacrifício.", secretTitle: "HAVBAGAN", secretSubtitle: "\"A Formação\"", secretText: "A rocha não é cega. Cada pedra colocada nas fundações do Crisol de Apriori pulsa como um coração lento." },
@@ -76,7 +76,7 @@ const elementalData = {
         "Umbra": { desc: "Em meu manto repousa os maiores terrores e mistérios do universo.<br>-''Ibi'una''", color: "#303030", hoverColor: "#262626", manifestacoes: ["Furtividade", "Escuridão localizada", "Intimidar"], lore: "Manto da <span class='madness-word' data-note='Não olhe para a escuridão por muito tempo.'>Noite Silenciosa</span>.", imagem: "", longDesc: "As sombras possuem textura e fome.", secretTitle: "YRMEGTORE", secretSubtitle: "\"A Ausência\"", secretText: "Não há escuridão vazia. Toda sombra projetada pelo sol é um portal." },
         "Vitae":  { desc: "Há formas de vida em todas as minhas criações e submissão às suas escolhas.<br>-''Yashima-no-Mikoto''", color: "#9d0e4f", hoverColor: "#7e0b3f", manifestacoes: ["Acelerar cura", "Estimular plantas", "Sentir auras"], lore: "Essência da <span class='madness-word' data-note='As raízes bebem dos nossos cadáveres.'>Natureza Viva</span>.", imagem: "", longDesc: "A energia da Vitae força células a se multiplicarem rapidamente.", secretTitle: "IGL'TRUTAE", secretSubtitle: "\"A Animação\"", secretText: "O excesso de magia vital causa o crescimento de órgãos redundantes no mago." },
         "Toxi": { desc: "Meu toque é o sussurro da entropia, a transformação inevitável e putrefata do todo.", color: "#76cf02", hoverColor: "#5ea602", manifestacoes: ["Criar venenos", "Causar náusea", "Resistência a doenças"], lore: "<span class='madness-word' data-note='Uma imensa máquina subterrânea que parece estar atravessando algumas Leis do Acaso.'>Núcleo Strolova</span>.", imagem: "", longDesc: "Senhores da putrefação e mestres do miasma.", secretTitle: "KARVPARLPAKS", secretSubtitle: "\"A Degradação\"", secretText: "A runa da toxina exige simbiose. O mago hospeda parasitas na sua corrente sanguínea." },
-        "Vis":{ desc: "Força pura, movimento, poder bruto, potencial.", color: "#803631", hoverColor: "#662b27", manifestacoes: ["Empurrão telecinético", "Escudos de energia", "Aumentar força"], lore: "Fluxo <span class='madness-word' data-note='O peso da magia esmaga a sanidade.'>Primordial</span>.", imagem: "", longDesc: "Desprovida de forma ou moralidade, a Vis é a energia cósmica crua.", secretTitle: "TSOZDNEMARO", secretSubtitle: "\"A Energia\"", secretText: "Conjurar energia bruta distorce os ossos do utilizador." },
+        "Vis":{ desc: "Força pura, movimento, poder bruto, potencial.", color: "#803631", hoverColor: "#662b27", manifestacoes: ["Empurrão telecinético", "Escudos de energia", "Aumentar força"], lore: "A primeira <span class='madness-word' data-note='O peso da magia esmaga a sanidade.'>Pluma</span>.", imagem: "", longDesc: "Desprovida de forma ou moralidade, a Vis é a energia cósmica crua.", secretTitle: "TSOZDNEMARO", secretSubtitle: "\"A Energia\"", secretText: "Conjurar energia bruta distorce os ossos do utilizador." },
         "Ulrhtau": { desc: "DADOS CORROMPIDOS // FALHA DE LEITURA", color: "#ff0000", hoverColor: "#ff0000", manifestacoes: ["Aberração espacial", "Distorção da realidade", "[ERRO]"], lore: "NÃO CLICAR. A <span class='madness-word' data-note='A DOR É INFINITA AQUI FORA A DOR É INFINITA'>runa esquecida</span> que corrói o grimório.", imagem: "fas fa-skull text-6xl text-red-600", longDesc: "A matéria grita ao ser tocada por esta anomalia. A DOR é o único idioma conhecido. //NÃO_OLHE_PARA_TRÁS//", secretTitle: "", secretSubtitle: "", secretText: "" }
     },
     combinations: {
@@ -254,9 +254,34 @@ const bestiaryData = [
         fullDesc: "Criaturas monstruosas e cegas com múltiplos membros espasmódicos e uma bocarra desproporcional cheia de dentes como agulhas. Eles deslizam e contorcem-se pelas falhas na realidade provocadas por anomalias de Ulrhtau. São inteiramente imunes a toxinas, e qualquer tentativa de usar magia vital (Vitae) neles apenas os regenera e fortalece, tornando-os um pesadelo absoluto para clérigos e curandeiros nos campos de batalha.",
         image: "",
         icon: "fas fa-pastafarianism"
-    }
+    },
+    { 
+        name: "Khatilis", 
+        habitat: "Pirâmides Khermet", 
+        lifeExpectancy: "15 - 30 anos",
+        reproductionRate: "Alto",
+        reproductionMethod: "Sexuada",
+        vulnerability: "Aqua, Toxi", 
+        resistance: "Flama, Umbra", 
+        peculiarity: "Consegue mimetizar perfeitamente a assinatura mágica de feitiços de cura (Vitae) para atrair presas que estejam gravemente feridas e à procura de socorro.",
+        desc: "Animais dóceis de domésticos semelhantes a panteras.",
+        fullDesc: "Criaturas monstruosas e cegas com múltiplos membros espasmódicos e uma bocarra desproporcional cheia de dentes como agulhas. Eles deslizam e contorcem-se pelas falhas na realidade provocadas por anomalias de Ulrhtau. São inteiramente imunes a toxinas, e qualquer tentativa de usar magia vital (Vitae) neles apenas os regenera e fortalece, tornando-os um pesadelo absoluto para clérigos e curandeiros nos campos de batalha.",
+        image: "",
+        icon: "fas fa-pastafarianism"
+    },
 ];
-
+// Base de Dados das Nações
+const nationsData = [
+    { name: "Sur-yaal", element: "Flama", climate: "Deserto Vulcânico", government: "Teocracia Ígnea", culture: "Marcial e Religiosa", desc: "Berço dos piromantes originais, uma nação esculpida no calor e na rocha derretida, onde a força é lei.", image: "", icon: "fas fa-fire" },
+    { name: "Sui-ryong", element: "Aqua", climate: "Arquipélago Submarino", government: "Dinastia Marítima", culture: "Erudita e Filosófica", desc: "O império das águas, famoso pelos seus palácios de cristal e bibliotecas insondáveis submersas no abismo.", image: "", icon: "fas fa-water" },
+    { name: "Lîngyù", element: "Terrae", climate: "Montanhoso e Cavernoso", government: "Conselho dos Anciões", culture: "Isolacionista", desc: "A fortaleza inabalável, onde a magia geológica ergueu muralhas impenetráveis para proteger os seus segredos.", image: "", icon: "fas fa-mountain" },
+    { name: "Aethelos", element: "Eol", climate: "Planícies Elevadas", government: "República dos Ventos", culture: "Nómada e Livre", desc: "Cidades cujas torres tocam as nuvens, suspensas por correntes perpétuas de Eol e habitadas por espíritos livres.", image: "", icon: "fas fa-wind" },
+    { name: "Jövirefolnr", element: "Crelix", climate: "Tundra Glacial Perene", government: "Matriarcado do Frio", culture: "Estóica e Preservacionista", desc: "As terras do zero absoluto, onde o tempo parece parar e a história das eras antigas é preservada no gelo eterno.", image: "", icon: "fas fa-snowflake" },
+    { name: "Py'aporã", element: "Fulmen, Lux, Umbra", climate: "Selva Tropical Densa", government: "Tribos Unidas", culture: "Xamânica e Dualista", desc: "Uma terra de contrastes absolutos. Tempestades elétricas rasgam a escuridão da noite, enquanto a luz da alvorada revela santuários esquecidos na selva.", image: "", icon: "fas fa-bolt" },
+    { name: "Jinsei", element: "Vitae", climate: "Floresta Primordial", government: "Comuna Druídica", culture: "Simbiótica com a Natureza", desc: "Um domínio onde a flora e a fauna crescem de forma descontrolada e selvagem, movidas pela pura energia vital vibrante.", image: "", icon: "fas fa-leaf" },
+    { name: "Moroyva", element: "Toxi", climate: "Pântano Miasmático", government: "Oligarquia Alquímica", culture: "Científica e Sobrevivencialista", desc: "Um refúgio sombrio, focado na transmutação, no estudo de pragas e no limite da sobrevivência biológica.", image: "", icon: "fas fa-skull-crossbones" },
+    { name: "Praetorium", element: "Vis", climate: "Planaltos Desolados", government: "Império Militar Hegemónico", culture: "Imperialista", desc: "A nação do poder puro, focada na expansão territorial e no domínio absoluto da força telecinética esmagadora.", image: "", icon: "fas fa-fist-raised" }
+];
 window.addEventListener('load', () => {
     const loader = document.getElementById('loading-screen');
     if (loader) {
@@ -730,7 +755,70 @@ document.addEventListener('DOMContentLoaded', () => {
     const viewTypings = document.getElementById('view-typings');
     const viewGenealogy = document.getElementById('view-genealogy');
     const viewBestiary = document.getElementById('view-bestiary');
-    
+    const btnOpenNations = document.getElementById('btn-open-nations');
+    const viewNations = document.getElementById('view-nations');
+
+    if(btnOpenNations) {
+        btnOpenNations.addEventListener('click', () => switchView(viewAltar, viewNations));
+    }
+
+    // =========================================
+    // NAÇÕES DE GIONYYL - RENDERIZAÇÃO E MODAL
+    // =========================================
+    const nationsGrid = document.getElementById('nations-grid');
+    if (nationsGrid) {
+        nationsGrid.innerHTML = '';
+        nationsData.forEach((nation, index) => {
+            nationsGrid.innerHTML += `
+                <div class="p-6 border border-slate-800 rounded bg-[#0a0a0f]/80 hover:border-[#d69e9e]/50 hover:bg-[#1a1a24] transition-all cursor-pointer group shadow-lg flex flex-col items-center text-center" data-nation-id="${index}">
+                    <div class="w-16 h-16 rounded-full bg-[#050508] border border-slate-700 flex items-center justify-center group-hover:border-[#d69e9e] transition-colors mb-4">
+                        <i class="${nation.icon} text-2xl text-slate-500 group-hover:text-[#d69e9e] transition-colors"></i>
+                    </div>
+                    <h3 class="font-cinzel text-xl text-white uppercase tracking-widest mb-1">${nation.name}</h3>
+                    <span class="text-[10px] text-[#d69e9e] uppercase tracking-widest mb-3 border border-[#d69e9e]/30 px-2 py-1 rounded bg-[#d69e9e]/5">${nation.element}</span>
+                    <p class="text-sm text-slate-400 font-serif line-clamp-3">${nation.desc}</p>
+                </div>
+            `;
+        });
+
+        // Lógica do Modal das Nações
+        const nationModal = document.getElementById('nation-modal');
+        const nationModalBg = document.getElementById('nation-modal-bg');
+        const closeNationBtn = document.getElementById('close-nation-modal');
+
+        nationsGrid.addEventListener('click', (e) => {
+            const card = e.target.closest('[data-nation-id]');
+            if (!card) return;
+            
+            const index = card.dataset.nationId;
+            const data = nationsData[index];
+
+            document.getElementById('nation-modal-name').innerText = data.name;
+            document.getElementById('nation-modal-element').innerText = data.element;
+            document.getElementById('nation-modal-gov').innerText = data.government;
+            document.getElementById('nation-modal-climate').innerText = data.climate;
+            document.getElementById('nation-modal-culture').innerText = data.culture;
+            document.getElementById('nation-modal-desc').innerText = data.desc;
+
+            // Manipula a exibição da Imagem vs Ícone
+            const imgEl = document.getElementById('nation-modal-image');
+            const iconEl = document.getElementById('nation-modal-icon');
+            if (data.image && data.image !== "") {
+                imgEl.src = data.image;
+                imgEl.classList.remove('hidden');
+                iconEl.classList.add('hidden');
+            } else {
+                imgEl.classList.add('hidden');
+                iconEl.className = `${data.icon} text-6xl text-slate-800 absolute transition-transform duration-500 group-hover:scale-110`;
+                iconEl.classList.remove('hidden');
+            }
+
+            nationModal.classList.add('active');
+        });
+
+        if(closeNationBtn) closeNationBtn.addEventListener('click', () => nationModal.classList.remove('active'));
+        if(nationModalBg) nationModalBg.addEventListener('click', () => nationModal.classList.remove('active'));
+    }
     // Transição genérica de ecrãs
     function switchView(fromView, toView) {
         if(!fromView || !toView) return;

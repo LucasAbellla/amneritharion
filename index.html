@@ -34,15 +34,18 @@
         <div class="container mx-auto p-4 md:p-8">
 
             <header class="text-center mb-8 md:mb-12 mt-4 relative z-10">
-                <h1 class="text-4xl md:text-6xl font-bold text-header-main">Grimório Interativo Elemental</h1>
-                <p class="text-subheader mt-2 text-lg mb-6">Selecione duas runas para invocar suas fusões mágicas.</p>
+                <h1 class="text-4xl md:text-6xl font-bold text-header-main">O Amneritharion</h1>
+                <p class="text-subheader mt-2 text-lg mb-6"></p>
                 
                 <div class="flex justify-center flex-wrap gap-4 md:gap-6">
                     <button id="btn-open-bestiary" class="text-[#d69e9e] font-cinzel text-sm border border-[#d69e9e]/30 px-6 py-2 rounded-sm hover:bg-[#d69e9e] hover:text-black transition shadow-[0_0_15px_rgba(214,158,158,0.1)]" style="-webkit-app-region: no-drag;">
                         <i class="fas fa-dragon mr-2"></i> Bestiário
                     </button>
+                    <button id="btn-open-nations" class="text-[#d69e9e] font-cinzel text-sm border border-[#d69e9e]/30 px-6 py-2 rounded-sm hover:bg-[#d69e9e] hover:text-black transition shadow-[0_0_15px_rgba(214,158,158,0.1)]" style="-webkit-app-region: no-drag;">
+                        <i class="fas fa-globe mr-2"></i> Nações de Gionyyl
+                    </button>
                     <button id="btn-open-arquivo" class="text-[#d69e9e] font-cinzel text-sm border border-[#d69e9e]/30 px-6 py-2 rounded-sm hover:bg-[#d69e9e] hover:text-black transition shadow-[0_0_15px_rgba(214,158,158,0.1)]" style="-webkit-app-region: no-drag;">
-                        <i class="fas fa-book mr-2"></i> Arquivo de Fissões
+                        <i class="fas fa-book mr-2"></i> Arquivo de Fusões
                     </button>
                     <button id="btn-open-genealogy" class="text-[#d69e9e] font-cinzel text-sm border border-[#d69e9e]/30 px-6 py-2 rounded-sm hover:bg-[#d69e9e] hover:text-black transition shadow-[0_0_15px_rgba(214,158,158,0.1)]" style="-webkit-app-region: no-drag;">
                         <i class="fas fa-project-diagram mr-2"></i> Árvore de Genealogia
@@ -289,6 +292,65 @@
         </div>
     </div>
 
+    <div id="view-nations" class="view-section hidden pt-24 px-8 pb-12 max-w-7xl mx-auto relative z-20">
+        <div class="flex justify-between items-center mb-12 border-b border-[#2a3040] pb-6">
+            <button class="btn-back-altar text-slate-400 hover:text-white font-cinzel tracking-widest transition px-6 py-2 border border-transparent hover:border-slate-700 bg-[#0a0a0f]/80 rounded">
+                <i class="fas fa-arrow-left mr-2"></i> Retornar ao Altar
+            </button>
+            <h2 class="text-4xl font-cinzel text-[#d69e9e] tracking-widest text-center" style="text-shadow: 0 0 15px rgba(214,158,158,0.3);">
+                Domínios de Gionyyl
+            </h2>
+            <div class="w-40 text-right text-slate-600 font-serif text-sm"></div>
+        </div>
+        
+        <p class="text-slate-400 mb-10 text-center max-w-2xl mx-auto font-serif">Os grandes impérios e territórios selvagens que moldam o cenário político e elemental do nosso mundo.</p>
+        
+        <div id="nations-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+
+    <div id="nation-modal" class="fixed inset-0 z-[9999] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
+        <div id="nation-modal-bg" class="absolute inset-0 bg-black/90 backdrop-blur-md"></div>
+        
+        <div id="nation-modal-content" class="relative bg-[#050508] border border-[#2a3040] p-8 md:p-12 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto rounded-sm transform scale-95 transition-all duration-500 shadow-[0_0_50px_rgba(0,0,0,0.8)] custom-scrollbar">
+            
+            <button id="close-nation-modal" class="absolute top-6 right-6 text-slate-500 hover:text-[#d69e9e] transition-colors duration-300 z-50">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+
+            <h2 id="nation-modal-name" class="text-4xl md:text-5xl font-cinzel text-white tracking-widest mb-6 text-center uppercase" style="text-shadow: 0 0 20px rgba(255,255,255,0.2);"></h2>
+            
+            <div class="w-full h-64 md:h-80 border border-slate-700 bg-[#0a0a0f] mb-8 relative flex items-center justify-center overflow-hidden rounded-sm shadow-inner group">
+                <img id="nation-modal-image" src="" alt="Paisagem da Nação" class="w-full h-full object-cover opacity-80 mix-blend-screen hidden transition-transform duration-700 group-hover:scale-105">
+                <i id="nation-modal-icon" class="fas fa-map-marked-alt text-6xl text-slate-800 absolute transition-transform duration-500 group-hover:scale-110"></i>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#050508] via-transparent to-transparent opacity-90"></div>
+                <div class="absolute bottom-4 left-4 border border-[#d69e9e]/50 bg-black/60 px-4 py-2 rounded-sm backdrop-blur-sm">
+                    <span class="font-cinzel text-xs text-slate-400 uppercase tracking-widest block mb-1">Matriz Predominante</span>
+                    <span id="nation-modal-element" class="text-[#d69e9e] font-bold tracking-widest uppercase"></span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 border-y border-slate-800 py-6">
+                <div class="bg-[#0a0a0f] p-4 rounded border border-slate-800/50">
+                    <span class="font-cinzel text-slate-500 uppercase tracking-wider text-[10px] block mb-2"><i class="fas fa-landmark mr-1"></i> Forma de Governo</span>
+                    <p id="nation-modal-gov" class="text-slate-300 font-serif text-sm"></p>
+                </div>
+                <div class="bg-[#0a0a0f] p-4 rounded border border-slate-800/50">
+                    <span class="font-cinzel text-slate-500 uppercase tracking-wider text-[10px] block mb-2"><i class="fas fa-cloud-sun mr-1"></i> Clima & Geografia</span>
+                    <p id="nation-modal-climate" class="text-slate-300 font-serif text-sm"></p>
+                </div>
+                <div class="bg-[#0a0a0f] p-4 rounded border border-slate-800/50">
+                    <span class="font-cinzel text-slate-500 uppercase tracking-wider text-[10px] block mb-2"><i class="fas fa-users mr-1"></i> Cultura</span>
+                    <p id="nation-modal-culture" class="text-slate-300 font-serif text-sm"></p>
+                </div>
+            </div>
+
+            <div>
+                <span class="font-cinzel text-[#d69e9e] uppercase tracking-wider text-[10px] block mb-3">Registos Históricos e Políticos</span>
+                <p id="nation-modal-desc" class="text-slate-300 font-serif text-sm leading-relaxed text-justify"></p>
+            </div>
+            
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

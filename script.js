@@ -66,17 +66,17 @@ audioManager.init();
 
 const elementalData = {
     baseElements: {
-        "Flama":   { desc: "Imbua seu ser ao calor do combate e torne seus pensamentos em armas.<br>-''Al-azim''", color: "#a61c1c", hoverColor: "#851616", manifestacoes: ["Controlar chamas", "Esferas de fogo", "Resistência ao calor"], lore: "Sangue jazido dos <span class='madness-word' data-note='Dizem que foram o primeiro povo de Sur-yaal e os criadores da Chama Sekhmet'>'Iitlaq</span>.", imagem: "", longDesc: "A manipulação das chamas transcende a simples destruição; é o ato de dar vida à entropia.", secretTitle: "KCOTOLOX", secretSubtitle: "\"A Punição\"", secretText: "Os primeiros piromantes de Nahvvatzal não conjuravam chamas do ar, mas queimavam as próprias memórias para gerar calor." },
-        "Aqua":   { desc: "Flua à minha mente, ou afogue-se na vastidão do meu ser.<br>-''Gyeang-ju''", color: "#3a4dff", hoverColor: "#2f3ecc", manifestacoes: ["Moldar água", "Respirar sob água", "Criar névoa"], lore: "Lágrima da <span class='madness-word' data-note='Ela chora sangue quando eclipsada.'>Deusa da Lua</span>.", imagem: "", longDesc: "A água atua como um espelho para os terrores esquecidos.", secretTitle: "UTYLOF", secretSubtitle: "\"A Transformação\"", secretText: "A Deusa da Lua não chora de tristeza. Suas lágrimas são compostas pelas almas daqueles que sucumbiram às profundezas." },
-        "Eol":     { desc: "Pense da menor reflexão de culpa à maior epifania noturna, esta é a liberdade.<br>-''Eristópheus''", color: "#00e689", hoverColor: "#00b86e", manifestacoes: ["Lufadas de vento", "Levitação breve", "Aumentar velocidade"], lore: "Sussurros dos <span class='madness-word' data-note='Eles nunca se calam! Façam parar!'>Céus</span>.", imagem: "", longDesc: "O ar não é vazio, mas um condutor de lamentos.", secretTitle: "EFENLORU", secretSubtitle: "\"A Liberdade\"", secretText: "Aqueles que escutam o vento por muito tempo perdem a própria voz." },
-        "Terrae":  { desc: "Solidez, estabilidade, crescimento, fundação.", color: "#6c4d42", hoverColor: "#573e35", manifestacoes: ["Mover pedras", "Barreiras de terra", "Sentir tremores"], lore: "Corpo da <span class='madness-word' data-note='Seus ossos formam as nossas prisões e túmulos.'>Mãe Antiga</span>.", imagem: "", longDesc: "As pedras fundacionais deste mundo estão manchadas de sacrifício.", secretTitle: "HAVBAGAN", secretSubtitle: "\"A Formação\"", secretText: "A rocha não é cega. Cada pedra colocada nas fundações do Crisol de Apriori pulsa como um coração lento." },
-        "Fulmen":   { desc: "Ouça o estrondo de minha presença ao pronunciar meu nome.<br>-''Tyapu''", color: "#ffff00", hoverColor: "#e6e600", manifestacoes: ["Disparar raios", "Magnetizar objetos", "Aumentar reflexos"], lore: "Fúria do <span class='madness-word' data-note='Um usurpador cego pela própria luz.'>Deus da Tempestade</span>.", imagem: "", longDesc: "Uma fração de segundo de energia pura que frita sinapses e altera percepções.", secretTitle: "TEZNITAJ", secretSubtitle: "\"A Movimentação\"", secretText: "Verdadeiro poder elétrico queima o nervo óptico. Magos experientes desta runa estão todos cegos." },
+        "Flama":   { desc: "''Imbua seu ser ao calor do combate e torne seus pensamentos em armas''<br>— Al-azim", color: "#a61c1c", hoverColor: "#851616", manifestacoes: ["Ataque Direto", "Queimaduras", "Golpes Consecutivos"], lore: "Sangue jazido dos <span class='madness-word' data-note='Meus estudos apontam que foram o primeiro povo de Sur-yaal e os criadores da Chama Sekhmet que seria um tipo de ´amplificador´ hereditário.'>'Iitlaq</span>.", imagem: "", longDesc: "A manipulação das chamas transcende a simples destruição; é o ato de dar vida à entropia.", secretTitle: "KCOTOLOX", secretSubtitle: "\"A Punição\"", secretText: "Os primeiros piromantes de Nahvvatzal não conjuravam chamas do ar, mas queimavam as próprias memórias para gerar calor." },
+        "Aqua":   { desc: "''Flua à minha mente, ou afogue-se na vastidão do meu ser''<br>— Gyeang-ju", color: "#3a4dff", hoverColor: "#2f3ecc", manifestacoes: ["Efeito de cura/autodano", "Melhorias de acordo com estado da vida", "Dualidade"], lore: "Faces de <span class='madness-word' data-note='A soberana da nação ´purificada´. Suas ações, benevolentes e gentis, para mim, escondem terrores que podem assolar toda Gionyyl...'>Yeoljeong</span> e <span class='madness-word' data-note='Nas expedições turísticas pouco pude ver o que é ou o que leva esse nome, apenas quilômetros de luzes ao nivel do abismo oceânico. Que, estranhamente, parecia estar vivo.'>Hwa</span>.", imagem: "", longDesc: "Aqua atua como um ''regulador'' de vida, onde ela tanto pode curar o usuário, amplificando seus efeitos com base no quanto o usuário está ferido, ou pode ser uma agente catastrófico de danos, amplificando seus efeitos com base na saúde do usuário.", secretTitle: "UTYLOF", secretSubtitle: "\"A Transformação\"", secretText: "As lágrimas de Yeoljeong e o ódio de Hwa não trazem tristeza, mas sim a certeza de que as almas afogadas nunca encontrarão descanso." },
+        "Eol":     { desc: "''Pense da menor reflexão de culpa à maior epifania noturna, esta é a liberdade''<br>— Eristópheus", color: "#00e689", hoverColor: "#00b86e", manifestacoes: ["Movimentação", "Controle de Grupo", "Aumento de  velocidade"], lore: "Sussurros dos <span class='madness-word' data-note='Eles nunca se calam! Façam parar!'>Céus</span>.", imagem: "", longDesc: "O ar não é vazio, mas um condutor de lamentos.", secretTitle: "EFENLORU", secretSubtitle: "\"A Liberdade\"", secretText: "Aqueles que escutam o vento por muito tempo perdem a própria voz." },
+        "Terrae":  { desc: "Solidez, estabilidade, crescimento, fundação.", color: "#6c4d42", hoverColor: "#573e35", manifestacoes: ["Durabilidade", "Barreiras defensivas", "Desenvolvimento de Resistências"], lore: "Corpo da <span class='madness-word' data-note='Seus ossos formam as nossas prisões e túmulos.'>Mãe Antiga</span>.", imagem: "", longDesc: "As pedras fundacionais deste mundo estão manchadas de sacrifício.", secretTitle: "HAVBAGAN", secretSubtitle: "\"A Formação\"", secretText: "A rocha não é cega. Cada pedra colocada nas fundações do Crisol de Apriori pulsa como um coração lento." },
+        "Fulmen":   { desc: "''Ouça o estrondo de minha presença ao pronunciar meu nome''<br>— Tyapu", color: "#ffff00", hoverColor: "#e6e600", manifestacoes: ["Ataque em Área", "Maior capacidade destrutiva", "Reflexos apurados e imprevisíveis"], lore: "Fúria do <span class='madness-word' data-note='Um usurpador cego pela própria luz.'>Deus da Tempestade</span>.", imagem: "", longDesc: "Uma fração de segundo de energia pura que frita sinapses e altera percepções.", secretTitle: "TEZNITAJ", secretSubtitle: "\"A Movimentação\"", secretText: "Verdadeiro poder elétrico queima o nervo óptico. Magos experientes desta runa estão todos cegos." },
         "Crelix":   { desc: "Frio, estagnação, preservação, rigidez.", color: "#56e5ff", hoverColor: "#45b7cc", manifestacoes: ["Congelar superfícies", "Armas de gelo", "Suportar frio"], lore: "Sopro Invernal do <span class='madness-word' data-note='Ele está adormecido sob o gelo vermelho.'>Gigante</span>.", imagem: "", longDesc: "O verdadeiro poder de Crelix não é o gelo, mas a paralisação do tempo em escala molecular.", secretTitle: "ORGNOTAMOTR", secretSubtitle: "\"A Permanência\"", secretText: "No coração do Zero Absoluto, o tempo não passa." },
-        "Lux":    { desc: "Iluminação, verdade, pureza, visão.", color: "#fbe4ec", hoverColor: "#f9d7e3", manifestacoes: ["Criar luz", "Dissipar sombras", "Cura leve"], lore: "Bênção do <span class='madness-word' data-note='Sua luz queima as almas impuras.'>Sol Eterno</span>.", imagem: "", longDesc: "A runa Lux arranca os véus da ilusão e expõe imperfeições.", secretTitle: "RASTONTRI", secretSubtitle: "\"A Presença\"", secretText: "Dizem que é cura, mas a luz queima as imperfeições." },
-        "Umbra": { desc: "Em meu manto repousa os maiores terrores e mistérios do universo.<br>-''Ibi'una''", color: "#303030", hoverColor: "#262626", manifestacoes: ["Furtividade", "Escuridão localizada", "Intimidar"], lore: "Manto da <span class='madness-word' data-note='Não olhe para a escuridão por muito tempo.'>Noite Silenciosa</span>.", imagem: "", longDesc: "As sombras possuem textura e fome.", secretTitle: "YRMEGTORE", secretSubtitle: "\"A Ausência\"", secretText: "Não há escuridão vazia. Toda sombra projetada pelo sol é um portal." },
-        "Vitae":  { desc: "Há formas de vida em todas as minhas criações e submissão às suas escolhas.<br>-''Yashima-no-Mikoto''", color: "#9d0e4f", hoverColor: "#7e0b3f", manifestacoes: ["Acelerar cura", "Estimular plantas", "Sentir auras"], lore: "Essência da <span class='madness-word' data-note='As raízes bebem dos nossos cadáveres.'>Natureza Viva</span>.", imagem: "", longDesc: "A energia da Vitae força células a se multiplicarem rapidamente.", secretTitle: "IGL'TRUTAE", secretSubtitle: "\"A Animação\"", secretText: "O excesso de magia vital causa o crescimento de órgãos redundantes no mago." },
-        "Toxi": { desc: "Meu toque é o sussurro da entropia, a transformação inevitável e putrefata do todo.", color: "#76cf02", hoverColor: "#5ea602", manifestacoes: ["Criar venenos", "Causar náusea", "Resistência a doenças"], lore: "<span class='madness-word' data-note='Uma imensa máquina subterrânea que parece estar atravessando algumas Leis do Acaso.'>Núcleo Strolova</span>.", imagem: "", longDesc: "Senhores da putrefação e mestres do miasma.", secretTitle: "KARVPARLPAKS", secretSubtitle: "\"A Degradação\"", secretText: "A runa da toxina exige simbiose. O mago hospeda parasitas na sua corrente sanguínea." },
-        "Vis":{ desc: "Força pura, movimento, poder bruto, potencial.", color: "#803631", hoverColor: "#662b27", manifestacoes: ["Empurrão telecinético", "Escudos de energia", "Aumentar força"], lore: "A primeira <span class='madness-word' data-note='O peso da magia esmaga a sanidade.'>Pluma</span>.", imagem: "", longDesc: "Desprovida de forma ou moralidade, a Vis é a energia cósmica crua.", secretTitle: "TSOZDNEMARO", secretSubtitle: "\"A Energia\"", secretText: "Conjurar energia bruta distorce os ossos do utilizador." },
+        "Lux":    { desc: "''Tudo uma vez teve de passar por mim e nada nesta existência se rebuçará do meu ser''<br>— Tesakã ", color: "#fbe4ec", hoverColor: "#f9d7e3", manifestacoes: ["Criar luz", "Dissipar sombras", "Cura leve"], lore: "<span class='madness-word' data-note='Pelo que pude reunir de pessoas que já frequentaram Py´aporã, isso é como se fosse uma ´´mente coletiva´´ ligada a todos os seres vivos da nação, onde se conectam a outro plano.'>Heta-akã</span>.", imagem: "", longDesc: "A runa Lux arranca os véus da ilusão e expõe imperfeições.", secretTitle: "RASTONTRI", secretSubtitle: "\"A Presença\"", secretText: "Dizem que é cura, mas a luz queima as imperfeições." },
+        "Umbra": { desc: "''Em meu manto repousa os maiores pavores ancestrais e incógnitas do universo''<br>— Ibi'una", color: "#303030", hoverColor: "#262626", manifestacoes: ["Ocultação", "Furtividade", "Efeitos Silenciadores"], lore: "Pesadelos póstumos de <span class='madness-word' data-note='Pouco sei sobre os nativos da parte oculta de Py´aporã, mas vendo apenas pela distância, pude perceber que que Ibi´una tem maiores capacidades à luz da lua.'>Pyhare</span>.", imagem: "", longDesc: "As sombras possuem textura e fome.", secretTitle: "YRMEGTORE", secretSubtitle: "\"A Ausência\"", secretText: "Não há escuridão vazia. Toda sombra projetada pelo sol é um portal." },
+        "Vitae":  { desc: "''Há formas de vida em todas as minhas criações e submissão às suas escolhas''<br>— Yashima-no-Mikoto", color: "#9d0e4f", hoverColor: "#7e0b3f", manifestacoes: ["Invocação", "Estimulação", "Sentido elemental aguçado"], lore: "Essência da <span class='madness-word' data-note='As raízes bebem dos nossos cadáveres.'>Natureza Viva</span>.", imagem: "", longDesc: "A energia da Vitae força células a se multiplicarem rapidamente.", secretTitle: "IGL'TRUTAE", secretSubtitle: "\"A Animação\"", secretText: "O excesso de magia vital causa o crescimento de órgãos redundantes no mago." },
+        "Toxi": { desc: "''Meu toque é o sussurro da entropia, a transformação inevitável e putrefata do todo''<br>— Koschkoniev", color: "#76cf02", hoverColor: "#5ea602", manifestacoes: ["Dano Contínuo", "Criação de venenos/antídotos", "Resistência a doenças"], lore: "<span class='madness-word' data-note='Em minha viagem à Moroyva pude presenciar a imensa máquina subterrânea que parece estar atravessando algumas Leis do Acaso. Não tive coragem de ir mais fundo no projeto.'>Núcleo Strolova</span>.", imagem: "", longDesc: "Toxi é considerada a própria praga viva, onde sua essência corrompe e adoece usuários afetados pelos seus contínuos danos ao corpo e à mente. Usuários Périplos conseguem prologar efeitos maléficos mesmo que os danos não sejam Toxi.", secretTitle: "KARVPARLPAKS", secretSubtitle: "\"A Degradação\"", secretText: "A runa da toxina exige simbiose. O mago hospeda parasitas na sua corrente sanguínea." },
+        "Vis":{ desc: "Força pura, movimento, poder bruto, potencial.", color: "#803631", hoverColor: "#662b27", manifestacoes: ["Cinética", "Ampliação reacionária", "Aumento físico"], lore: "A primeira <span class='madness-word' data-note='Já vi coisas descendo do céu vindo de um ponto muito específico, muito perto da igreja...'>Pluma</span>.", imagem: "", longDesc: "Desprovida de forma ou moralidade, a Vis é a energia cósmica crua.", secretTitle: "TSOZDNEMARO", secretSubtitle: "\"A Energia\"", secretText: "Conjurar energia bruta distorce os ossos do utilizador." },
         "Ulrhtau": { desc: "DADOS CORROMPIDOS // FALHA DE LEITURA", color: "#ff0000", hoverColor: "#ff0000", manifestacoes: ["Aberração espacial", "Distorção da realidade", "[ERRO]"], lore: "NÃO CLICAR. A <span class='madness-word' data-note='A DOR É INFINITA AQUI FORA A DOR É INFINITA'>runa esquecida</span> que corrói o grimório.", imagem: "fas fa-skull text-6xl text-red-600", longDesc: "A matéria grita ao ser tocada por esta anomalia. A DOR é o único idioma conhecido. //NÃO_OLHE_PARA_TRÁS//", secretTitle: "", secretSubtitle: "", secretText: "" }
     },
     combinations: {
@@ -93,9 +93,9 @@ const elementalData = {
         "Vis": {"Flama": "Explosão", "Aqua": "Corrente", "Eol": "Tornado", "Terrae": "Tremor", "Fulmen": "Descarga", "Crelix": "Congelação", "Lux": "Facho", "Umbra": "Pulso", "Vitae": "Vigor", "Toxi": "Contágio", "Vis": "Força Gravitacional"}
     },
     complexElementDescriptions: {
-        "Flama Fátuo": "Chamas etéreas que dançam com vida própria, guiando ou enganando os incautos.",
+        "Fogo Fátuo": "Chamas incontroláveis que queimam a alma e perduram instrinsecamente na existência.",
         "Vapor": "Uma névoa escaldante que obscurece a visão e queima ao toque, nascida do conflito elemental.",
-        "Incêndio": "Uma reação catastrófica de chamas incontroláveis.",
+        "Incêndio": "Uma reação catastrófica de enormes chamas.",
         "Magma": "Rocha derretida em fúria rubra, remodelando o mundo.",
         "Faísca": "Um pequeno e súbito estalo de energia, o prenúncio de uma tempestade.",
         "Névoa": "Uma cortina opaca onde o calor encontra o frio.",
@@ -104,7 +104,7 @@ const elementalData = {
         "Alma": "A essência espiritual em fervor ardente.",
         "Fuligem": "Resíduos tóxicos impregnando o ambiente.",
         "Explosão": "Uma liberação violenta de energia e matéria.",
-        "Purificação Reminiscente": "Água imbuída de calma profunda e memória ancestral.",
+        "Purificação Reminiscente": "Água imbuída na dualidade perfeita de ódio e amor.",
         "Bruma": "Vapor de água suspenso, obscurecendo caminhos.",
         "Lama": "Terra saturada de água, um terreno instável.",
         "Supercondução": "Água eletrizada em fluxo perpétuo.",
@@ -114,7 +114,7 @@ const elementalData = {
         "Sangue": "O fluido vital de Nahvvatzal.",
         "Ácido": "Substância corrosiva e virulenta.",
         "Corrente": "A força da água em movimento perpétuo.",
-        "Turbilhão Vendaval": "Massas de ar em rotação violenta.",
+        "Turbilhão Vendaval": "Violentas massas de ar que destroem o que tocam.",
         "Areia": "Terra erodida transportada pelo vento.",
         "Trovão": "A onda de choque sonora do Fulmen.",
         "Nevoeiro": "Ar gélido condensado e opaco.",
@@ -122,7 +122,7 @@ const elementalData = {
         "Sopro": "O fluxo vital do ar.",
         "Gás": "Ar impregnado de vapores invisíveis e letais.",
         "Tornado": "Uma coluna de vento e energia em rotação destrutiva.",
-        "Rocha Eterna": "Solidez inabalável do corpo da Mãe Antiga.",
+        "Rocha Eterna": "Solidez inabalável que petrifica a pele e abre montanhas.",
         "Magnetismo": "A força invisível atraindo e repelindo metais.",
         "Geada": "Cristais de gelo cobrindo a terra.",
         "Domínio": "Terra consagrada imbuída de luz.",
@@ -130,14 +130,14 @@ const elementalData = {
         "Fertilidade": "Crescimento acelerado pela vida primordial.",
         "Erosão": "Decadência lenta da terra por toxinas.",
         "Tremor": "A terra chacoalhando com energia Vis.",
-        "Intempérie Estrondosa": "Uma tempestade elétrica de fúria avassaladora.",
+        "Intempérie Estrondosa": "Inúmeras tempestates furiosas onde não há espacatória.",
         "Granizo": "Bombardeio de gelo energizado pelo Fulmen.",
         "Clarão": "Um feixe de luz súbito e ofuscante.",
         "Crepúsculo": "O limite entre a luz residual e as sombras.",
         "Choque": "Descarga elétrica paralisante.",
         "Ionização": "O ar energizado em estado instável.",
         "Descarga": "Liberação caótica de poder Fulmen puro.",
-        "Zero Absoluto": "A ausência total de movimento molecular.",
+        "Zero Absoluto": "A ausência total de movimento podendo aprisionar completamente uma nação.",
         "Prisma": "Gelo que refrata a luz em cores cósmicas.",
         "Escuridão": "Vazio gelado opressor.",
         "Hibernação": "Estado de sono vital induzido pelo frio.",
@@ -155,9 +155,9 @@ const elementalData = {
         "Vida Plena": "A força vital em sua expressão máxima.",
         "Doença": "Putrefação vital acelerada.",
         "Vigor": "Energia vital concentrada.",
-        "Praga Letal": "Putrefação que se espalha incontrolavelmente.",
+        "Praga Letal": "Putrefação absoluta que se espalha incontrolavelmente.",
         "Contágio": "Transmissão virulenta de toxinas e energia.",
-        "Força Gravitacional": "Manifestação pura da energia Vis distorcendo o espaço."
+        "Força Gravitacional": "Manifestação pura da energia que distorce o espaço."
     },
     complexElementTypes: {
         "Flama Fátuo": "Combinatória.", "Vapor": "Combinatória.", "Incêndio": "Reacionária.", "Magma": "Combinatória.", "Faísca": "Reacionária.", "Névoa": "Combinatória.", "Radiação": "Reacionária.", "Fumaça": "Combinatória.", "Alma": "Combinatória.", "Fuligem": "Reacionária.", "Explosão": "Reacionária.",
@@ -197,7 +197,6 @@ const elementalData = {
     }
 };
 
-// NOVO: Base de Dados Expansiva do Bestiário
 const bestiaryData = [
     { 
         name: "Sombra Rastejante", 
@@ -254,23 +253,9 @@ const bestiaryData = [
         fullDesc: "Criaturas monstruosas e cegas com múltiplos membros espasmódicos e uma bocarra desproporcional cheia de dentes como agulhas. Eles deslizam e contorcem-se pelas falhas na realidade provocadas por anomalias de Ulrhtau. São inteiramente imunes a toxinas, e qualquer tentativa de usar magia vital (Vitae) neles apenas os regenera e fortalece, tornando-os um pesadelo absoluto para clérigos e curandeiros nos campos de batalha.",
         image: "",
         icon: "fas fa-pastafarianism"
-    },
-    { 
-        name: "Khatilis", 
-        habitat: "Pirâmides Khermet", 
-        lifeExpectancy: "15 - 30 anos",
-        reproductionRate: "Alto",
-        reproductionMethod: "Sexuada",
-        vulnerability: "Aqua, Toxi", 
-        resistance: "Flama, Umbra", 
-        peculiarity: "Consegue mimetizar perfeitamente a assinatura mágica de feitiços de cura (Vitae) para atrair presas que estejam gravemente feridas e à procura de socorro.",
-        desc: "Animais dóceis de domésticos semelhantes a panteras.",
-        fullDesc: "Criaturas monstruosas e cegas com múltiplos membros espasmódicos e uma bocarra desproporcional cheia de dentes como agulhas. Eles deslizam e contorcem-se pelas falhas na realidade provocadas por anomalias de Ulrhtau. São inteiramente imunes a toxinas, e qualquer tentativa de usar magia vital (Vitae) neles apenas os regenera e fortalece, tornando-os um pesadelo absoluto para clérigos e curandeiros nos campos de batalha.",
-        image: "",
-        icon: "fas fa-pastafarianism"
-    },
+    }
 ];
-// Base de Dados das Nações
+
 const nationsData = [
     { name: "Sur-yaal", element: "Flama", climate: "Deserto Vulcânico", government: "Teocracia Ígnea", culture: "Marcial e Religiosa", desc: "Berço dos piromantes originais, uma nação esculpida no calor e na rocha derretida, onde a força é lei.", image: "", icon: "fas fa-fire" },
     { name: "Sui-ryong", element: "Aqua", climate: "Arquipélago Submarino", government: "Dinastia Marítima", culture: "Erudita e Filosófica", desc: "O império das águas, famoso pelos seus palácios de cristal e bibliotecas insondáveis submersas no abismo.", image: "", icon: "fas fa-water" },
@@ -282,6 +267,7 @@ const nationsData = [
     { name: "Moroyva", element: "Toxi", climate: "Pântano Miasmático", government: "Oligarquia Alquímica", culture: "Científica e Sobrevivencialista", desc: "Um refúgio sombrio, focado na transmutação, no estudo de pragas e no limite da sobrevivência biológica.", image: "", icon: "fas fa-skull-crossbones" },
     { name: "Praetorium", element: "Vis", climate: "Planaltos Desolados", government: "Império Militar Hegemónico", culture: "Imperialista", desc: "A nação do poder puro, focada na expansão territorial e no domínio absoluto da força telecinética esmagadora.", image: "", icon: "fas fa-fist-raised" }
 ];
+
 window.addEventListener('load', () => {
     const loader = document.getElementById('loading-screen');
     if (loader) {
@@ -607,7 +593,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     audioManager.playFusion();
 
-                    // NOVO: Sistema de gravação preparado para Diário de Campo
                     if (!discoveredFusions[complexElementName]) {
                         discoveredFusions[complexElementName] = { discovered: true, notes: "" };
                         localStorage.setItem('nahvvatzal_fusions', JSON.stringify(discoveredFusions));
@@ -755,71 +740,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const viewTypings = document.getElementById('view-typings');
     const viewGenealogy = document.getElementById('view-genealogy');
     const viewBestiary = document.getElementById('view-bestiary');
-    const btnOpenNations = document.getElementById('btn-open-nations');
     const viewNations = document.getElementById('view-nations');
-
-    if(btnOpenNations) {
-        btnOpenNations.addEventListener('click', () => switchView(viewAltar, viewNations));
-    }
-
-    // =========================================
-    // NAÇÕES DE GIONYYL - RENDERIZAÇÃO E MODAL
-    // =========================================
-    const nationsGrid = document.getElementById('nations-grid');
-    if (nationsGrid) {
-        nationsGrid.innerHTML = '';
-        nationsData.forEach((nation, index) => {
-            nationsGrid.innerHTML += `
-                <div class="p-6 border border-slate-800 rounded bg-[#0a0a0f]/80 hover:border-[#d69e9e]/50 hover:bg-[#1a1a24] transition-all cursor-pointer group shadow-lg flex flex-col items-center text-center" data-nation-id="${index}">
-                    <div class="w-16 h-16 rounded-full bg-[#050508] border border-slate-700 flex items-center justify-center group-hover:border-[#d69e9e] transition-colors mb-4">
-                        <i class="${nation.icon} text-2xl text-slate-500 group-hover:text-[#d69e9e] transition-colors"></i>
-                    </div>
-                    <h3 class="font-cinzel text-xl text-white uppercase tracking-widest mb-1">${nation.name}</h3>
-                    <span class="text-[10px] text-[#d69e9e] uppercase tracking-widest mb-3 border border-[#d69e9e]/30 px-2 py-1 rounded bg-[#d69e9e]/5">${nation.element}</span>
-                    <p class="text-sm text-slate-400 font-serif line-clamp-3">${nation.desc}</p>
-                </div>
-            `;
-        });
-
-        // Lógica do Modal das Nações
-        const nationModal = document.getElementById('nation-modal');
-        const nationModalBg = document.getElementById('nation-modal-bg');
-        const closeNationBtn = document.getElementById('close-nation-modal');
-
-        nationsGrid.addEventListener('click', (e) => {
-            const card = e.target.closest('[data-nation-id]');
-            if (!card) return;
-            
-            const index = card.dataset.nationId;
-            const data = nationsData[index];
-
-            document.getElementById('nation-modal-name').innerText = data.name;
-            document.getElementById('nation-modal-element').innerText = data.element;
-            document.getElementById('nation-modal-gov').innerText = data.government;
-            document.getElementById('nation-modal-climate').innerText = data.climate;
-            document.getElementById('nation-modal-culture').innerText = data.culture;
-            document.getElementById('nation-modal-desc').innerText = data.desc;
-
-            // Manipula a exibição da Imagem vs Ícone
-            const imgEl = document.getElementById('nation-modal-image');
-            const iconEl = document.getElementById('nation-modal-icon');
-            if (data.image && data.image !== "") {
-                imgEl.src = data.image;
-                imgEl.classList.remove('hidden');
-                iconEl.classList.add('hidden');
-            } else {
-                imgEl.classList.add('hidden');
-                iconEl.className = `${data.icon} text-6xl text-slate-800 absolute transition-transform duration-500 group-hover:scale-110`;
-                iconEl.classList.remove('hidden');
-            }
-
-            nationModal.classList.add('active');
-        });
-
-        if(closeNationBtn) closeNationBtn.addEventListener('click', () => nationModal.classList.remove('active'));
-        if(nationModalBg) nationModalBg.addEventListener('click', () => nationModal.classList.remove('active'));
-    }
-    // Transição genérica de ecrãs
+    
     function switchView(fromView, toView) {
         if(!fromView || !toView) return;
         fromView.classList.remove('active');
@@ -830,13 +752,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500); 
     }
 
-    // Botões de Abertura
     document.getElementById('btn-open-arquivo')?.addEventListener('click', () => switchView(viewAltar, viewComplex));
     document.getElementById('btn-open-typings')?.addEventListener('click', () => switchView(viewAltar, viewTypings));
     document.getElementById('btn-open-genealogy')?.addEventListener('click', () => switchView(viewAltar, viewGenealogy));
     document.getElementById('btn-open-bestiary')?.addEventListener('click', () => switchView(viewAltar, viewBestiary));
+    document.getElementById('btn-open-nations')?.addEventListener('click', () => switchView(viewAltar, viewNations));
 
-    // Botões de Voltar ao Altar
     document.querySelectorAll('.btn-back-altar').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const currentView = e.target.closest('.view-section');
@@ -845,7 +766,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =========================================
-    // BESTIÁRIO DE GIONYYL - RENDERIZAÇÃO E MODAL
+    // BESTIÁRIO DE GIONYYL
     // =========================================
     const bestiaryGrid = document.getElementById('bestiary-grid');
     if (bestiaryGrid) {
@@ -865,7 +786,6 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         });
 
-        // Lógica de Clique e Modal do Bestiário
         const bestiaryModal = document.getElementById('bestiary-modal');
         const bestiaryModalBg = document.getElementById('bestiary-modal-bg');
         const closeBestiaryBtn = document.getElementById('close-bestiary-modal');
@@ -887,7 +807,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('bestiary-modal-peculiarity').innerText = data.peculiarity;
             document.getElementById('bestiary-modal-desc').innerText = data.fullDesc;
 
-            // Manipula a exibição da Imagem vs Ícone
             const imgEl = document.getElementById('bestiary-modal-image');
             const iconEl = document.getElementById('bestiary-modal-icon');
             if (data.image) {
@@ -905,6 +824,68 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if(closeBestiaryBtn) closeBestiaryBtn.addEventListener('click', () => bestiaryModal.classList.remove('active'));
         if(bestiaryModalBg) bestiaryModalBg.addEventListener('click', () => bestiaryModal.classList.remove('active'));
+    }
+
+    // =========================================
+    // NAÇÕES DE GIONYYL - RENDERIZAÇÃO E MODAL
+    // =========================================
+    const nationsGrid = document.getElementById('nations-grid');
+    if (nationsGrid) {
+        nationsGrid.innerHTML = '';
+        nationsData.forEach((nation, index) => {
+            nationsGrid.innerHTML += `
+                <div class="p-6 border border-slate-800 rounded bg-[#0a0a0f]/80 hover:border-[#d69e9e]/50 hover:bg-[#1a1a24] transition-all cursor-pointer group shadow-lg flex flex-col items-center text-center" data-nation-id="${index}">
+                    <div class="w-16 h-16 rounded-full bg-[#050508] border border-slate-700 flex items-center justify-center group-hover:border-[#d69e9e] transition-colors mb-4">
+                        <i class="${nation.icon} text-2xl text-slate-500 group-hover:text-[#d69e9e] transition-colors"></i>
+                    </div>
+                    <h3 class="font-cinzel text-xl text-white uppercase tracking-widest mb-1">${nation.name}</h3>
+                    <span class="text-[10px] text-[#d69e9e] uppercase tracking-widest mb-3 border border-[#d69e9e]/30 px-2 py-1 rounded bg-[#d69e9e]/5">${nation.element}</span>
+                    <p class="text-sm text-slate-400 font-serif line-clamp-3">${nation.desc}</p>
+                </div>
+            `;
+        });
+
+        const nationModal = document.getElementById('nation-modal');
+        const nationModalBg = document.getElementById('nation-modal-bg');
+        const closeNationBtn = document.getElementById('close-nation-modal');
+        const nationModalContent = document.getElementById('nation-modal-content');
+
+        nationsGrid.addEventListener('click', (e) => {
+            const card = e.target.closest('[data-nation-id]');
+            if (!card) return;
+            
+            const index = card.dataset.nationId;
+            const data = nationsData[index];
+
+            document.getElementById('nation-modal-name').innerText = data.name;
+            document.getElementById('nation-modal-element').innerText = data.element;
+            document.getElementById('nation-modal-gov').innerText = data.government;
+            document.getElementById('nation-modal-climate').innerText = data.climate;
+            document.getElementById('nation-modal-culture').innerText = data.culture;
+            document.getElementById('nation-modal-desc').innerText = data.desc;
+
+            const primaryElement = data.element.split(',')[0].trim();
+            const elemColor = elementalData.baseElements[primaryElement] ? elementalData.baseElements[primaryElement].color : '#d69e9e';
+            
+            nationModalContent.style.setProperty('--nation-color', elemColor);
+
+            const imgEl = document.getElementById('nation-modal-image');
+            const iconEl = document.getElementById('nation-modal-icon');
+            if (data.image && data.image !== "") {
+                imgEl.src = data.image;
+                imgEl.classList.remove('hidden');
+                iconEl.classList.add('hidden');
+            } else {
+                imgEl.classList.add('hidden');
+                iconEl.className = `${data.icon} text-6xl text-slate-800 absolute transition-transform duration-500 group-hover:scale-110`;
+                iconEl.classList.remove('hidden');
+            }
+
+            nationModal.classList.add('active');
+        });
+
+        if(closeNationBtn) closeNationBtn.addEventListener('click', () => nationModal.classList.remove('active'));
+        if(nationModalBg) nationModalBg.addEventListener('click', () => nationModal.classList.remove('active'));
     }
 
 
@@ -1067,17 +1048,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('fusion-modal-type-content').innerText = data.type;
         document.getElementById('fusion-modal-power-content').innerText = data.power;
         
-        // CARREGA AS ANOTAÇÕES DO ALQUIMISTA
         const savedData = discoveredFusions[fusionName];
         const notesField = document.getElementById('fusion-notes');
         
         if (notesField) {
-            // Retrocompatibilidade
             if (typeof savedData === 'boolean') {
                 discoveredFusions[fusionName] = { discovered: true, notes: "" };
             }
             notesField.value = discoveredFusions[fusionName].notes || "";
-            // Atrela a fusão atual ao botão de salvar
             const saveNotesBtn = document.getElementById('save-notes-btn');
             if (saveNotesBtn) saveNotesBtn.dataset.fusionTarget = fusionName;
         }
@@ -1087,7 +1065,6 @@ document.addEventListener('DOMContentLoaded', () => {
         fusionModal.classList.add('active');
     }
 
-    // AÇÃO DE SALVAR ANOTAÇÕES DO DIÁRIO
     const saveNotesBtn = document.getElementById('save-notes-btn');
     if (saveNotesBtn) {
         saveNotesBtn.addEventListener('click', () => {
@@ -1126,31 +1103,73 @@ document.addEventListener('DOMContentLoaded', () => {
     // LÓGICA DA JANELA SECRETA (EASTER EGGS DE HORROR)
     // =========================================
     const secretModal = document.getElementById('secret-modal');
-    const closeSecretBtn = document.getElementById('close-secret-modal');
-    const secretBg = document.getElementById('secret-modal-bg');
     const secretModalContent = document.getElementById('secret-modal-content');
+    const whispersContainer = document.getElementById('creepy-whispers-container');
+    
     let activeGlitchIntervals = [];
+    let whisperInterval;
+
+    const creepyPhrases = [
+        "ELES VÊM", "A DOR É INFINITA", "NÃO HÁ LUZ AQUI", "A PEDRA SANGRA", 
+        "FECHE OS OLHOS", "ULRHTAU DESPERTA", "ESQUEÇA O SEU NOME", "TUDO QUEIMA",
+        "O VAZIO FALA", "A CULPA É SUA"
+    ];
 
     function clearAllIntervals() {
         activeGlitchIntervals.forEach(clearInterval);
         activeGlitchIntervals = [];
+        clearInterval(whisperInterval);
+        if(whispersContainer) whispersContainer.innerHTML = '';
     }
 
-    function scrambleText(element, finalString, duration) {
-        const chars = "⍙⎍⍜⍎⍑⍋⍝⍯⍮⍫⍡⍪⍤⍥⍨⍢⍣⍗⍒⍞⍟§‡ℵERROR10101010";
+    function spawnWhispers() {
+        whisperInterval = setInterval(() => {
+            const whisper = document.createElement('div');
+            whisper.className = 'creepy-whisper';
+            whisper.innerText = creepyPhrases[Math.floor(Math.random() * creepyPhrases.length)];
+            
+            whisper.style.left = `${Math.random() * 80 + 10}%`;
+            whisper.style.top = `${Math.random() * 80 + 10}%`;
+            
+            const rot = (Math.random() * 40) - 20;
+            whisper.style.transform = `rotate(${rot}deg)`;
+            
+            whispersContainer.appendChild(whisper);
+            setTimeout(() => whisper.remove(), 4000);
+        }, 1500); 
+    }
+
+    function scrambleTextEldritch(element, finalString, duration) {
+        const chars = "⍙⎍⍜⍎⍑⍋⍝⍯⍮⍫⍡⍪⍤⍥⍨⍢⍣⍗⍒⍞⍟§‡ℵ¥ØѼ☠☢☣";
         let iterations = 0;
         const maxIterations = duration / 30; 
         element.innerText = ""; 
-        const interval = setInterval(() => {
+        
+        const resolveInterval = setInterval(() => {
             element.innerText = finalString.split('').map((letter, index) => {
                 if (letter === " " || letter === "\n") return letter; 
                 if (index < iterations / (maxIterations / finalString.length)) return finalString[index]; 
                 return chars[Math.floor(Math.random() * chars.length)]; 
             }).join('');
             iterations++;
-            if (iterations >= maxIterations) { clearInterval(interval); element.innerText = finalString; }
+            
+            if (iterations >= maxIterations) { 
+                clearInterval(resolveInterval); 
+                element.innerText = finalString; 
+                
+                const curseInterval = setInterval(() => {
+                    if(Math.random() > 0.8) { 
+                        const arr = finalString.split('');
+                        const randIdx = Math.floor(Math.random() * arr.length);
+                        if(arr[randIdx] !== " ") arr[randIdx] = chars[Math.floor(Math.random() * chars.length)];
+                        element.innerText = arr.join('');
+                        setTimeout(() => { element.innerText = finalString; }, 100);
+                    }
+                }, 200);
+                activeGlitchIntervals.push(curseInterval);
+            }
         }, 30);
-        activeGlitchIntervals.push(interval);
+        activeGlitchIntervals.push(resolveInterval);
     }
 
     function animateEye(element) {
@@ -1169,7 +1188,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "                  ██████████████████████                  ",
             "                          ████████                          "
         ].join('\n');
-        const chars = "⍙⎍⍜⍎⍑⍋⍝⍯⍮⍫⍡⍪⍤⍥⍨⍢⍣⍗⍒⍞⍟§‡ℵ";
+        const chars = "⍙⎍⍜⍎⍑⍋⍝⍯⍮⍫⍡⍪⍤⍥⍨⍢⍣⍗⍒⍞⍟§‡ℵX";
         const interval = setInterval(() => {
             let result = "";
             for(let i=0; i<template.length; i++) {
@@ -1178,45 +1197,76 @@ document.addEventListener('DOMContentLoaded', () => {
                 else result += chars[Math.floor(Math.random() * chars.length)]; 
             }
             element.innerText = result;
-        }, 50); 
+        }, 30); 
         activeGlitchIntervals.push(interval);
     }
 
     if(secretModal) {
         function openSecretModal(elementName, data) {
             clearAllIntervals(); 
+            audioManager.playGlitch(true);
+
+            const glitchOverlay = document.getElementById('intro-glitch-overlay');
+            const glitchText = document.getElementById('intro-glitch-text');
+            glitchOverlay.classList.add('active');
+            glitchText.classList.add('violent-glitch-text');
+            
+            let garbage = "";
+            const chars = "⍙⎍⍜⍎⍑⍋⍝⍯⍮⍫⍡⍪⍤⍥⍨⍢⍣⍗⍒⍞⍟§‡ℵ¥ØѼ☠☢☣01ERRO";
+            for(let i=0; i<3000; i++) garbage += chars[Math.floor(Math.random() * chars.length)];
+            glitchText.innerText = garbage;
+
+            const introInterval = setInterval(() => {
+                const arr = glitchText.innerText.split('');
+                for(let i=0; i<150; i++) arr[Math.floor(Math.random() * arr.length)] = chars[Math.floor(Math.random() * chars.length)];
+                glitchText.innerText = arr.join('');
+            }, 50);
+            activeGlitchIntervals.push(introInterval);
+
             secretModalContent.style.setProperty('--modal-rune-color', data.color);
-            secretModal.classList.add('active');
+            document.getElementById('secret-glow').style.backgroundColor = data.color; 
             
             const titleEl = document.getElementById('secret-modal-title');
             const subEl = document.getElementById('secret-modal-subtitle');
             const textEl = document.getElementById('secret-modal-text');
 
-            if (elementName === "Ulrhtau") {
-                titleEl.className = "text-3xl font-cinzel text-red-600 mb-6 tracking-widest text-center font-bold";
-                subEl.innerText = "";
-                textEl.className = "ascii-eye";
-                scrambleText(titleEl, "MILN JADITYL XCO", 2000);
-                animateEye(textEl);
-            } else {
-                titleEl.className = "text-2xl font-cinzel text-red-900 mb-6 tracking-widest text-center";
-                textEl.className = "mt-4"; 
-                const sTitle = data.secretTitle || "REGISTOS OBSCUROS";
-                const sSub = data.secretSubtitle || "\"As páginas que a ordem tentou queimar...\"";
-                const sText = data.secretText || "Nenhum registo proibido encontrado para esta anomalia.";
-                if(titleEl) scrambleText(titleEl, sTitle, 1500); 
-                if(subEl) scrambleText(subEl, sSub, 2500); 
-                if(textEl) scrambleText(textEl, sText, 4000); 
-            }
+            setTimeout(() => {
+                clearInterval(introInterval);
+                glitchOverlay.classList.remove('active'); 
+                secretModal.classList.add('active'); 
+                
+                spawnWhispers();
+
+                if (elementName === "Ulrhtau") {
+                    titleEl.className = "text-5xl font-cinzel text-red-600 mb-8 tracking-[0.5em] text-center font-bold z-10 uppercase eerie-text-shadow";
+                    subEl.innerText = "";
+                    textEl.className = "ascii-eye mt-10";
+                    scrambleTextEldritch(titleEl, "MILN JADITYL XCO", 2000);
+                    animateEye(textEl);
+                } else {
+                    titleEl.className = "text-4xl md:text-5xl font-cinzel text-[#cbd5e1] mb-6 tracking-widest text-center z-10 eerie-text-shadow";
+                    titleEl.style.color = data.color;
+                    textEl.className = "mt-6 font-medium text-justify md:text-center text-xl tracking-wide eerie-body-text"; 
+                    
+                    const sTitle = data.secretTitle || "REGISTOS OBSCUROS";
+                    const sSub = data.secretSubtitle || "\"As páginas que a ordem tentou queimar...\"";
+                    const sText = data.secretText || "Nenhum registo proibido encontrado. O vazio consumiu esta página.";
+                    
+                    if(titleEl) scrambleTextEldritch(titleEl, sTitle, 1000); 
+                    if(subEl) scrambleTextEldritch(subEl, sSub, 2000); 
+                    if(textEl) scrambleTextEldritch(textEl, sText, 3500); 
+                }
+            }, 800); 
         }
 
         function closeSecretModal() {
             secretModal.classList.remove('active');
+            audioManager.playGlitch(false);
             clearAllIntervals(); 
         }
-
-        closeSecretBtn.addEventListener('click', closeSecretModal);
-        secretBg.addEventListener('click', closeSecretModal);
+        
+        // Fechar ao clicar em qualquer lugar da tela
+        secretModal.addEventListener('click', closeSecretModal);
 
         grimoireGrid.addEventListener('click', (e) => {
             if (e.target.classList.contains('secret-btn')) {

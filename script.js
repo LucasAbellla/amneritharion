@@ -64,20 +64,22 @@ const audioManager = {
 
 audioManager.init(); 
 
-// BANCO DE DADOS PRINCIPAL
+// =====================================
+// DADOS COMPLETOS E INTACTOS
+// =====================================
 const elementalData = {
     baseElements: {
-        "Flama":   { desc: "''Imbua seu ser ao calor do combate e torne seus pensamentos em armas''<br>— Al-azim", color: "#a61c1c", hoverColor: "#851616", manifestacoes: ["Ataque Direto", "Queimaduras", "Golpes Consecutivos"], lore: "Sangue jazido dos <span class='madness-word' data-note='Meus estudos apontam que foram o primeiro povo de Sur-yaal e os criadores da Chama Sekhmet que seria um tipo de ´amplificador´ hereditário.'>'Iitlaq</span>.", imagem: "", longDesc: "A manipulação das chamas transcende a simples destruição; é o ato de dar vida à entropia.", secretTitle: "KCOTOLOX", secretSubtitle: "\"A Punição\"", secretText: "Os primeiros piromantes de Nahvvatzal não conjuravam chamas do ar, mas queimavam as próprias memórias para gerar calor." },
-        "Aqua":   { desc: "''Flua à minha mente, ou afogue-se na vastidão do meu ser''<br>— Gyeang-ju", color: "#3a4dff", hoverColor: "#2f3ecc", manifestacoes: ["Efeito de cura/autodano", "Melhorias de acordo com estado da vida", "Dualidade"], lore: "Faces de <span class='madness-word' data-note='A soberana da nação ´purificada´. Suas ações, benevolentes e gentis, para mim, escondem terrores que podem assolar toda Gionyyl...'>Yeoljeong</span> e <span class='madness-word' data-note='Nas expedições turísticas pouco pude ver o que é ou o que leva esse nome, apenas quilômetros de luzes ao nivel do abismo oceânico. Que, estranhamente, parecia estar vivo.'>Hwa</span>.", imagem: "", longDesc: "Aqua atua como um ''regulador'' de vida, onde ela tanto pode curar o usuário, amplificando seus efeitos com base no quanto o usuário está ferido, ou pode ser uma agente catastrófico de danos, amplificando seus efeitos com base na saúde do usuário.", secretTitle: "UTYLOF", secretSubtitle: "\"A Transformação\"", secretText: "As lágrimas de Yeoljeong e o ódio de Hwa não trazem tristeza, mas sim a certeza de que as almas afogadas nunca encontrarão descanso." },
-        "Eol":     { desc: "''Pense da menor reflexão de culpa à maior epifania noturna, esta é a liberdade''<br>— Eristópheus", color: "#00e689", hoverColor: "#00b86e", manifestacoes: ["Movimentação", "Controle de Grupo", "Aumento de  velocidade"], lore: "Sussurros dos <span class='madness-word' data-note='Eles nunca se calam! Façam parar!'>Céus</span>.", imagem: "", longDesc: "O ar não é vazio, mas um condutor de lamentos.", secretTitle: "EFENLORU", secretSubtitle: "\"A Liberdade\"", secretText: "Aqueles que escutam o vento por muito tempo perdem a própria voz." },
-        "Terrae":  { desc: "Solidez, estabilidade, crescimento, fundação.", color: "#6c4d42", hoverColor: "#573e35", manifestacoes: ["Durabilidade", "Barreiras defensivas", "Desenvolvimento de Resistências"], lore: "Corpo da <span class='madness-word' data-note='Seus ossos formam as nossas prisões e túmulos.'>Mãe Antiga</span>.", imagem: "", longDesc: "As pedras fundacionais deste mundo estão manchadas de sacrifício.", secretTitle: "HAVBAGAN", secretSubtitle: "\"A Formação\"", secretText: "A rocha não é cega. Cada pedra colocada nas fundações do Crisol de Apriori pulsa como um coração lento." },
-        "Fulmen":   { desc: "''Ouça o estrondo de minha presença ao pronunciar meu nome''<br>— Tyapu", color: "#ffff00", hoverColor: "#e6e600", manifestacoes: ["Ataque em Área", "Maior capacidade destrutiva", "Reflexos apurados e imprevisíveis"], lore: "Fúria do <span class='madness-word' data-note='Um usurpador cego pela própria luz.'>Deus da Tempestade</span>.", imagem: "", longDesc: "Uma fração de segundo de energia pura que frita sinapses e altera percepções.", secretTitle: "TEZNITAJ", secretSubtitle: "\"A Movimentação\"", secretText: "Verdadeiro poder elétrico queima o nervo óptico. Magos experientes desta runa estão todos cegos." },
-        "Crelix":   { desc: "Frio, estagnação, preservação, rigidez.", color: "#56e5ff", hoverColor: "#45b7cc", manifestacoes: ["Congelar superfícies", "Armas de gelo", "Suportar frio"], lore: "Sopro Invernal do <span class='madness-word' data-note='Ele está adormecido sob o gelo vermelho.'>Gigante</span>.", imagem: "", longDesc: "O verdadeiro poder de Crelix não é o gelo, mas a paralisação do tempo em escala molecular.", secretTitle: "ORGNOTAMOTR", secretSubtitle: "\"A Permanência\"", secretText: "No coração do Zero Absoluto, o tempo não passa." },
-        "Lux":    { desc: "''Tudo uma vez teve de passar por mim e nada nesta existência se rebuçará do meu ser''<br>— Tesakã ", color: "#fbe4ec", hoverColor: "#f9d7e3", manifestacoes: ["Criar luz", "Dissipar sombras", "Cura leve"], lore: "<span class='madness-word' data-note='Pelo que pude reunir de pessoas que já frequentaram Py´aporã, isso é como se fosse uma ´´mente coletiva´´ ligada a todos os seres vivos da nação, onde se conectam a outro plano.'>Heta-akã</span>.", imagem: "", longDesc: "A runa Lux arranca os véus da ilusão e expõe imperfeições.", secretTitle: "RASTONTRI", secretSubtitle: "\"A Presença\"", secretText: "Dizem que é cura, mas a luz queima as imperfeições." },
+        "Flama": { desc: "''Imbua seu ser ao calor do combate e torne seus pensamentos em armas''<br>— Al-azim", color: "#a61c1c", hoverColor: "#851616", manifestacoes: ["Ataque Direto", "Queimaduras", "Golpes Consecutivos"], lore: "Sangue jazido dos <span class='madness-word' data-note='Meus estudos apontam que foram o primeiro povo de Sur-yaal e os criadores da Chama Sekhmet que seria um tipo de ´amplificador´ hereditário.'>'Iitlaq</span>.", imagem: "", longDesc: "A manipulação das chamas transcende a simples destruição; é o ato de dar vida à entropia.", secretTitle: "KCOTOLOX", secretSubtitle: "\"A Punição\"", secretText: "Os primeiros piromantes de Nahvvatzal não conjuravam chamas do ar, mas queimavam as próprias memórias para gerar calor." },
+        "Aqua": { desc: "''Flua à minha mente, ou afogue-se na vastidão do meu ser''<br>— Gyeang-ju", color: "#3a4dff", hoverColor: "#2f3ecc", manifestacoes: ["Efeito de cura/autodano", "Melhorias de acordo com estado da vida", "Dualidade"], lore: "Faces de <span class='madness-word' data-note='A soberana da nação ´purificada´. Suas ações, benevolentes e gentis, para mim, escondem terrores que podem assolar toda Gionyyl...'>Yeoljeong</span> e <span class='madness-word' data-note='Nas expedições turísticas pouco pude ver o que é ou o que leva esse nome, apenas quilômetros de luzes ao nivel do abismo oceânico. Que, estranhamente, parecia estar vivo.'>Hwa</span>.", imagem: "", longDesc: "Aqua atua como um ''regulador'' de vida, onde ela tanto pode curar o usuário, amplificando seus efeitos com base no quanto o usuário está ferido, ou pode ser uma agente catastrófico de danos, amplificando seus efeitos com base na saúde do usuário.", secretTitle: "UTYLOF", secretSubtitle: "\"A Transformação\"", secretText: "As lágrimas de Yeoljeong e o ódio de Hwa não trazem tristeza, mas sim a certeza de que as almas afogadas nunca encontrarão descanso." },
+        "Eol": { desc: "''Pense da menor reflexão de culpa à maior epifania noturna, esta é a liberdade''<br>— Eristópheus", color: "#00e689", hoverColor: "#00b86e", manifestacoes: ["Movimentação", "Controle de Grupo", "Aumento de velocidade"], lore: "Sussurros dos <span class='madness-word' data-note='Eles nunca se calam! Façam parar!'>Céus</span>.", imagem: "", longDesc: "O ar não é vazio, mas um condutor de lamentos.", secretTitle: "EFENLORU", secretSubtitle: "\"A Liberdade\"", secretText: "Aqueles que escutam o vento por muito tempo perdem a própria voz." },
+        "Terrae": { desc: "Solidez, estabilidade, crescimento, fundação.", color: "#6c4d42", hoverColor: "#573e35", manifestacoes: ["Durabilidade", "Barreiras defensivas", "Desenvolvimento de Resistências"], lore: "Corpo da <span class='madness-word' data-note='Seus ossos formam as nossas prisões e túmulos.'>Mãe Antiga</span>.", imagem: "", longDesc: "As pedras fundacionais deste mundo estão manchadas de sacrifício.", secretTitle: "HAVBAGAN", secretSubtitle: "\"A Formação\"", secretText: "A rocha não é cega. Cada pedra colocada nas fundações do Crisol de Apriori pulsa como um coração lento." },
+        "Fulmen": { desc: "''Ouça o estrondo de minha presença ao pronunciar meu nome''<br>— Tyapu", color: "#ffff00", hoverColor: "#e6e600", manifestacoes: ["Ataque em Área", "Maior capacidade destrutiva", "Reflexos apurados e imprevisíveis"], lore: "Fúria do <span class='madness-word' data-note='Um usurpador cego pela própria luz.'>Deus da Tempestade</span>.", imagem: "", longDesc: "Uma fração de segundo de energia pura que frita sinapses e altera percepções.", secretTitle: "TEZNITAJ", secretSubtitle: "\"A Movimentação\"", secretText: "Verdadeiro poder elétrico queima o nervo óptico. Magos experientes desta runa estão todos cegos." },
+        "Crelix": { desc: "Frio, estagnação, preservação, rigidez.", color: "#56e5ff", hoverColor: "#45b7cc", manifestacoes: ["Congelar superfícies", "Armas de gelo", "Suportar frio"], lore: "Sopro Invernal do <span class='madness-word' data-note='Ele está adormecido sob o gelo vermelho.'>Gigante</span>.", imagem: "", longDesc: "O verdadeiro poder de Crelix não é o gelo, mas a paralisação do tempo em escala molecular.", secretTitle: "ORGNOTAMOTR", secretSubtitle: "\"A Permanência\"", secretText: "No coração do Zero Absoluto, o tempo não passa." },
+        "Lux": { desc: "''Tudo uma vez teve de passar por mim e nada nesta existência se rebuçará do meu ser''<br>— Tesakã ", color: "#fbe4ec", hoverColor: "#f9d7e3", manifestacoes: ["Criar luz", "Dissipar sombras", "Cura leve"], lore: "<span class='madness-word' data-note='Pelo que pude reunir de pessoas que já frequentaram Py´aporã, isso é como se fosse uma ´´mente coletiva´´ ligada a todos os seres vivos da nação, onde se conectam a outro plano.'>Heta-akã</span>.", imagem: "", longDesc: "A runa Lux arranca os véus da ilusão e expõe imperfeições.", secretTitle: "RASTONTRI", secretSubtitle: "\"A Presença\"", secretText: "Dizem que é cura, mas a luz queima as imperfeições." },
         "Umbra": { desc: "''Em meu manto repousa os maiores pavores ancestrais e incógnitas do universo''<br>— Ibi'una", color: "#303030", hoverColor: "#262626", manifestacoes: ["Ocultação", "Furtividade", "Efeitos Silenciadores"], lore: "Pesadelos póstumos de <span class='madness-word' data-note='Pouco sei sobre os nativos da parte oculta de Py´aporã, mas vendo apenas pela distância, pude perceber que que Ibi´una tem maiores capacidades à luz da lua.'>Pyhare</span>.", imagem: "", longDesc: "As sombras possuem textura e fome.", secretTitle: "YRMEGTORE", secretSubtitle: "\"A Ausência\"", secretText: "Não há escuridão vazia. Toda sombra projetada pelo sol é um portal." },
-        "Vitae":  { desc: "''Há formas de vida em todas as minhas criações e submissão às suas escolhas''<br>— Yashima-no-Mikoto", color: "#9d0e4f", hoverColor: "#7e0b3f", manifestacoes: ["Invocação", "Estimulação", "Sentido elemental aguçado"], lore: "Essência da <span class='madness-word' data-note='As raízes bebem dos nossos cadáveres.'>Natureza Viva</span>.", imagem: "", longDesc: "A energia da Vitae força células a se multiplicarem rapidamente.", secretTitle: "IGL'TRUTAE", secretSubtitle: "\"A Animação\"", secretText: "O excesso de magia vital causa o crescimento de órgãos redundantes no mago." },
+        "Vitae": { desc: "''Há formas de vida em todas as minhas criações e submissão às suas escolhas''<br>— Yashima-no-Mikoto", color: "#9d0e4f", hoverColor: "#7e0b3f", manifestacoes: ["Invocação", "Estimulação", "Sentido elemental aguçado"], lore: "Essência da <span class='madness-word' data-note='As raízes bebem dos nossos cadáveres.'>Natureza Viva</span>.", imagem: "", longDesc: "A energia da Vitae força células a se multiplicarem rapidamente.", secretTitle: "IGL'TRUTAE", secretSubtitle: "\"A Animação\"", secretText: "O excesso de magia vital causa o crescimento de órgãos redundantes no mago." },
         "Toxi": { desc: "''Meu toque é o sussurro da entropia, a transformação inevitável e putrefata do todo''<br>— Koschkoniev", color: "#76cf02", hoverColor: "#5ea602", manifestacoes: ["Dano Contínuo", "Criação de venenos/antídotos", "Resistência a doenças"], lore: "<span class='madness-word' data-note='Em minha viagem à Moroyva pude presenciar a imensa máquina subterrânea que parece estar atravessando algumas Leis do Acaso. Não tive coragem de ir mais fundo no projeto.'>Núcleo Strolova</span>.", imagem: "", longDesc: "Toxi é considerada a própria praga viva, onde sua essência corrompe e adoece usuários afetados pelos seus contínuos danos ao corpo e à mente. Usuários Périplos conseguem prologar efeitos maléficos mesmo que os danos não sejam Toxi.", secretTitle: "KARVPARLPAKS", secretSubtitle: "\"A Degradação\"", secretText: "A runa da toxina exige simbiose. O mago hospeda parasitas na sua corrente sanguínea." },
-        "Vis":{ desc: "Força pura, movimento, poder bruto, potencial.", color: "#803631", hoverColor: "#662b27", manifestacoes: ["Cinética", "Ampliação reacionária", "Aumento físico"], lore: "A primeira <span class='madness-word' data-note='Já vi coisas descendo do céu vindo de um ponto muito específico, muito perto da igreja...'>Pluma</span>.", imagem: "", longDesc: "Desprovida de forma ou moralidade, a Vis é a energia cósmica crua.", secretTitle: "TSOZDNEMARO", secretSubtitle: "\"A Energia\"", secretText: "Conjurar energia bruta distorce os ossos do utilizador." },
+        "Vis": { desc: "Força pura, movimento, poder bruto, potencial.", color: "#803631", hoverColor: "#662b27", manifestacoes: ["Cinética", "Ampliação reacionária", "Aumento físico"], lore: "A primeira <span class='madness-word' data-note='Já vi coisas descendo do céu vindo de um ponto muito específico, muito perto da igreja...'>Pluma</span>.", imagem: "", longDesc: "Desprovida de forma ou moralidade, a Vis é a energia cósmica crua.", secretTitle: "TSOZDNEMARO", secretSubtitle: "\"A Energia\"", secretText: "Conjurar energia bruta distorce os ossos do utilizador." },
         "Ulrhtau": { desc: "DADOS CORROMPIDOS // FALHA DE LEITURA", color: "#ff0000", hoverColor: "#ff0000", manifestacoes: ["Aberração espacial", "Distorção da realidade", "[ERRO]"], lore: "NÃO CLICAR. A <span class='madness-word' data-note='A DOR É INFINITA AQUI FORA A DOR É INFINITA'>runa esquecida</span> que corrói o grimório.", imagem: "fas fa-skull text-6xl text-red-600", longDesc: "A matéria grita ao ser tocada por esta anomalia. A DOR é o único idioma conhecido. //NÃO_OLHE_PARA_TRÁS//", secretTitle: "01100101 01110010 01110010", secretSubtitle: "NÃO ESTOU AQUI", secretText: "SAIA DESTE LUGAR" }
     },
     combinations: {
@@ -188,7 +190,7 @@ const elementalData = {
     },
     typings: {
         acquisition: {
-            "Benção": { desc: "Concedida por uma entidade superior.", related: ["Única", "Múltipla", "Masterizadora"], mini_narrativa: "A Deusa tocou sua testa..." },
+            "Benção": { desc: "Concedida por uma entidade superior.", related: ["Única", "Múltipla"], mini_narrativa: "A Deusa tocou sua testa..." },
             "Treino": { desc: "Adquirida por prática intensiva.", related: ["Única"], mini_narrativa: "Anos de meditação no gelo..." }
         },
         classification: {
@@ -269,7 +271,6 @@ const nationsData = [
     { name: "Praetorium", element: "Vis", climate: "Planaltos Desolados", government: "Império Militar Hegemónico", culture: "Imperialista", desc: "A nação do poder puro, focada na expansão territorial e no domínio absoluto da força telecinética esmagadora.", image: "", icon: "fas fa-fist-raised" }
 ];
 
-// DADOS DAS RELÍQUIAS INJETADOS NO SEU ARQUIVO ORIGINAL
 const relicsData = [
     {
         name: "Conclusão Imediata",
@@ -285,41 +286,54 @@ const relicsData = [
         lore: "Vestígios de alquimistas caídos em Moroyva, impregnados com a essência da podridão eterna que consome tudo o que toca."
     },
     {
-        name: "Eco da Fornalha",
-        theme: "Flama / Dano Direto",
+        name: "Chama Sekhmet",
+        theme: "Dano Consecutivo",
         color: "#a61c1c",
         icon: "fas fa-fire-alt",
         image: "",
         bonuses: {
             "2": "O dano Flama é aumentado em 15%.",
-            "4": "Após usar uma habilidade, o próximo ataque ignora 20% da defesa do alvo.",
-            "6": "Sempre que aplicar Queimadura, há 50% de chance de detonar os danos contínuos no alvo instantaneamente."
+            "4": "A DEF inimiga é ignorada em 10%.",
+            "6": "Sempre que o alvo executa ações conscesutivas, aumenta o dano Flama inflingido no inimigo em 16%. Podendo chegar a 64% de dano aumentado."
         },
         lore: "A cinza que nunca esfria, forjada nas entranhas de Sur-yaal pelos antigos piromantes bélicos."
     },
     {
-        name: "Véu da Profundeza",
-        theme: "Aqua / Sobrevivência",
+        name: "Couraça dos Indomáveis",
+        theme: "Sobrevivência",
         color: "#3a4dff",
         icon: "fas fa-water",
         image: "",
         bonuses: {
-            "2": "A cura recebida e concedida é aumentada em 15%.",
-            "4": "Quando a vida cai abaixo de 50%, cria um escudo equivalente a 30% da vida máxima do usuário.",
-            "6": "O escudo originado por este conjunto reflete 50% do dano sofrido de volta ao atacante como dano Aqua puro."
+            "2": "O dano Aqua é aumentado em 15%.",
+            "4": "A vida máxima é aumentada em 15%",
+            "6": "Cada vez que a vida aumenta ou diminui, o usuário ganha 5% de bonus de dano Aqua. O efeito pode acumular em até 100%."
         },
         lore: "Pérolas abissais que choram a melancolia do oceano esquecido, recuperadas dos recifes de Sui-ryong."
     },
     {
-        name: "Vendaval Estilhaçado",
-        theme: "Eol / Dispersão",
+        name: "Hipótese Extensiva",
+        theme: "Dispersão",
         color: "#00e689",
         icon: "fas fa-wind",
         image: "",
         bonuses: {
-            "2": "A Velocidade base é aumentada em 10.",
-            "4": "O Dano de Dispersão Elemental (reação Eol) é aumentado em 40%.",
-            "6": "Sempre que dispersar um elemento, avança as próprias ações na Linha do Tempo em 25%."
+            "2": "O dano Eol é aumentado em 15%.",
+            "4": "O dano de Dispersão é aumentado em 15%.",
+            "6": "O elemento infundido na Dispersão tem sua resistência diminuída em 40%."
+        },
+        lore: "Estes fragmentos de vidro temperado carregam a brisa mortal das tempestades sem fim de Aethelos."
+    },
+    {
+        name: "Nascido no Crisol",
+        theme: "Resistência",
+        color: "#6c4d42",
+        icon: "fas fa-wind",
+        image: "",
+        bonuses: {
+            "2": "A defesa é aumentada em 15%.",
+            "4": "A força do escudo é aumentada em 10%.",
+            "6": "O limite que o escudo pode chegar além da vida máxima do personagem é 50%. Para cada 1% do escudo além da vida máxima do personagem com este conjunto equipado, ganha adicionalmente 2% de defesa."
         },
         lore: "Estes fragmentos de vidro temperado carregam a brisa mortal das tempestades sem fim de Aethelos."
     }
@@ -947,7 +961,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================
-    // NAÇÕES DE GIONYYL - RENDERIZAÇÃO E MODAL
+    // NAÇÕES DE GIONYYL
     // =========================================
     const nationsGrid = document.getElementById('nations-grid');
     if (nationsGrid) {
@@ -1037,10 +1051,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
             } else {
                 complexGrid.innerHTML += `
-                    <div class="locked-card p-5 rounded-sm flex flex-col items-center justify-center relative overflow-hidden h-36 opacity-60">
+                    <div class="locked-card p-5 border border-slate-800 rounded-sm flex flex-col items-center justify-center relative overflow-hidden h-36 opacity-60">
                         <span class="absolute top-2 left-2 text-[10px] text-slate-700 font-mono">#${(index + 1).toString().padStart(3, '0')}</span>
-                        <i class="fas fa-lock text-3xl text-[#2a3040] mb-3"></i>
-                        <h4 class="font-cinzel text-sm text-[#4a5568] tracking-widest uppercase">Essência Selada</h4>
+                        <i class="fas fa-lock text-3xl text-slate-700 mb-3"></i>
+                        <h4 class="font-cinzel text-sm text-slate-500 tracking-widest uppercase">Essência Selada</h4>
                     </div>
                 `;
             }
@@ -1151,7 +1165,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderGenealogySelectors();
 
     // =========================================
-    // LÓGICA DO MODAL MAJESTOSO DAS FUSÕES E DIÁRIO
+    // LÓGICA DO MODAL MAJESTOSO DAS FUSÕES
     // =========================================
     const fusionModal = document.getElementById('fusion-modal');
     const fusionModalBg = document.getElementById('fusion-modal-bg');

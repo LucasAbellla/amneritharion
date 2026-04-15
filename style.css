@@ -32,11 +32,7 @@ h1, h2, h3, .font-cinzel { font-family: 'Cinzel', serif; }
 /* Customização Global da Barra de Rolagem */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: #050508; }
-::-webkit-scrollbar-thumb {
-    background: #1e222d;
-    border-radius: 4px;
-    border: 1px solid #2a3040;
-}
+::-webkit-scrollbar-thumb { background: #1e222d; border-radius: 4px; border: 1px solid #2a3040; }
 ::-webkit-scrollbar-thumb:hover { background: #475569; box-shadow: 0 0 5px rgba(255,255,255,0.2); }
 ::selection { background: rgba(139, 0, 0, 0.4); color: #fff; text-shadow: 0 0 8px rgba(255, 0, 0, 0.8); }
 
@@ -49,28 +45,12 @@ h1, h2, h3, .font-cinzel { font-family: 'Cinzel', serif; }
 /* =========================================
    ECOS E LOUCURA
    ========================================= */
-.qold-rune {
-    position: absolute; color: #4a5568; font-family: serif; user-select: none;
-    transition: transform 0.1s linear; text-shadow: 0 0 5px rgba(255,255,255,0.05);
-}
+.qold-rune { position: absolute; color: #4a5568; font-family: serif; user-select: none; transition: transform 0.1s linear; text-shadow: 0 0 5px rgba(255,255,255,0.05); }
 
-.madness-word {
-    text-decoration: none; background-image: linear-gradient(90deg, #ff4444, #ffaa00, #ff4444);
-    background-size: 200% auto; color: transparent; -webkit-background-clip: text;
-    background-clip: text; animation: gradient-shift 2.5s linear infinite; cursor: help;
-    position: relative; display: inline-block; font-weight: 700; transition: transform 0.2s ease; z-index: 1; 
-}
+.madness-word { text-decoration: none; background-image: linear-gradient(90deg, #ff4444, #ffaa00, #ff4444); background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; animation: gradient-shift 2.5s linear infinite; cursor: help; position: relative; display: inline-block; font-weight: 700; transition: transform 0.2s ease; z-index: 1; }
 @keyframes gradient-shift { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
 .madness-word:hover { transform: scale(1.05); text-shadow: 0 0 15px rgba(255, 68, 68, 0.4); z-index: 10; }
-.madness-word::after {
-    content: attr(data-note); position: absolute; bottom: 130%; left: 0; width: max-content;
-    max-width: 220px; background: rgba(10, 5, 5, 0.98); border: 1px solid #4a1515;
-    -webkit-background-clip: initial; background-clip: initial; color: #d69e9e;
-    -webkit-text-fill-color: #d69e9e; font-family: 'Bradley Hand', 'Indie Flower', cursive, serif;
-    font-size: 0.9rem; font-weight: normal; padding: 12px 16px; border-radius: 4px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.9); opacity: 0; visibility: hidden; transition: all 0.2s ease;
-    z-index: 9999; pointer-events: none; text-align: left; line-height: 1.4; white-space: normal;
-}
+.madness-word::after { content: attr(data-note); position: absolute; bottom: 130%; left: 0; width: max-content; max-width: 220px; background: rgba(10, 5, 5, 0.98); border: 1px solid #4a1515; -webkit-background-clip: initial; background-clip: initial; color: #d69e9e; -webkit-text-fill-color: #d69e9e; font-family: 'Bradley Hand', 'Indie Flower', cursive, serif; font-size: 0.9rem; font-weight: normal; padding: 12px 16px; border-radius: 4px; box-shadow: 0 5px 20px rgba(0,0,0,0.9); opacity: 0; visibility: hidden; transition: all 0.2s ease; z-index: 9999; pointer-events: none; text-align: left; line-height: 1.4; white-space: normal; }
 .madness-word:hover::after { opacity: 1; visibility: visible; transform: translateY(-5px); pointer-events: auto; }
 
 /* =========================================
@@ -82,33 +62,14 @@ h1, h2, h3, .font-cinzel { font-family: 'Cinzel', serif; }
     100% { box-shadow: 0 0 8px var(--rune-color), inset 0 0 8px transparent; }
 }
 
-.element-btn {
-    transition: all 0.3s ease-in-out, transform 0.15s ease-out; min-width: 120px; height: 50px; 
-    display: flex; align-items: center; justify-content: center; gap: 8px; position: relative;
-    background-color: transparent; cursor: pointer; border: 1px solid #475569; border-radius: 0 !important; 
-    color: #94a3b8; font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 0.1em;
-    text-transform: uppercase; font-size: 0.85rem;
-}
+.element-btn { transition: all 0.3s ease-in-out, transform 0.15s ease-out; min-width: 120px; height: 50px; display: flex; align-items: center; justify-content: center; gap: 8px; position: relative; background-color: transparent; cursor: pointer; border: 1px solid #475569; border-radius: 0 !important; color: #94a3b8; font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.85rem; }
 .element-btn::before { content: '\2726'; font-size: 1.1em; font-weight: normal; color: #475569; transition: all 0.3s ease; }
-.element-btn:hover {
-    transform: translateY(-2px); color: #fff; border-color: var(--rune-color); 
-    background-color: color-mix(in srgb, var(--rune-color) 10%, transparent);
-    box-shadow: 0 0 15px color-mix(in srgb, var(--rune-color) 50%, transparent), inset 0 0 10px color-mix(in srgb, var(--rune-color) 30%, transparent);
-    text-shadow: 0 0 8px var(--rune-color);
-}
+.element-btn:hover { transform: translateY(-2px); color: #fff; border-color: var(--rune-color); background-color: color-mix(in srgb, var(--rune-color) 10%, transparent); box-shadow: 0 0 15px color-mix(in srgb, var(--rune-color) 50%, transparent), inset 0 0 10px color-mix(in srgb, var(--rune-color) 30%, transparent); text-shadow: 0 0 8px var(--rune-color); }
 .element-btn:hover::before { color: var(--rune-color); text-shadow: 0 0 12px var(--rune-color); }
-.element-btn.selected {
-    transform: translateY(-2px); color: #fff; border-color: var(--rune-color);
-    background-color: color-mix(in srgb, var(--rune-color) 15%, transparent);
-    text-shadow: 0 0 8px var(--rune-color); animation: pulseRune 2s infinite ease-in-out;
-}
+.element-btn.selected { transform: translateY(-2px); color: #fff; border-color: var(--rune-color); background-color: color-mix(in srgb, var(--rune-color) 15%, transparent); text-shadow: 0 0 8px var(--rune-color); animation: pulseRune 2s infinite ease-in-out; }
 .element-btn.selected::before { color: var(--rune-color); text-shadow: 0 0 12px var(--rune-color); }
 
-#explorer {
-    background-color: rgba(5, 5, 8, 0.4) !important; backdrop-filter: blur(16px) !important; 
-    border: 1px solid rgba(255, 255, 255, 0.03) !important; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8) !important; 
-    border-radius: 8px !important; -webkit-app-region: drag; 
-}
+#explorer { background-color: rgba(5, 5, 8, 0.4) !important; backdrop-filter: blur(16px) !important; border: 1px solid rgba(255, 255, 255, 0.03) !important; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8) !important; border-radius: 8px !important; -webkit-app-region: drag; }
 #explorer button, #explorer selector, .element-btn, .window-controls button { -webkit-app-region: no-drag; }
 #btn-close:hover { text-shadow: 0 0 10px rgba(255, 0, 0, 0.8); transform: scale(1.1); }
 #btn-minimize:hover { transform: scale(1.1); }
@@ -116,69 +77,37 @@ h1, h2, h3, .font-cinzel { font-family: 'Cinzel', serif; }
 /* =========================================
    ALTAR E FUSÕES
    ========================================= */
-#result-card-display {
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease-out, background 0.3s ease, box-shadow 0.3s ease;
-    min-height: 16rem; opacity: 0; transform: scale(0.95); width: 100%;
-    background: linear-gradient(135deg, #1e222d 0%, #101218 100%); border-radius: 4px; 
-    padding: 30px; text-align: center; display: flex; flex-direction: column; justify-content: center;
-    position: relative; box-shadow: inset 5px 5px 15px rgba(0,0,0,0.8), inset -2px -2px 5px rgba(255,255,255,0.03), 0 10px 20px rgba(0,0,0,0.4);
-    border-top: 1px solid #2a3040; border-left: 1px solid #2a3040; border-right: 1px solid transparent;
-}
+#result-card-display { transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease-out, background 0.3s ease, box-shadow 0.3s ease; min-height: 16rem; opacity: 0; transform: scale(0.95); width: 100%; background: linear-gradient(135deg, #1e222d 0%, #101218 100%); border-radius: 4px; padding: 30px; text-align: center; display: flex; flex-direction: column; justify-content: center; position: relative; box-shadow: inset 5px 5px 15px rgba(0,0,0,0.8), inset -2px -2px 5px rgba(255,255,255,0.03), 0 10px 20px rgba(0,0,0,0.4); border-top: 1px solid #2a3040; border-left: 1px solid #2a3040; border-right: 1px solid transparent; }
 #result-card-display.visible { opacity: 1; transform: scale(1); }
-#magic-circle {
-    position: absolute; top: 50%; left: 50%; width: 240px; height: 240px; margin-top: -120px; margin-left: -120px;
-    border: 1px dashed rgba(255, 255, 255, 0.1); border-radius: 50%; pointer-events: none; opacity: 0;
-    transition: opacity 0.5s ease; z-index: 1; 
-}
+#magic-circle { position: absolute; top: 50%; left: 50%; width: 240px; height: 240px; margin-top: -120px; margin-left: -120px; border: 1px dashed rgba(255, 255, 255, 0.1); border-radius: 50%; pointer-events: none; opacity: 0; transition: opacity 0.5s ease; z-index: 1; }
 #magic-circle::before { content: ''; position: absolute; inset: 15px; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 50%; transform: rotate(45deg); }
 #magic-circle::after { content: ''; position: absolute; inset: 30px; border: 2px dotted rgba(255, 255, 255, 0.05); border-radius: 50%; }
 @keyframes giro-arcano { 100% { transform: rotate(360deg); } }
 @keyframes giro-arcano-reverso { 100% { transform: rotate(-360deg); } }
 
-#result-card-display.fissao-ativa {
-    background: #050505 !important; 
-    box-shadow: inset 40px 0 60px -40px color-mix(in srgb, var(--color1) 50%, transparent), inset -40px 0 60px -40px color-mix(in srgb, var(--color2) 50%, transparent);
-    border-left: 2px solid color-mix(in srgb, var(--color1) 60%, transparent); border-right: 2px solid color-mix(in srgb, var(--color2) 60%, transparent); border-top: none;
-}
+#result-card-display.fissao-ativa { background: #050505 !important; box-shadow: inset 40px 0 60px -40px color-mix(in srgb, var(--color1) 50%, transparent), inset -40px 0 60px -40px color-mix(in srgb, var(--color2) 50%, transparent); border-left: 2px solid color-mix(in srgb, var(--color1) 60%, transparent); border-right: 2px solid color-mix(in srgb, var(--color2) 60%, transparent); border-top: none; }
 #result-card-display.fissao-ativa #magic-circle { opacity: 0.6; animation: giro-arcano 10s linear infinite; border-color: color-mix(in srgb, var(--color1) 50%, transparent); }
 #result-card-display.fissao-ativa #magic-circle::before { border-color: color-mix(in srgb, var(--color2) 50%, transparent); animation: giro-arcano-reverso 15s linear infinite; }
 #result-card-display.fissao-ativa #magic-circle::after { border-color: color-mix(in srgb, var(--color1) 80%, transparent); }
 
-@keyframes respiracao-sombria {
-    0%, 100% { opacity: 0.3; text-shadow: 0 0 2px rgba(255,255,255,0.1); }
-    50% { opacity: 0.8; text-shadow: 0 0 10px rgba(100, 116, 139, 0.5); }
-}
+@keyframes respiracao-sombria { 0%, 100% { opacity: 0.3; text-shadow: 0 0 2px rgba(255,255,255,0.1); } 50% { opacity: 0.8; text-shadow: 0 0 10px rgba(100, 116, 139, 0.5); } }
 .texto-aguardando { font-family: 'Cinzel', serif; color: #4a5568; font-size: 1.2rem; letter-spacing: 3px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); animation: respiracao-sombria 4s infinite ease-in-out; }
 #complex-element-name { font-family: 'Cinzel', serif; font-size: 2.5rem; letter-spacing: 6px; color: #ffffff; margin-bottom: 10px; text-shadow: -4px 0 15px color-mix(in srgb, var(--color1) 80%, transparent), 4px 0 15px color-mix(in srgb, var(--color2) 80%, transparent); }
 #complex-element-combination { font-size: 0.9rem; color: #718096; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
 #complex-element-description { font-size: 1rem; line-height: 1.5; color: #cbd5e0; font-weight: 300; }
 
-@keyframes forja-arcana {
-    0% { opacity: 0; color: #fff; text-shadow: 0 0 20px #fff, 0 0 40px #ff9900, 0 0 60px #ff3300; transform: scale(1.05) translateY(10px); }
-    40% { opacity: 1; color: #fff; text-shadow: 0 0 15px #ffaa00, 0 0 30px #ff5500; transform: scale(1) translateY(0); }
-    100% { opacity: 1; transform: scale(1) translateY(0); }
-}
+@keyframes forja-arcana { 0% { opacity: 0; color: #fff; text-shadow: 0 0 20px #fff, 0 0 40px #ff9900, 0 0 60px #ff3300; transform: scale(1.05) translateY(10px); } 40% { opacity: 1; color: #fff; text-shadow: 0 0 15px #ffaa00, 0 0 30px #ff5500; transform: scale(1) translateY(0); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
 .result-text-entry { opacity: 0; }
 .result-text-entry.visible { animation: forja-arcana 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
 
-.btn-dissipar-pedra {
-    background-color: #1a1a24; color: #e53e3e; border: 1px solid #4a1515; padding: 12px 35px;
-    font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 2px; border-radius: 2px;
-    cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.5);
-}
+.btn-dissipar-pedra { background-color: #1a1a24; color: #e53e3e; border: 1px solid #4a1515; padding: 12px 35px; font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 2px; border-radius: 2px; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.5); }
 .btn-dissipar-pedra:hover { background-color: #4a1515; color: #fff; box-shadow: 0 0 15px rgba(229, 62, 62, 0.4); transform: translateY(-2px); }
 
 /* =========================================
    CARTÕES BASE E MODAIS
    ========================================= */
-.grimoire-card { 
-    background-color: rgba(10, 10, 15, 0.6) !important; border: 1px solid #2a3040 !important;
-    border-left: 2px solid var(--rune-color) !important; border-radius: 4px !important; transition: all 0.3s ease;
-}
-.grimoire-card:hover {
-    border-color: var(--rune-color) !important; background-color: color-mix(in srgb, var(--rune-color) 5%, rgba(10, 10, 15, 0.9)) !important;
-    box-shadow: inset 40px 0 60px -40px color-mix(in srgb, var(--rune-color) 50%, transparent) !important; transform: translateY(-2px);
-}
+.grimoire-card { background-color: rgba(10, 10, 15, 0.6) !important; border: 1px solid #2a3040 !important; border-left: 2px solid var(--rune-color) !important; border-radius: 4px !important; transition: all 0.3s ease; }
+.grimoire-card:hover { border-color: var(--rune-color) !important; background-color: color-mix(in srgb, var(--rune-color) 5%, rgba(10, 10, 15, 0.9)) !important; box-shadow: inset 40px 0 60px -40px color-mix(in srgb, var(--rune-color) 50%, transparent) !important; transform: translateY(-2px); }
 .grimoire-card h3 { font-family: 'Cinzel', serif; text-shadow: 0 0 8px color-mix(in srgb, var(--rune-color) 50%, transparent); }
 .grimoire-card-details { margin-top: 1rem; }
 .rune-image-placeholder { background-color: #050508; border: 1px solid color-mix(in srgb, var(--rune-color) 30%, #2a3040); box-shadow: inset 0 0 15px rgba(0,0,0,0.9); }
@@ -192,19 +121,11 @@ h1, h2, h3, .font-cinzel { font-family: 'Cinzel', serif; }
 .grimoire-card.card-amaldicoado:hover { border-style: solid !important; border-color: #fff !important; background-color: rgba(20, 0, 0, 0.4) !important; animation: tremor 0.2s infinite linear !important; box-shadow: inset 0 0 20px rgba(255, 0, 0, 0.2) !important; }
 .grimoire-card.card-amaldicoado h3 { color: #fff !important; text-shadow: -2px 0 red, 2px 0 blue !important; }
 
-@keyframes tremor {
-    0% { transform: translate(1px, 1px) rotate(0deg); } 20% { transform: translate(-1px, -2px) rotate(-1deg); } 40% { transform: translate(-3px, 0px) rotate(1deg); }
-    60% { transform: translate(3px, 2px) rotate(0deg); } 80% { transform: translate(1px, -1px) rotate(1deg); } 100% { transform: translate(-1px, 2px) rotate(-1deg); }
-}
+@keyframes tremor { 0% { transform: translate(1px, 1px) rotate(0deg); } 20% { transform: translate(-1px, -2px) rotate(-1deg); } 40% { transform: translate(-3px, 0px) rotate(1deg); } 60% { transform: translate(3px, 2px) rotate(0deg); } 80% { transform: translate(1px, -1px) rotate(1deg); } 100% { transform: translate(-1px, 2px) rotate(-1deg); } }
 
 body.anomalia-realidade { animation: tremor-realidade 0.15s infinite linear; }
 body.anomalia-realidade::after { content: ''; position: fixed; inset: 0; background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0px, rgba(0, 0, 0, 0.15) 2px, transparent 2px, transparent 4px); z-index: 9999; pointer-events: none; animation: scanline 8s linear infinite; }
-@keyframes tremor-realidade {
-    0%, 100% { transform: translate(1px, 1px); filter: drop-shadow(-3px 0px 0px rgba(255,0,0,0.5)) drop-shadow(3px 0px 0px rgba(0,0,255,0.5)); }
-    25% { transform: translate(-2px, -1px); filter: drop-shadow(3px 0px 0px rgba(255,0,0,0.5)) drop-shadow(-3px 0px 0px rgba(0,0,255,0.5)); }
-    50% { transform: translate(1px, 2px); filter: drop-shadow(-1px 0px 0px rgba(255,0,0,0.5)) drop-shadow(1px 0px 0px rgba(0,0,255,0.5)); }
-    75% { transform: translate(-1px, -2px); filter: drop-shadow(4px 0px 0px rgba(255,0,0,0.5)) drop-shadow(-4px 0px 0px rgba(0,0,255,0.5)); }
-}
+@keyframes tremor-realidade { 0%, 100% { transform: translate(1px, 1px); filter: drop-shadow(-3px 0px 0px rgba(255,0,0,0.5)) drop-shadow(3px 0px 0px rgba(0,0,255,0.5)); } 25% { transform: translate(-2px, -1px); filter: drop-shadow(3px 0px 0px rgba(255,0,0,0.5)) drop-shadow(-3px 0px 0px rgba(0,0,255,0.5)); } 50% { transform: translate(1px, 2px); filter: drop-shadow(-1px 0px 0px rgba(255,0,0,0.5)) drop-shadow(1px 0px 0px rgba(0,0,255,0.5)); } 75% { transform: translate(-1px, -2px); filter: drop-shadow(4px 0px 0px rgba(255,0,0,0.5)) drop-shadow(-4px 0px 0px rgba(0,0,255,0.5)); } }
 @keyframes scanline { 0% { background-position: 0 0; } 100% { background-position: 0 100vh; } }
 
 .button-secondary { background-color: transparent !important; color: #94a3b8; border: 1px solid #475569; border-radius: 0 !important; font-family: 'Cinzel', serif; letter-spacing: 1px; }
@@ -222,7 +143,6 @@ body.anomalia-realidade::after { content: ''; position: fixed; inset: 0; backgro
    ========================================= */
 .genealogy-branch { opacity: 0; animation: branch-ascend 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
 @keyframes branch-ascend { 0% { transform: translateY(30px) scale(0.9); opacity: 0; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
-
 .genealogy-center-node::after { content: ''; position: absolute; top: 100%; left: 50%; width: 2px; height: 64px; background: linear-gradient(to bottom, var(--node-color), transparent); opacity: 0.5; transform: translateX(-50%); }
 
 .fusion-card { background: linear-gradient(90deg, rgba(20,20,25,0.9) 0%, rgba(10,10,15,0.9) 100%); border-left: 3px solid #d69e9e; }
@@ -231,8 +151,10 @@ body.anomalia-realidade::after { content: ''; position: fixed; inset: 0; backgro
 .locked-card:hover { background: rgba(20, 20, 25, 0.6); border-color: #4a5568; }
 .locked-card i { text-shadow: 0 0 10px rgba(0,0,0,0.9); }
 
-.secret-btn { margin-top: 0.75rem; font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 0.3em; color: #4a5568; opacity: 0.1; transition: all 0.4s ease; cursor: pointer; background: transparent; border: none; outline: none; width: 100%; text-align: center; }
-.secret-btn:hover { opacity: 1; color: var(--rune-color, #ff4444); text-shadow: 0 0 10px var(--rune-color, #ff4444), 0 0 20px var(--rune-color, transparent); transform: scale(1.1); }
+/* BOTAO SECRETO CORRIGIDO */
+.secret-btn { margin-top: 0.75rem; font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 0.3em; color: #4a5568; opacity: 0.1; transition: all 0.4s ease; cursor: pointer; background: transparent; border: none; outline: none; width: 100%; text-align: center; position: relative; z-index: 20; }
+@keyframes secret-pulse { 0% { opacity: 0.8; text-shadow: 0 0 10px var(--rune-color); } 100% { opacity: 1; text-shadow: 0 0 25px var(--rune-color), 0 0 40px var(--rune-color); transform: scale(1.1); } }
+.secret-btn:hover { animation: secret-pulse 1s infinite alternate; color: #fff; }
 
 /* Modais Secretos e Mágicos */
 #secret-modal.active { opacity: 1; pointer-events: auto; }
@@ -265,7 +187,7 @@ body.anomalia-realidade::after { content: ''; position: fixed; inset: 0; backgro
 #fusion-modal.active #fusion-modal-content { transform: scale(1); border-color: color-mix(in srgb, var(--modal-c1) 50%, #2a3040); box-shadow: inset 0 0 100px color-mix(in srgb, var(--modal-c1) 10%, transparent), inset 0 0 100px color-mix(in srgb, var(--modal-c2) 10%, transparent), 0 0 100px rgba(0,0,0,1); }
 
 /* =========================================
-   RELÍQUIAS
+   RELÍQUIAS - ESTILOS E ANIMAÇÕES
    ========================================= */
 .relic-card { 
     background: linear-gradient(135deg, rgba(20,20,25,0.9) 0%, rgba(10,10,15,0.9) 100%); 
@@ -273,12 +195,19 @@ body.anomalia-realidade::after { content: ''; position: fixed; inset: 0; backgro
     cursor: pointer; 
     border: 1px solid #2a3040; 
     border-top: 3px solid var(--relic-color); 
+    position: relative;
+    overflow: hidden;
+}
+.relic-card::before {
+    content: ''; position: absolute; inset: 0; background: radial-gradient(circle at top, var(--relic-color) 0%, transparent 70%); opacity: 0.1; transition: opacity 0.4s;
 }
 .relic-card:hover { 
-    transform: scale(1.03) translateY(-3px); 
-    box-shadow: 0 15px 30px rgba(0,0,0,0.8), inset 0 0 20px color-mix(in srgb, var(--relic-color) 20%, transparent); 
+    transform: scale(1.05) translateY(-5px); 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 20px color-mix(in srgb, var(--relic-color) 20%, transparent); 
     border-color: var(--relic-color); 
+    z-index: 10;
 }
+.relic-card:hover::before { opacity: 0.3; }
 
 #relic-modal.active { opacity: 1; pointer-events: auto; }
-#relic-modal.active #relic-modal-content { transform: scale(1); }
+#relic-modal.active #relic-modal-content { transform: scale(1); border-color: color-mix(in srgb, var(--relic-color) 50%, #2a3040); box-shadow: inset 0 0 100px color-mix(in srgb, var(--relic-color) 10%, transparent), 0 0 100px rgba(0,0,0,1); }

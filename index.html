@@ -13,7 +13,7 @@
 </head>
 <body class="antialiased relative overflow-x-hidden">
 
-    <div class="window-controls fixed top-4 right-4 flex gap-4 z-">
+    <div class="window-controls fixed top-4 right-4 flex gap-4 z-[9999]">
         <button id="btn-minimize" class="text-slate-500 hover:text-white transition-colors duration-300">
             <i class="fas fa-minus"></i>
         </button>
@@ -22,13 +22,13 @@
         </button>
     </div>
 
-    <div id="loading-screen" class="fixed inset-0 z- bg- flex flex-col items-center justify-center transition-opacity duration-1000">
+    <div id="loading-screen" class="fixed inset-0 z-[9999] bg-[#050508] flex flex-col items-center justify-center transition-opacity duration-1000">
         <div class="text-red-900 text-8xl mb-6 animate-pulse" style="font-family: serif; text-shadow: 0 0 20px #4a1515;">⎊</div>
-        <div class="text-gray-500 tracking- text-sm uppercase animate-pulse" style="font-family: 'Cinzel', serif;">Despertando o Tomo...</div>
+        <div class="text-gray-500 tracking-[0.8em] text-sm uppercase animate-pulse" style="font-family: 'Cinzel', serif;">Despertando o Tomo...</div>
     </div>
 
-    <div id="qoldjornesz-bg" class="fixed inset-0 z- pointer-events-none overflow-hidden opacity-20"></div>
-    <div id="ambient-glow" class="fixed inset-0 z- pointer-events-none transition-all duration-1000"></div>
+    <div id="qoldjornesz-bg" class="fixed inset-0 z-[-2] pointer-events-none overflow-hidden opacity-20"></div>
+    <div id="ambient-glow" class="fixed inset-0 z-[-1] pointer-events-none transition-all duration-1000"></div>
 
     <div id="view-altar" class="view-section active">
         <div class="container mx-auto p-4 md:p-8">
@@ -38,23 +38,24 @@
                 <p class="text-subheader mt-2 text-lg mb-6"></p>
                 
                 <div class="flex justify-center flex-wrap gap-4 md:gap-6">
-                    <button id="btn-open-bestiary" class="text- font-cinzel text-sm border border-/30 px-6 py-2 rounded-sm hover:bg- hover:text-black transition shadow-" style="-webkit-app-region: no-drag;">
+                    <button id="btn-open-bestiary" class="text-[#d69e9e] font-cinzel text-sm border border-[#d69e9e]/30 px-6 py-2 rounded-sm hover:bg-[#d69e9e] hover:text-black transition shadow-[0_0_15px_rgba(214,158,158,0.1)]" style="-webkit-app-region: no-drag;">
                         <i class="fas fa-dragon mr-2"></i> Bestiário
                     </button>
-                    <button id="btn-open-nations" class="text- font-cinzel text-sm border border-/30 px-6 py-2 rounded-sm hover:bg- hover:text-black transition shadow-" style="-webkit-app-region: no-drag;">
+                    <button id="btn-open-nations" class="text-[#d69e9e] font-cinzel text-sm border border-[#d69e9e]/30 px-6 py-2 rounded-sm hover:bg-[#d69e9e] hover:text-black transition shadow-[0_0_15px_rgba(214,158,158,0.1)]" style="-webkit-app-region: no-drag;">
                         <i class="fas fa-globe mr-2"></i> Nações de Gionyyl
                     </button>
-                    <!-- NOVO BOTÃO DE RELÍQUIAS AQUI -->
-                    <button id="btn-open-relics" class="text- font-cinzel text-sm border border-/30 px-6 py-2 rounded-sm hover:bg- hover:text-black transition shadow-" style="-webkit-app-region: no-drag;">
+                    
+                    <button id="btn-open-relics" class="text-[#d69e9e] font-cinzel text-sm border border-[#d69e9e]/30 px-6 py-2 rounded-sm hover:bg-[#d69e9e] hover:text-black transition shadow-[0_0_15px_rgba(214,158,158,0.1)]" style="-webkit-app-region: no-drag;">
                         <i class="fas fa-ring mr-2"></i> Relíquias
                     </button>
-                    <button id="btn-open-arquivo" class="text- font-cinzel text-sm border border-/30 px-6 py-2 rounded-sm hover:bg- hover:text-black transition shadow-" style="-webkit-app-region: no-drag;">
+
+                    <button id="btn-open-arquivo" class="text-[#d69e9e] font-cinzel text-sm border border-[#d69e9e]/30 px-6 py-2 rounded-sm hover:bg-[#d69e9e] hover:text-black transition shadow-[0_0_15px_rgba(214,158,158,0.1)]" style="-webkit-app-region: no-drag;">
                         <i class="fas fa-book mr-2"></i> Arquivo de Fusões
                     </button>
-                    <button id="btn-open-genealogy" class="text- font-cinzel text-sm border border-/30 px-6 py-2 rounded-sm hover:bg- hover:text-black transition shadow-" style="-webkit-app-region: no-drag;">
+                    <button id="btn-open-genealogy" class="text-[#d69e9e] font-cinzel text-sm border border-[#d69e9e]/30 px-6 py-2 rounded-sm hover:bg-[#d69e9e] hover:text-black transition shadow-[0_0_15px_rgba(214,158,158,0.1)]" style="-webkit-app-region: no-drag;">
                         <i class="fas fa-project-diagram mr-2"></i> Árvore de Genealogia
                     </button>
-                    <button id="btn-open-typings" class="text- font-cinzel text-sm border border-/30 px-6 py-2 rounded-sm hover:bg- hover:text-black transition shadow-" style="-webkit-app-region: no-drag;">
+                    <button id="btn-open-typings" class="text-[#d69e9e] font-cinzel text-sm border border-[#d69e9e]/30 px-6 py-2 rounded-sm hover:bg-[#d69e9e] hover:text-black transition shadow-[0_0_15px_rgba(214,158,158,0.1)]" style="-webkit-app-region: no-drag;">
                         <i class="fas fa-scroll mr-2"></i> Arquivo de Tipagens
                     </button>
                 </div>
@@ -68,7 +69,7 @@
                             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
                         </div>
                         
-                        <div class="flex flex-col items-center order-first md:order-none space-y-6 w-full max-w- mx-auto">
+                        <div class="flex flex-col items-center order-first md:order-none space-y-6 w-full max-w-[600px] mx-auto">
                             <div id="result-card-display" class="w-full">
                                 <div id="magic-circle"></div>
                                 <span id="placeholder-text" class="texto-aguardando">Aguardando Invocação...</span>
@@ -96,13 +97,12 @@
     </div> 
 
 
-    <!-- NOVA ABA: RELÍQUIAS -->
     <div id="view-relics" class="view-section hidden pt-24 px-8 pb-12 max-w-7xl mx-auto relative z-20">
-        <div class="flex justify-between items-center mb-12 border-b border- pb-6">
-            <button class="btn-back-altar text-slate-400 hover:text-white font-cinzel tracking-widest transition px-6 py-2 border border-transparent hover:border-slate-700 bg-/80 rounded">
+        <div class="flex justify-between items-center mb-12 border-b border-[#2a3040] pb-6">
+            <button class="btn-back-altar text-slate-400 hover:text-white font-cinzel tracking-widest transition px-6 py-2 border border-transparent hover:border-slate-700 bg-[#0a0a0f]/80 rounded">
                 <i class="fas fa-arrow-left mr-2"></i> Retornar ao Altar
             </button>
-            <h2 class="text-4xl font-cinzel text- tracking-widest text-center" style="text-shadow: 0 0 15px rgba(214,158,158,0.3);">
+            <h2 class="text-4xl font-cinzel text-[#d69e9e] tracking-widest text-center" style="text-shadow: 0 0 15px rgba(214,158,158,0.3);">
                 Relíquias Ancestrais
             </h2>
             <div class="w-40 text-right text-slate-600 font-serif text-sm">
@@ -117,11 +117,11 @@
 
 
     <div id="view-complex" class="view-section hidden pt-24 px-8 pb-12 max-w-7xl mx-auto relative z-20">
-        <div class="flex justify-between items-center mb-12 border-b border- pb-6">
-            <button class="btn-back-altar text-slate-400 hover:text-white font-cinzel tracking-widest transition px-6 py-2 border border-transparent hover:border-slate-700 bg-/80 rounded">
+        <div class="flex justify-between items-center mb-12 border-b border-[#2a3040] pb-6">
+            <button class="btn-back-altar text-slate-400 hover:text-white font-cinzel tracking-widest transition px-6 py-2 border border-transparent hover:border-slate-700 bg-[#0a0a0f]/80 rounded">
                 <i class="fas fa-arrow-left mr-2"></i> Retornar ao Altar
             </button>
-            <h2 class="text-4xl font-cinzel text- tracking-widest text-center" style="text-shadow: 0 0 15px rgba(214,158,158,0.3);">
+            <h2 class="text-4xl font-cinzel text-[#d69e9e] tracking-widest text-center" style="text-shadow: 0 0 15px rgba(214,158,158,0.3);">
                 O Índice dos Sábios
             </h2>
             <div class="w-40 text-right text-slate-600 font-serif text-sm">
@@ -134,11 +134,11 @@
 
 
     <div id="view-genealogy" class="view-section hidden pt-24 px-8 pb-12 max-w-7xl mx-auto relative z-20">
-        <div class="flex justify-between items-center mb-12 border-b border- pb-6">
-            <button class="btn-back-altar text-slate-400 hover:text-white font-cinzel tracking-widest transition px-6 py-2 border border-transparent hover:border-slate-700 bg-/80 rounded">
+        <div class="flex justify-between items-center mb-12 border-b border-[#2a3040] pb-6">
+            <button class="btn-back-altar text-slate-400 hover:text-white font-cinzel tracking-widest transition px-6 py-2 border border-transparent hover:border-slate-700 bg-[#0a0a0f]/80 rounded">
                 <i class="fas fa-arrow-left mr-2"></i> Retornar ao Altar
             </button>
-            <h2 class="text-4xl font-cinzel text- tracking-widest text-center" style="text-shadow: 0 0 15px rgba(214,158,158,0.3);">
+            <h2 class="text-4xl font-cinzel text-[#d69e9e] tracking-widest text-center" style="text-shadow: 0 0 15px rgba(214,158,158,0.3);">
                 Genealogia Elemental
             </h2>
             <div class="w-40 text-right text-slate-600 font-serif text-sm"></div>
@@ -147,7 +147,7 @@
         <div class="flex flex-col items-center">
             <p class="text-slate-400 mb-10 text-center max-w-2xl font-serif">Selecione uma Matriz Primordial para visualizar todas as suas ramificações e descendências conhecidas no universo de Nahvvatzal.</p>
             <div id="genealogy-selector" class="flex flex-wrap justify-center gap-4 mb-16 relative z-30"></div>
-            <div id="genealogy-tree" class="w-full bg-gradient-to-b from-/80 to-/80 border border-slate-800 rounded-lg p-8 md:p-16 min-h- flex items-center justify-center relative overflow-hidden shadow-inner">
+            <div id="genealogy-tree" class="w-full bg-gradient-to-b from-[#0a0a0f]/80 to-[#050508]/80 border border-slate-800 rounded-lg p-8 md:p-16 min-h-[400px] flex items-center justify-center relative overflow-hidden shadow-inner">
                 <span class="text-slate-600 italic font-serif">Aguardando sintonização da matriz primordial...</span>
             </div>
         </div>
@@ -155,11 +155,11 @@
 
 
     <div id="view-typings" class="view-section hidden pt-24 px-8 pb-12 max-w-7xl mx-auto relative z-20">
-        <div class="flex justify-between items-center mb-12 border-b border- pb-6">
-            <button class="btn-back-altar text-slate-400 hover:text-white font-cinzel tracking-widest transition px-6 py-2 border border-transparent hover:border-slate-700 bg-/80 rounded">
+        <div class="flex justify-between items-center mb-12 border-b border-[#2a3040] pb-6">
+            <button class="btn-back-altar text-slate-400 hover:text-white font-cinzel tracking-widest transition px-6 py-2 border border-transparent hover:border-slate-700 bg-[#0a0a0f]/80 rounded">
                 <i class="fas fa-arrow-left mr-2"></i> Retornar ao Altar
             </button>
-            <h2 class="text-4xl font-cinzel text- tracking-widest text-center" style="text-shadow: 0 0 15px rgba(214,158,158,0.3);">
+            <h2 class="text-4xl font-cinzel text-[#d69e9e] tracking-widest text-center" style="text-shadow: 0 0 15px rgba(214,158,158,0.3);">
                 Arquivo de Tipagens
             </h2>
             <div class="w-40 text-right text-slate-600 font-serif text-sm"></div>
@@ -167,13 +167,13 @@
         
         <div class="space-y-20">
             <div>
-                <h3 class="text-3xl font-bold text-center text- font-cinzel mb-8">Grimório das Runas Base</h3>
+                <h3 class="text-3xl font-bold text-center text-[#cbd5e1] font-cinzel mb-8">Grimório das Runas Base</h3>
                 <div id="grimoire-grid" class="grid grid-cols-1 xl:grid-cols-2 gap-8"></div>
             </div>
 
             <div class="border-t border-slate-800 pt-16">
-                <h3 class="text-3xl font-bold text-center text- font-cinzel mb-8">Sistema de Tipagens Mágicas</h3>
-                <div id="acquisition-narrative-display" class="my-6 p-4 bg-/80 border border-slate-700 text-content-light hidden min-h- rounded shadow-lg">
+                <h3 class="text-3xl font-bold text-center text-[#cbd5e1] font-cinzel mb-8">Sistema de Tipagens Mágicas</h3>
+                <div id="acquisition-narrative-display" class="my-6 p-4 bg-[#0a0a0f]/80 border border-slate-700 text-content-light hidden min-h-[60px] rounded shadow-lg">
                     <p id="narrative-text" class="italic"></p>
                 </div>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -192,11 +192,11 @@
 
 
     <div id="view-bestiary" class="view-section hidden pt-24 px-8 pb-12 max-w-7xl mx-auto relative z-20">
-        <div class="flex justify-between items-center mb-12 border-b border- pb-6">
-            <button class="btn-back-altar text-slate-400 hover:text-white font-cinzel tracking-widest transition px-6 py-2 border border-transparent hover:border-slate-700 bg-/80 rounded">
+        <div class="flex justify-between items-center mb-12 border-b border-[#2a3040] pb-6">
+            <button class="btn-back-altar text-slate-400 hover:text-white font-cinzel tracking-widest transition px-6 py-2 border border-transparent hover:border-slate-700 bg-[#0a0a0f]/80 rounded">
                 <i class="fas fa-arrow-left mr-2"></i> Retornar ao Altar
             </button>
-            <h2 class="text-4xl font-cinzel text- tracking-widest text-center" style="text-shadow: 0 0 15px rgba(214,158,158,0.3);">
+            <h2 class="text-4xl font-cinzel text-[#d69e9e] tracking-widest text-center" style="text-shadow: 0 0 15px rgba(214,158,158,0.3);">
                 Bestiário de Gionyyl
             </h2>
             <div class="w-40 text-right text-slate-600 font-serif text-sm"></div>
@@ -208,11 +208,11 @@
 
 
     <div id="view-nations" class="view-section hidden pt-24 px-8 pb-12 max-w-7xl mx-auto relative z-20">
-        <div class="flex justify-between items-center mb-12 border-b border- pb-6">
-            <button class="btn-back-altar text-slate-400 hover:text-white font-cinzel tracking-widest transition px-6 py-2 border border-transparent hover:border-slate-700 bg-/80 rounded">
+        <div class="flex justify-between items-center mb-12 border-b border-[#2a3040] pb-6">
+            <button class="btn-back-altar text-slate-400 hover:text-white font-cinzel tracking-widest transition px-6 py-2 border border-transparent hover:border-slate-700 bg-[#0a0a0f]/80 rounded">
                 <i class="fas fa-arrow-left mr-2"></i> Retornar ao Altar
             </button>
-            <h2 class="text-4xl font-cinzel text- tracking-widest text-center" style="text-shadow: 0 0 15px rgba(214,158,158,0.3);">
+            <h2 class="text-4xl font-cinzel text-[#d69e9e] tracking-widest text-center" style="text-shadow: 0 0 15px rgba(214,158,158,0.3);">
                 Domínios de Gionyyl
             </h2>
             <div class="w-40 text-right text-slate-600 font-serif text-sm"></div>
@@ -223,155 +223,207 @@
     </div>
 
 
-    <!-- MODAIS E POPUPS -->
-
-    <!-- Modal das Relíquias (NOVO) -->
-    <div id="relic-modal" class="fixed inset-0 z- flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
-        <div id="relic-modal-bg" class="absolute inset-0 bg-black/90 backdrop-blur-md"></div>
+    <div id="relic-modal" class="fixed inset-0 z-[9999] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
+        <div id="relic-modal-bg" class="absolute inset-0 bg-black/95 backdrop-blur-xl"></div>
         
-        <div id="relic-modal-content" class="relative bg- border border- p-8 md:p-12 max-w-3xl w-full mx-4 max-h- overflow-y-auto rounded-sm transform scale-95 transition-all duration-500 shadow- custom-scrollbar">
+        <div id="relic-modal-content" class="relative bg-[#050508] border border-[#2a3040] p-10 md:p-16 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto custom-scrollbar rounded-sm transform scale-95 transition-all duration-700 shadow-[0_0_80px_rgba(0,0,0,1)]">
+            <div class="absolute inset-0 opacity-20 pointer-events-none mix-blend-screen" style="background: radial-gradient(circle at center, var(--relic-color) 0%, transparent 60%);"></div>
+            <div class="absolute top-[10%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-dashed border-white/10 rounded-full pointer-events-none animate-[giro-arcano_20s_linear_infinite]"></div>
             
-            <button id="close-relic-modal" class="absolute top-6 right-6 text-slate-500 hover:text-white transition-colors duration-300 z-50">
-                <i class="fas fa-times text-2xl"></i>
-            </button>
+            <button id="close-relic-modal" class="absolute top-6 right-6 text-slate-500 hover:text-white transition-colors duration-300 z-50"><i class="fas fa-times text-3xl"></i></button>
 
-            <div class="flex items-center justify-center gap-6 mb-8">
-                <div id="relic-modal-icon-container" class="w-24 h-24 rounded-full border-2 flex items-center justify-center bg- shadow-lg">
-                    <i id="relic-modal-icon" class="text-4xl"></i>
-                    <img id="relic-modal-image" src="" alt="Relíquia" class="w-full h-full object-cover rounded-full hidden opacity-80 mix-blend-lighten">
+            <div class="flex flex-col items-center justify-center text-center relative z-10">
+                <div id="relic-modal-icon-container" class="w-24 h-24 rounded-full border-2 flex items-center justify-center bg-[#050508] shadow-lg mb-6 relative overflow-hidden">
+                    <i id="relic-modal-icon" class="text-4xl relative z-10"></i>
+                    <img id="relic-modal-image" src="" alt="Relíquia" class="w-full h-full object-cover hidden opacity-80 mix-blend-lighten absolute inset-0">
+                    <div class="absolute inset-0 opacity-30" style="background: radial-gradient(circle, var(--relic-color) 0%, transparent 70%);"></div>
                 </div>
-                <div>
-                    <h2 id="relic-modal-title" class="text-3xl md:text-4xl font-cinzel tracking-widest uppercase mb-2"></h2>
-                    <span id="relic-modal-theme" class="text-xs font-bold uppercase tracking-widest text-slate-400 border border-slate-700 px-3 py-1 rounded bg-black/50"></span>
-                </div>
+                
+                <h4 id="relic-modal-theme" class="text-xs md:text-sm font-bold uppercase tracking-[0.4em] text-slate-300 mb-4 border border-white/10 bg-black/60 px-6 py-2 rounded-sm shadow-[0_0_15px_rgba(0,0,0,0.8)]"></h4>
+                <h2 id="relic-modal-title" class="text-4xl md:text-6xl font-cinzel text-white tracking-widest mb-8 uppercase" style="text-shadow: 0 0 30px var(--relic-color);"></h2>
+                
+                <div class="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-8"></div>
+                
+                <p id="relic-modal-lore" class="text-xl md:text-2xl text-[#cbd5e0] font-serif italic leading-relaxed max-w-2xl mb-12" style="text-shadow: 0 2px 4px rgba(0,0,0,0.8);"></p>
             </div>
             
-            <div class="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-8"></div>
-            
-            <p id="relic-modal-lore" class="text-slate-300 font-serif italic text-center mb-10 leading-relaxed px-4"></p>
-            
-            <h3 class="font-cinzel text-lg text-slate-400 uppercase tracking-widest mb-6 border-b border-slate-800 pb-2">Bônus de Conjunto</h3>
-            
-            <div class="space-y-4">
-                <div class="bg-/80 border border-slate-700/50 p-4 rounded flex gap-4 items-start">
-                    <span id="relic-color-2" class="font-cinzel text-xl font-bold flex-shrink-0">2 Peças</span>
-                    <p id="relic-modal-2pc" class="text-slate-300 font-serif text-sm mt-1"></p>
+            <div class="w-full max-w-3xl mx-auto z-10 relative">
+                <h3 class="font-cinzel text-lg text-slate-400 uppercase tracking-widest mb-6 border-b border-slate-800 pb-2 text-center">Ressonância do Conjunto</h3>
+                <div class="space-y-6">
+                    <div class="bg-[#0a0a0f]/80 border border-slate-700/50 p-5 rounded-sm flex gap-6 items-center shadow-inner hover:border-slate-500 transition-colors" style="border-left: 3px solid var(--relic-color);">
+                        <span class="font-cinzel text-2xl font-bold flex-shrink-0" style="color: var(--relic-color); text-shadow: 0 0 10px var(--relic-color);">2 Peças</span>
+                        <p id="relic-modal-2pc" class="text-slate-300 font-serif text-sm leading-relaxed"></p>
+                    </div>
+                    <div class="bg-[#0a0a0f]/80 border border-slate-700/50 p-5 rounded-sm flex gap-6 items-center shadow-inner hover:border-slate-500 transition-colors" style="border-left: 3px solid var(--relic-color);">
+                        <span class="font-cinzel text-2xl font-bold flex-shrink-0" style="color: var(--relic-color); text-shadow: 0 0 10px var(--relic-color);">4 Peças</span>
+                        <p id="relic-modal-4pc" class="text-slate-300 font-serif text-sm leading-relaxed"></p>
+                    </div>
+                    <div class="bg-[#050508] border border-slate-700 p-5 rounded-sm flex gap-6 items-center shadow-[0_0_20px_rgba(0,0,0,0.5)] hover:border-white transition-colors relative overflow-hidden" style="border-left: 4px solid var(--relic-color);">
+                        <div class="absolute inset-0 opacity-5 pointer-events-none" style="background: linear-gradient(90deg, var(--relic-color), transparent);"></div>
+                        <span class="font-cinzel text-2xl font-bold flex-shrink-0" style="color: var(--relic-color); text-shadow: 0 0 15px var(--relic-color);">6 Peças</span>
+                        <p id="relic-modal-6pc" class="text-white font-serif text-sm leading-relaxed font-medium"></p>
+                    </div>
                 </div>
-                <div class="bg-/80 border border-slate-700/50 p-4 rounded flex gap-4 items-start">
-                    <span id="relic-color-4" class="font-cinzel text-xl font-bold flex-shrink-0">4 Peças</span>
-                    <p id="relic-modal-4pc" class="text-slate-300 font-serif text-sm mt-1"></p>
-                </div>
-                <div class="bg-/80 border border-slate-700/50 p-4 rounded flex gap-4 items-start shadow-inner">
-                    <span id="relic-color-6" class="font-cinzel text-xl font-bold flex-shrink-0">6 Peças</span>
-                    <p id="relic-modal-6pc" class="text-slate-300 font-serif text-sm mt-1"></p>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-
-
-    <div id="nation-modal" class="fixed inset-0 z- flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
-        <div id="nation-modal-bg" class="absolute inset-0 bg-black/90 backdrop-blur-md"></div>
-        <div id="nation-modal-content" class="relative bg- border border- p-8 md:p-12 max-w-4xl w-full mx-4 max-h- overflow-y-auto rounded-sm transform scale-95 transition-all duration-500 shadow- custom-scrollbar">
-            <button id="close-nation-modal" class="absolute top-6 right-6 text-slate-500 hover:text- transition-colors duration-300 z-50"><i class="fas fa-times text-2xl"></i></button>
-            <h2 id="nation-modal-name" class="text-4xl md:text-5xl font-cinzel text-white tracking-widest mb-6 text-center uppercase" style="text-shadow: 0 0 20px rgba(255,255,255,0.2);"></h2>
-            <div class="w-full h-64 md:h-80 border border-slate-700 bg- mb-8 relative flex items-center justify-center overflow-hidden rounded-sm shadow-inner group">
-                <img id="nation-modal-image" src="" alt="Paisagem da Nação" class="w-full h-full object-cover opacity-80 mix-blend-screen hidden transition-transform duration-700 group-hover:scale-105">
-                <i id="nation-modal-icon" class="fas fa-map-marked-alt text-6xl text-slate-800 absolute transition-transform duration-500 group-hover:scale-110"></i>
-                <div class="absolute inset-0 bg-gradient-to-t from- via-transparent to-transparent opacity-90"></div>
-                <div class="absolute bottom-4 left-4 border border-/50 bg-black/60 px-4 py-2 rounded-sm backdrop-blur-sm">
-                    <span class="font-cinzel text-xs text-slate-400 uppercase tracking-widest block mb-1">Matriz Predominante</span>
-                    <span id="nation-modal-element" class="text- font-bold tracking-widest uppercase"></span>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 border-y border-slate-800 py-6">
-                <div class="bg- p-4 rounded border border-slate-800/50">
-                    <span class="font-cinzel text-slate-500 uppercase tracking-wider text- block mb-2"><i class="fas fa-landmark mr-1"></i> Forma de Governo</span>
-                    <p id="nation-modal-gov" class="text-slate-300 font-serif text-sm"></p>
-                </div>
-                <div class="bg- p-4 rounded border border-slate-800/50">
-                    <span class="font-cinzel text-slate-500 uppercase tracking-wider text- block mb-2"><i class="fas fa-cloud-sun mr-1"></i> Clima & Geografia</span>
-                    <p id="nation-modal-climate" class="text-slate-300 font-serif text-sm"></p>
-                </div>
-                <div class="bg- p-4 rounded border border-slate-800/50">
-                    <span class="font-cinzel text-slate-500 uppercase tracking-wider text- block mb-2"><i class="fas fa-users mr-1"></i> Cultura</span>
-                    <p id="nation-modal-culture" class="text-slate-300 font-serif text-sm"></p>
-                </div>
-            </div>
-            <div>
-                <span class="font-cinzel text- uppercase tracking-wider text- block mb-3">Registos Históricos e Políticos</span>
-                <p id="nation-modal-desc" class="text-slate-300 font-serif text-sm leading-relaxed text-justify"></p>
             </div>
         </div>
     </div>
 
 
-    <div id="bestiary-modal" class="fixed inset-0 z- flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
-        <div id="bestiary-modal-bg" class="absolute inset-0 bg-black/90 backdrop-blur-md"></div>
-        <div id="bestiary-modal-content" class="relative bg- border border- p-8 md:p-12 max-w-4xl w-full mx-4 max-h- overflow-y-auto rounded-sm transform scale-95 transition-all duration-500 shadow- custom-scrollbar">
-            <button id="close-bestiary-modal" class="absolute top-6 right-6 text-slate-500 hover:text-red-600 transition-colors duration-300 z-50"><i class="fas fa-times text-2xl"></i></button>
-            <h2 id="bestiary-modal-title" class="text-4xl md:text-5xl font-cinzel text- tracking-widest mb-6 text-center uppercase" style="text-shadow: 0 0 15px rgba(214,158,158,0.3);"></h2>
-            <div class="w-full md:w-2/3 lg:w-1/2 mx-auto aspect-video border border-slate-700 bg- mb-8 relative flex items-center justify-center overflow-hidden rounded-sm shadow-inner group">
-                <img id="bestiary-modal-image" src="" alt="Criatura" class="w-full h-full object-cover opacity-70 mix-blend-lighten hidden">
-                <i id="bestiary-modal-icon" class="fas fa-spider text-6xl text-slate-800 absolute transition-transform duration-500 group-hover:scale-110"></i>
-                <div class="absolute inset-0 bg-gradient-to-t from- via-transparent to-transparent opacity-80"></div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 border-y border-slate-800 py-6">
-                <div><span class="font-cinzel text-content-dim uppercase tracking-wider text- block mb-1">Habitat</span><p id="bestiary-modal-habitat" class="text-slate-300 font-serif text-sm"></p></div>
-                <div><span class="font-cinzel text-content-dim uppercase tracking-wider text- block mb-1">Perspectiva de Vida</span><p id="bestiary-modal-life" class="text-slate-300 font-serif text-sm"></p></div>
-                <div><span class="font-cinzel text-content-dim uppercase tracking-wider text- block mb-1">Nível de Reprodução</span><p id="bestiary-modal-repro-rate" class="text-slate-300 font-serif text-sm"></p></div>
-                <div><span class="font-cinzel text-content-dim uppercase tracking-wider text- block mb-1">Meio de Reprodução</span><p id="bestiary-modal-repro-method" class="text-slate-300 font-serif text-sm"></p></div>
-                <div class="bg-red-900/10 p-3 rounded border border-red-900/30"><span class="font-cinzel text-red-500 uppercase tracking-wider text- block mb-1 flex items-center gap-1"><i class="fas fa-bullseye"></i> Vulnerabilidade</span><p id="bestiary-modal-vuln" class="text-red-400 font-serif text-sm"></p></div>
-                <div class="bg-slate-800/30 p-3 rounded border border-slate-700/50"><span class="font-cinzel text-slate-400 uppercase tracking-wider text- block mb-1 flex items-center gap-1"><i class="fas fa-shield-alt"></i> Resistência</span><p id="bestiary-modal-resist" class="text-slate-300 font-serif text-sm"></p></div>
-            </div>
-            <div class="mb-8 border-l-2 border- p-4 bg-/5 rounded-r-sm"><span class="font-cinzel text- uppercase tracking-wider text- block mb-2 flex items-center gap-2"><i class="fas fa-star"></i> Peculiaridade Biológica</span><p id="bestiary-modal-peculiarity" class="text-slate-300 font-serif text-sm italic leading-relaxed"></p></div>
-            <div><span class="font-cinzel text-content-dim uppercase tracking-wider text- block mb-2">Registos da Ordem</span><p id="bestiary-modal-desc" class="text-slate-300 font-serif text-sm leading-relaxed text-justify"></p></div>
-        </div>
-    </div>
-
-
-    <div id="fusion-modal" class="fixed inset-0 z- flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
-        <div id="fusion-modal-bg" class="absolute inset-0 bg-black/95 backdrop-blur-xl"></div>
-        <div id="fusion-modal-content" class="relative bg- border border- p-10 md:p-16 max-w-5xl w-full mx-4 min-h- max-h- overflow-y-auto custom-scrollbar rounded-sm transform scale-95 transition-all duration-700 flex flex-col items-center text-center shadow-">
-            <div class="absolute inset-0 opacity-20 pointer-events-none mix-blend-screen" id="fusion-modal-glow" style="background: radial-gradient(circle at top left, var(--modal-c1) 0%, transparent 60%), radial-gradient(circle at bottom right, var(--modal-c2) 0%, transparent 60%);"></div>
-            <div class="absolute top- left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-white/5 rounded-full pointer-events-none animate-"></div>
-            <div class="absolute top- left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-dashed border-white/10 rounded-full pointer-events-none animate-"></div>
-            
-            <button id="close-fusion-modal" class="absolute top-6 right-6 text-slate-500 hover:text-white transition-colors duration-300 z-50"><i class="fas fa-times text-3xl"></i></button>
-            <h4 id="fusion-modal-parents" class="text-xs md:text-sm font-bold uppercase tracking- text-slate-300 mb-6 z-10 border border-white/10 bg-black/60 px-6 py-2 rounded-sm shadow- mt-4"></h4>
-            <h2 id="fusion-modal-title" class="text-5xl md:text-7xl font-cinzel text-white tracking-widest mb-10 z-10 uppercase" style="text-shadow: 0 0 30px var(--modal-c1), 0 0 60px var(--modal-c2);"></h2>
-            <div class="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-10 z-10"></div>
-            <p id="fusion-modal-desc-content" class="text-xl md:text-2xl text- font-serif leading-relaxed max-w-3xl z-10 mb-10" style="text-shadow: 0 2px 4px rgba(0,0,0,0.8);"></p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-3xl z-10 border-t border-slate-800 pt-10">
-                <div class="text-left"><span class="font-cinzel text-content-dim uppercase tracking-wider text-xs block mb-3">Tipo Mágico</span><p id="fusion-modal-type-content" class="text-white font-serif text-sm border-l-2 pl-3" style="border-color: var(--modal-c1)"></p></div>
-                <div class="text-left"><span class="font-cinzel text-content-dim uppercase tracking-wider text-xs block mb-3">Nível de Poder e Utilidade</span><p id="fusion-modal-power-content" class="text-white font-serif text-sm border-l-2 pl-3" style="border-color: var(--modal-c2)"></p></div>
-            </div>
-            <div class="w-full max-w-3xl z-10 border-t border-slate-800 pt-6 mt-8 flex flex-col">
-                <span class="font-cinzel text-content-dim uppercase tracking-wider text-xs block mb-3 text-left">Anotações do Alquimista</span>
-                <textarea id="fusion-notes" class="w-full bg-black/50 border border-slate-700 rounded p-4 text-slate-300 font-serif text-sm focus:outline-none focus:border- transition-colors resize-none h-32 custom-scrollbar" placeholder="Escreva as suas observações e resultados de testes com esta essência..."></textarea>
-                <div class="flex justify-end items-center gap-4 mt-3">
-                    <span id="save-feedback" class="text-green-500 text-xs italic opacity-0 transition-opacity">Anotações salvas na memória da pedra!</span>
-                    <button id="save-notes-btn" class="px-6 py-2 bg- text- border border-/30 rounded text-xs font-cinzel tracking-widest hover:bg- hover:text-black transition-colors"><i class="fas fa-save mr-2"></i> Gravar nas Páginas</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="secret-modal" class="fixed inset-0 z- flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
+    <div id="secret-modal" class="fixed inset-0 z-[9999] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
         <div id="secret-modal-bg" class="absolute inset-0 bg-black/80 backdrop-blur-md"></div>
-        <div id="secret-modal-content" class="relative bg- border border- p-8 max-w-2xl w-full mx-4 rounded-sm shadow- transform scale-95 transition-transform duration-500 overflow-hidden">
+        <div id="secret-modal-content" class="relative bg-[#050508] border border-[#2a3040] p-8 max-w-2xl w-full mx-4 rounded-sm shadow-[0_0_50px_rgba(0,0,0,1)] transform scale-95 transition-transform duration-500 overflow-hidden">
             <button id="close-secret-modal" class="absolute top-4 right-4 text-slate-500 hover:text-red-600 transition-colors duration-300 z-50"><i class="fas fa-times text-xl"></i></button>
             <h3 id="secret-modal-title" class="text-2xl font-cinzel text-red-900 mb-6 tracking-widest text-center" style="text-shadow: 0 0 10px rgba(255,0,0,0.2);"></h3>
-            <div id="secret-modal-body" class="text-slate-400 font-serif leading-relaxed space-y-4 text-sm min-h-">
+            <div id="secret-modal-body" class="text-slate-400 font-serif leading-relaxed space-y-4 text-sm min-h-[150px]">
                 <p id="secret-modal-subtitle" class="italic text-center opacity-70"></p>
                 <p id="secret-modal-text" class="mt-4"></p>
             </div>
-            <div id="creepy-whispers-container" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
+        </div>
+    </div>
+
+    <div id="fusion-modal" class="fixed inset-0 z-[9999] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
+        <div id="fusion-modal-bg" class="absolute inset-0 bg-black/95 backdrop-blur-xl"></div>
+        <div id="fusion-modal-content" class="relative bg-[#050508] border border-[#2a3040] p-10 md:p-16 max-w-5xl w-full mx-4 min-h-[70vh] max-h-[90vh] overflow-y-auto custom-scrollbar rounded-sm transform scale-95 transition-all duration-700 flex flex-col items-center text-center shadow-[0_0_80px_rgba(0,0,0,1)]">
+            <div class="absolute inset-0 opacity-20 pointer-events-none mix-blend-screen" id="fusion-modal-glow" style="background: radial-gradient(circle at top left, var(--modal-c1) 0%, transparent 60%), radial-gradient(circle at bottom right, var(--modal-c2) 0%, transparent 60%);"></div>
+            <div class="absolute top-[20%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-white/5 rounded-full pointer-events-none animate-[giro-arcano_20s_linear_infinite]"></div>
+            <div class="absolute top-[20%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-dashed border-white/10 rounded-full pointer-events-none animate-[giro-arcano-reverso_15s_linear_infinite]"></div>
+            
+            <button id="close-fusion-modal" class="absolute top-6 right-6 text-slate-500 hover:text-white transition-colors duration-300 z-50"><i class="fas fa-times text-3xl"></i></button>
+            
+            <h4 id="fusion-modal-parents" class="text-xs md:text-sm font-bold uppercase tracking-[0.4em] text-slate-300 mb-6 z-10 border border-white/10 bg-black/60 px-6 py-2 rounded-sm shadow-[0_0_15px_rgba(0,0,0,0.8)] mt-4"></h4>
+            <h2 id="fusion-modal-title" class="text-5xl md:text-7xl font-cinzel text-white tracking-widest mb-10 z-10 uppercase" style="text-shadow: 0 0 30px var(--modal-c1), 0 0 60px var(--modal-c2);"></h2>
+            <div class="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-10 z-10"></div>
+            
+            <p id="fusion-modal-desc-content" class="text-xl md:text-2xl text-[#cbd5e0] font-serif leading-relaxed max-w-3xl z-10 mb-10" style="text-shadow: 0 2px 4px rgba(0,0,0,0.8);"></p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-3xl z-10 border-t border-slate-800 pt-10">
+                <div class="text-left">
+                    <span class="font-cinzel text-content-dim uppercase tracking-wider text-xs block mb-3">Tipo Mágico</span>
+                    <p id="fusion-modal-type-content" class="text-white font-serif text-sm border-l-2 pl-3" style="border-color: var(--modal-c1)"></p>
+                </div>
+                <div class="text-left">
+                    <span class="font-cinzel text-content-dim uppercase tracking-wider text-xs block mb-3">Nível de Poder e Utilidade</span>
+                    <p id="fusion-modal-power-content" class="text-white font-serif text-sm border-l-2 pl-3" style="border-color: var(--modal-c2)"></p>
+                </div>
+            </div>
+
+            <div class="w-full max-w-3xl z-10 border-t border-slate-800 pt-6 mt-8 flex flex-col">
+                <span class="font-cinzel text-content-dim uppercase tracking-wider text-xs block mb-3 text-left">Anotações do Alquimista</span>
+                <textarea id="fusion-notes" class="w-full bg-black/50 border border-slate-700 rounded p-4 text-slate-300 font-serif text-sm focus:outline-none focus:border-[#d69e9e] transition-colors resize-none h-32 custom-scrollbar" placeholder="Escreva as suas observações e resultados de testes com esta essência..."></textarea>
+                
+                <div class="flex justify-end items-center gap-4 mt-3">
+                    <span id="save-feedback" class="text-green-500 text-xs italic opacity-0 transition-opacity">Anotações salvas na memória da pedra!</span>
+                    <button id="save-notes-btn" class="px-6 py-2 bg-[#1a1a24] text-[#d69e9e] border border-[#d69e9e]/30 rounded text-xs font-cinzel tracking-widest hover:bg-[#d69e9e] hover:text-black transition-colors">
+                        <i class="fas fa-save mr-2"></i> Gravar nas Páginas
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div id="bestiary-modal" class="fixed inset-0 z-[9999] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
+        <div id="bestiary-modal-bg" class="absolute inset-0 bg-black/90 backdrop-blur-md"></div>
+        
+        <div id="bestiary-modal-content" class="relative bg-[#050508] border border-[#2a3040] p-8 md:p-12 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto rounded-sm transform scale-95 transition-all duration-500 shadow-[0_0_50px_rgba(0,0,0,0.8)] custom-scrollbar">
+            
+            <button id="close-bestiary-modal" class="absolute top-6 right-6 text-slate-500 hover:text-red-600 transition-colors duration-300 z-50">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+
+            <h2 id="bestiary-modal-title" class="text-4xl md:text-5xl font-cinzel text-[#d69e9e] tracking-widest mb-6 text-center uppercase" style="text-shadow: 0 0 15px rgba(214,158,158,0.3);"></h2>
+            
+            <div class="w-full md:w-2/3 lg:w-1/2 mx-auto aspect-video border border-slate-700 bg-[#0a0a0f] mb-8 relative flex items-center justify-center overflow-hidden rounded-sm shadow-inner group">
+                <img id="bestiary-modal-image" src="" alt="Criatura" class="w-full h-full object-cover opacity-70 mix-blend-lighten hidden">
+                <i id="bestiary-modal-icon" class="fas fa-spider text-6xl text-slate-800 absolute transition-transform duration-500 group-hover:scale-110"></i>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#050508] via-transparent to-transparent opacity-80"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 border-y border-slate-800 py-6">
+                <div>
+                    <span class="font-cinzel text-content-dim uppercase tracking-wider text-[10px] block mb-1">Habitat</span>
+                    <p id="bestiary-modal-habitat" class="text-slate-300 font-serif text-sm"></p>
+                </div>
+                <div>
+                    <span class="font-cinzel text-content-dim uppercase tracking-wider text-[10px] block mb-1">Perspectiva de Vida</span>
+                    <p id="bestiary-modal-life" class="text-slate-300 font-serif text-sm"></p>
+                </div>
+                <div>
+                    <span class="font-cinzel text-content-dim uppercase tracking-wider text-[10px] block mb-1">Nível de Reprodução</span>
+                    <p id="bestiary-modal-repro-rate" class="text-slate-300 font-serif text-sm"></p>
+                </div>
+                <div>
+                    <span class="font-cinzel text-content-dim uppercase tracking-wider text-[10px] block mb-1">Meio de Reprodução</span>
+                    <p id="bestiary-modal-repro-method" class="text-slate-300 font-serif text-sm"></p>
+                </div>
+                <div class="bg-red-900/10 p-3 rounded border border-red-900/30">
+                    <span class="font-cinzel text-red-500 uppercase tracking-wider text-[10px] block mb-1 flex items-center gap-1"><i class="fas fa-bullseye"></i> Vulnerabilidade</span>
+                    <p id="bestiary-modal-vuln" class="text-red-400 font-serif text-sm"></p>
+                </div>
+                <div class="bg-slate-800/30 p-3 rounded border border-slate-700/50">
+                    <span class="font-cinzel text-slate-400 uppercase tracking-wider text-[10px] block mb-1 flex items-center gap-1"><i class="fas fa-shield-alt"></i> Resistência</span>
+                    <p id="bestiary-modal-resist" class="text-slate-300 font-serif text-sm"></p>
+                </div>
+            </div>
+
+            <div class="mb-8 border-l-2 border-[#d69e9e] p-4 bg-[#d69e9e]/5 rounded-r-sm">
+                <span class="font-cinzel text-[#d69e9e] uppercase tracking-wider text-[10px] block mb-2 flex items-center gap-2"><i class="fas fa-star"></i> Peculiaridade Biológica</span>
+                <p id="bestiary-modal-peculiarity" class="text-slate-300 font-serif text-sm italic leading-relaxed"></p>
+            </div>
+
+            <div>
+                <span class="font-cinzel text-content-dim uppercase tracking-wider text-[10px] block mb-2">Registos da Ordem</span>
+                <p id="bestiary-modal-desc" class="text-slate-300 font-serif text-sm leading-relaxed text-justify"></p>
+            </div>
+            
+        </div>
+    </div>
+
+    <div id="nation-modal" class="fixed inset-0 z-[9999] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
+        <div id="nation-modal-bg" class="absolute inset-0 bg-black/90 backdrop-blur-md"></div>
+        
+        <div id="nation-modal-content" class="relative bg-[#050508] border border-[#2a3040] p-8 md:p-12 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto rounded-sm transform scale-95 transition-all duration-500 shadow-[0_0_50px_rgba(0,0,0,0.8)] custom-scrollbar">
+            
+            <button id="close-nation-modal" class="absolute top-6 right-6 text-slate-500 hover:text-[#d69e9e] transition-colors duration-300 z-50">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+
+            <h2 id="nation-modal-name" class="text-4xl md:text-5xl font-cinzel text-white tracking-widest mb-6 text-center uppercase" style="text-shadow: 0 0 20px rgba(255,255,255,0.2);"></h2>
+            
+            <div class="w-full h-64 md:h-80 border border-slate-700 bg-[#0a0a0f] mb-8 relative flex items-center justify-center overflow-hidden rounded-sm shadow-inner group">
+                <img id="nation-modal-image" src="" alt="Paisagem da Nação" class="w-full h-full object-cover opacity-80 mix-blend-screen hidden transition-transform duration-700 group-hover:scale-105">
+                <i id="nation-modal-icon" class="fas fa-map-marked-alt text-6xl text-slate-800 absolute transition-transform duration-500 group-hover:scale-110"></i>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#050508] via-transparent to-transparent opacity-90"></div>
+                <div class="absolute bottom-4 left-4 border border-[#d69e9e]/50 bg-black/60 px-4 py-2 rounded-sm backdrop-blur-sm">
+                    <span class="font-cinzel text-xs text-slate-400 uppercase tracking-widest block mb-1">Matriz Predominante</span>
+                    <span id="nation-modal-element" class="text-[#d69e9e] font-bold tracking-widest uppercase"></span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 border-y border-slate-800 py-6">
+                <div class="bg-[#0a0a0f] p-4 rounded border border-slate-800/50">
+                    <span class="font-cinzel text-slate-500 uppercase tracking-wider text-[10px] block mb-2"><i class="fas fa-landmark mr-1"></i> Forma de Governo</span>
+                    <p id="nation-modal-gov" class="text-slate-300 font-serif text-sm"></p>
+                </div>
+                <div class="bg-[#0a0a0f] p-4 rounded border border-slate-800/50">
+                    <span class="font-cinzel text-slate-500 uppercase tracking-wider text-[10px] block mb-2"><i class="fas fa-cloud-sun mr-1"></i> Clima & Geografia</span>
+                    <p id="nation-modal-climate" class="text-slate-300 font-serif text-sm"></p>
+                </div>
+                <div class="bg-[#0a0a0f] p-4 rounded border border-slate-800/50">
+                    <span class="font-cinzel text-slate-500 uppercase tracking-wider text-[10px] block mb-2"><i class="fas fa-users mr-1"></i> Cultura</span>
+                    <p id="nation-modal-culture" class="text-slate-300 font-serif text-sm"></p>
+                </div>
+            </div>
+
+            <div>
+                <span class="font-cinzel text-[#d69e9e] uppercase tracking-wider text-[10px] block mb-3">Registos Históricos e Políticos</span>
+                <p id="nation-modal-desc" class="text-slate-300 font-serif text-sm leading-relaxed text-justify"></p>
+            </div>
+            
         </div>
     </div>
     
-    <div id="intro-glitch-overlay" class="fixed inset-0 z- bg-black opacity-0 pointer-events-none transition-opacity duration-100 flex items-center justify-center">
+    <div id="intro-glitch-overlay" class="fixed inset-0 z-[99999] bg-black opacity-0 pointer-events-none transition-opacity duration-100 flex items-center justify-center">
         <div id="intro-glitch-text" class="text-red-600 font-mono text-xl opacity-80 mix-blend-screen break-all overflow-hidden h-full w-full"></div>
     </div>
 

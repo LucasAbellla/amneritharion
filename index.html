@@ -96,7 +96,6 @@
         </div>
     </div> 
 
-
     <div id="view-relics" class="view-section hidden pt-24 px-8 pb-12 max-w-7xl mx-auto relative z-20">
         <div class="flex justify-between items-center mb-12 border-b border-[#2a3040] pb-6">
             <button class="btn-back-altar text-slate-400 hover:text-white font-cinzel tracking-widest transition px-6 py-2 border border-transparent hover:border-slate-700 bg-[#0a0a0f]/80 rounded">
@@ -115,7 +114,6 @@
         <div id="relics-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </div>
 
-
     <div id="view-complex" class="view-section hidden pt-24 px-8 pb-12 max-w-7xl mx-auto relative z-20">
         <div class="flex justify-between items-center mb-12 border-b border-[#2a3040] pb-6">
             <button class="btn-back-altar text-slate-400 hover:text-white font-cinzel tracking-widest transition px-6 py-2 border border-transparent hover:border-slate-700 bg-[#0a0a0f]/80 rounded">
@@ -131,7 +129,6 @@
         
         <div id="complex-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>
     </div>
-
 
     <div id="view-genealogy" class="view-section hidden pt-24 px-8 pb-12 max-w-7xl mx-auto relative z-20">
         <div class="flex justify-between items-center mb-12 border-b border-[#2a3040] pb-6">
@@ -152,7 +149,6 @@
             </div>
         </div>
     </div>
-
 
     <div id="view-typings" class="view-section hidden pt-24 px-8 pb-12 max-w-7xl mx-auto relative z-20">
         <div class="flex justify-between items-center mb-12 border-b border-[#2a3040] pb-6">
@@ -190,7 +186,6 @@
         </div>
     </div>
 
-
     <div id="view-bestiary" class="view-section hidden pt-24 px-8 pb-12 max-w-7xl mx-auto relative z-20">
         <div class="flex justify-between items-center mb-12 border-b border-[#2a3040] pb-6">
             <button class="btn-back-altar text-slate-400 hover:text-white font-cinzel tracking-widest transition px-6 py-2 border border-transparent hover:border-slate-700 bg-[#0a0a0f]/80 rounded">
@@ -206,7 +201,6 @@
         <div id="bestiary-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </div>
 
-
     <div id="view-nations" class="view-section hidden pt-24 px-8 pb-12 max-w-7xl mx-auto relative z-20">
         <div class="flex justify-between items-center mb-12 border-b border-[#2a3040] pb-6">
             <button class="btn-back-altar text-slate-400 hover:text-white font-cinzel tracking-widest transition px-6 py-2 border border-transparent hover:border-slate-700 bg-[#0a0a0f]/80 rounded">
@@ -221,7 +215,6 @@
         
         <div id="nations-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </div>
-
 
     <div id="relic-modal" class="fixed inset-0 z-[9999] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
         <div id="relic-modal-bg" class="absolute inset-0 bg-black/95 backdrop-blur-xl"></div>
@@ -268,7 +261,6 @@
         </div>
     </div>
 
-
     <div id="secret-modal" class="fixed inset-0 z-[9999] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
         <div id="secret-modal-bg" class="absolute inset-0 bg-black/80 backdrop-blur-md"></div>
         <div id="secret-modal-content" class="relative bg-[#050508] border border-[#2a3040] p-8 max-w-2xl w-full mx-4 rounded-sm shadow-[0_0_50px_rgba(0,0,0,1)] transform scale-95 transition-transform duration-500 overflow-hidden">
@@ -307,12 +299,21 @@
                 </div>
             </div>
 
+            <div class="w-full max-w-3xl z-10 border-t border-slate-800 pt-8 mt-8 text-left">
+                <span class="font-cinzel text-slate-400 uppercase tracking-wider text-xs block mb-4 flex items-center gap-2">
+                    <i class="fas fa-dice-d20"></i> Efeitos e Mecânicas de Combate
+                </span>
+                <div class="bg-black/40 border border-slate-700/50 rounded p-4 shadow-inner">
+                    <p id="fusion-modal-mechanics-content" class="text-slate-300 font-serif text-sm leading-relaxed whitespace-pre-line"></p>
+                </div>
+            </div>
+
             <div class="w-full max-w-3xl z-10 border-t border-slate-800 pt-6 mt-8 flex flex-col">
-                <span class="font-cinzel text-content-dim uppercase tracking-wider text-xs block mb-3 text-left">Anotações do Alquimista</span>
+                <span class="font-cinzel text-content-dim uppercase tracking-wider text-xs block mb-3 text-left">Anotações</span>
                 <textarea id="fusion-notes" class="w-full bg-black/50 border border-slate-700 rounded p-4 text-slate-300 font-serif text-sm focus:outline-none focus:border-[#d69e9e] transition-colors resize-none h-32 custom-scrollbar" placeholder="Escreva as suas observações e resultados de testes com esta essência..."></textarea>
                 
                 <div class="flex justify-end items-center gap-4 mt-3">
-                    <span id="save-feedback" class="text-green-500 text-xs italic opacity-0 transition-opacity">Anotações salvas na memória da pedra!</span>
+                    <span id="save-feedback" class="text-green-500 text-xs italic opacity-0 transition-opacity">Anotações salvas</span>
                     <button id="save-notes-btn" class="px-6 py-2 bg-[#1a1a24] text-[#d69e9e] border border-[#d69e9e]/30 rounded text-xs font-cinzel tracking-widest hover:bg-[#d69e9e] hover:text-black transition-colors">
                         <i class="fas fa-save mr-2"></i> Gravar nas Páginas
                     </button>

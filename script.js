@@ -163,7 +163,7 @@ const elementalData = {
         "Força Gravitacional": "Manifestação pura da energia que distorce o espaço."
     },
     complexElementTypes: {
-        "Flama Fátuo": "Combinatória.", "Vapor": "Combinatória.", "Incêndio": "Reacionária.", "Magma": "Combinatória.", "Faísca": "Reacionária.", "Névoa": "Combinatória.", "Radiação": "Reacionária.", "Fumaça": "Combinatória.", "Alma": "Combinatória.", "Fuligem": "Reacionária.", "Explosão": "Reacionária.",
+        "Flama Fátuo": "Combinatória.", "Vapor": "Reacionária.", "Incêndio": "Reacionária.", "Magma": "Combinatória.", "Faísca": "Reacionária.", "Névoa": "Combinatória.", "Radiação": "Reacionária.", "Fumaça": "Combinatória.", "Alma": "Combinatória.", "Fuligem": "Reacionária.", "Explosão": "Reacionária.",
         "Purificação Reminiscente": "Combinatória.", "Bruma": "Combinatória.", "Lama": "Combinatória.", "Supercondução": "Combinatória.", "Cristal": "Combinatória.", "Ilusão": "Combinatória.", "Miragem": "Combinatória.", "Sangue": "Combinatória.", "Ácido": "Reacionária.", "Corrente": "Combinatória.",
         "Turbilhão Vendaval": "Combinatória.", "Areia": "Combinatória.", "Trovão": "Reacionária.", "Nevoeiro": "Combinatória.", "Fulgor": "Reacionária.", "Sopro": "Combinatória.", "Gás": "Reacionária.", "Tornado": "Combinatória.",
         "Rocha Eterna": "Combinatória.", "Magnetismo": "Combinatória.", "Geada": "Combinatória.", "Domínio": "Combinatória.", "Assombração": "Reacionária.", "Fertilidade": "Combinatória.", "Erosão": "Reacionária.", "Tremor": "Reacionária.",
@@ -175,6 +175,17 @@ const elementalData = {
         "Praga Letal": "Reacionária.", "Contágio": "Reacionária.",
         "Força Gravitacional": "Combinatória."
     },
+
+    complexElementMechanics: {
+        "Fulgor": "🔸 Dano: Luz Ofuscante (Lux + Eol)\n🔸 Custo de AP: 3 | Custo de MP: 45\n\nEfeito: Causa Dano em Área (AoE) e tem 60% de chance de aplicar [Cegueira] por 2 turnos, reduzindo a Precisão dos inimigos afetados a 0. Se os alvos já possuírem aflições Eol, a dispersão amplifica a Cegueira para [Atordoamento].",
+        "Supercondução": "🔸 Dano: Luz Ofuscante (Lux + Eol)\n🔸 Custo de AP: 3 | Custo de MP: 45\n\nEfeito: Quando desencadeada, se houver mais inimigos afetados pro Fulmen ou Aqua, o dano de Supercondutor será expalhado por todos os alvos afetados simultaneamente e aplicando uma intância de Choque.",
+        "Fuligem": "🔸 Dano: Contínuo (Lux + Eol)\n🔸 Custo de AP: 3 | Custo de MP: 45\n\nEfeito: Cria uma nuvem gasosa em volta do alvo onde aconteceu a fusão. A nuvem prologa e amplifica o efeito de Queimadura.",
+        "Incêndio": "🔸 Dano: Luz Ofuscante (Lux + Eol)\n🔸 Custo de AP: 3 | Custo de MP: 45\n\nEfeito: Causa Dano em Área (AoE) e tem 60% de chance de aplicar [Cegueira] por 2 turnos, reduzindo a Precisão dos inimigos afetados a 0. Se os alvos já possuírem aflições Eol, a dispersão amplifica a Cegueira para [Atordoamento].",
+        "Areia": "🔸 Dano: Físico/Abrasivo (Terrae + Eol)\n🔸 Custo de AP: 2 | Custo de MP: 30\n\nEfeito: Cria uma tempestade de areia que causa dano contínuo (DoT) leve por 3 turnos. Inimigos dentro da tempestade têm sua Defesa reduzida em 15% e Velocidade reduzida em 10.",
+        "Vapor": "🔸 Dano: Direto\n🔸 Custo de AP: 2 | Custo de MP: 25\n\nEfeito: Causa Dano Direto amplificado ao desencadear essa fusão",
+        "default": "Dados mecânicos em desenvolvimento pelos arquivistas. Testes práticos em batalha são necessários para determinar custos exatos de AP/MP, multiplicadores de dano e efeitos de controle de campo."
+    },
+
     complexElementPowers: {
         "Flama Fátuo": "Nível de Poder: Médio.", "Vapor": "Nível de Poder: Baixo.", "Incêndio": "Nível de Poder: Alto.", "Magma": "Nível de Poder: Muito Alto.", "Faísca": "Nível de Poder: Baixo.", "Névoa": "Nível de Poder: Baixo.", "Radiação": "Nível de Poder: Alto.", "Fumaça": "Nível de Poder: Médio.", "Alma": "Nível de Poder: Alto.", "Fuligem": "Nível de Poder: Médio.", "Explosão": "Nível de Poder: Muito Alto.",
         "Purificação Reminiscente": "Nível de Poder: Médio.", "Bruma": "Nível de Poder: Baixo.", "Lama": "Nível de Poder: Médio.", "Supercondução": "Nível de Poder: Alto.", "Cristal": "Nível de Poder: Alto.", "Ilusão": "Nível de Poder: Médio.", "Miragem": "Nível de Poder: Baixo.", "Sangue": "Nível de Poder: Alto.", "Ácido": "Nível de Poder: Alto.", "Corrente": "Nível de Poder: Médio.",
@@ -356,6 +367,10 @@ function initFusionsData() {
     for (const [el1, combinations] of Object.entries(elementalData.combinations)) {
         for (const [el2, fusionName] of Object.entries(combinations)) {
             if (!allFusionsData[fusionName]) {
+                let mech = elementalData.complexElementMechanics["default"];
+                if(elementalData.complexElementMechanics[fusionName]) {
+                    mech = elementalData.complexElementMechanics[fusionName];
+                }
                 allFusionsData[fusionName] = {
                     name: fusionName,
                     parent1: el1,
@@ -364,7 +379,8 @@ function initFusionsData() {
                     color2: elementalData.baseElements[el2].color,
                     desc: elementalData.complexElementDescriptions[fusionName] || "Descrição oculta.",
                     type: elementalData.complexElementTypes[fusionName] || "Tipo desconhecido.",
-                    power: elementalData.complexElementPowers[fusionName] || "Poder oculto."
+                    power: elementalData.complexElementPowers[fusionName] || "Poder oculto.",
+                    mechanics: mech // <--- É SÓ ADICIONAR ESTA LINHA (com a vírgula na linha de cima!)
                 };
             }
         }
@@ -1181,6 +1197,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('fusion-modal-desc-content').innerText = data.desc;
         document.getElementById('fusion-modal-type-content').innerText = data.type;
         document.getElementById('fusion-modal-power-content').innerText = data.power;
+
+        document.getElementById('fusion-modal-mechanics-content').innerText = data.mechanics;
         
         const savedData = discoveredFusions[fusionName];
         const notesField = document.getElementById('fusion-notes');

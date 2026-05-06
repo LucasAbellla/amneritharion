@@ -904,6 +904,252 @@ document.addEventListener('DOMContentLoaded', () => {
     renderGenealogySelectors();
 
     // =========================================
+    // DESCRIÇÃO ENCICLOPÉDICA DAS FUSÕES
+    // =========================================
+    const fusionElementProfiles = {
+        "Flama": {
+            natureza: "calor, combustão, impulso e pressão ofensiva",
+            funcao: "acelera a matéria, intensifica reações e converte energia em ruptura térmica",
+            aplicacao: "forjas rituais, purificação por fogo, ofensivas diretas e destruição controlada",
+            risco: "pode consumir oxigênio, memória corporal e estabilidade emocional quando mantida por tempo demais"
+        },
+        "Aqua": {
+            natureza: "fluxo, adaptação, cura, afogamento e memória líquida",
+            funcao: "redistribui energia, regula estados vitais e conduz alterações internas",
+            aplicacao: "tratamentos, manipulação de pressão, travessias, selamentos fluidos e controle de terreno",
+            risco: "pode diluir identidades mágicas, afogar sinais vitais ou tornar a matriz instável por excesso de oscilação"
+        },
+        "Eol": {
+            natureza: "movimento, dispersão, velocidade, respiração e liberdade direcional",
+            funcao: "carrega, espalha, amplia alcance e altera trajetória de outras essências",
+            aplicacao: "mobilidade, propagação de efeitos, barreiras de vento, leitura de correntes e evasão",
+            risco: "pode fragmentar conjurações, espalhar efeitos indesejados ou tornar a magia difícil de conter"
+        },
+        "Terrae": {
+            natureza: "estrutura, peso, estabilidade, crescimento mineral e fundação",
+            funcao: "dá corpo físico às essências, ancora fenômenos e aumenta resistência",
+            aplicacao: "arquitetura arcana, escudos, selamentos, contenção, muralhas e alteração de relevo",
+            risco: "pode petrificar fluxos, endurecer tecidos ou tornar a conjuração lenta e excessivamente rígida"
+        },
+        "Fulmen": {
+            natureza: "descarga, impulso nervoso, tempestade, reflexo e ruptura súbita",
+            funcao: "ativa respostas rápidas, energiza matéria e cria picos de instabilidade destrutiva",
+            aplicacao: "sinalização, sobrecarga, interrupção de feitiços, ataque em área e condução energética",
+            risco: "pode queimar nervos, cegar sentidos mágicos ou causar reações em cadeia fora do controle"
+        },
+        "Crelix": {
+            natureza: "frio, preservação, lentidão, rigidez e suspensão de movimento",
+            funcao: "reduz atividade, cristaliza formas e conserva estados antes que se decomponham",
+            aplicacao: "prisões, preservação histórica, armas cristalinas, selos de estase e controle de temperatura",
+            risco: "pode paralisar processos vitais, congelar intenções mágicas ou interromper ciclos naturais"
+        },
+        "Lux": {
+            natureza: "revelação, presença, refração, cura leve e exposição de verdades",
+            funcao: "torna visível o oculto, purifica impurezas superficiais e direciona energia com precisão",
+            aplicacao: "diagnóstico, iluminação ritual, dissipação de sombras, prismas, selos e leitura de inscrições",
+            risco: "pode expor segredos, queimar imperfeições ou tornar uma presença impossível de ocultar"
+        },
+        "Umbra": {
+            natureza: "ausência, silêncio, ocultação, medo ancestral e profundidade",
+            funcao: "absorve sinais, cria zonas de ocultamento e dobra a percepção ao redor da matéria",
+            aplicacao: "furtividade, proteção de arquivos, rituais noturnos, apagamento de rastros e travessia por sombras",
+            risco: "pode isolar sentidos, alimentar paranoia ou abrir espaço para ecos que não pertencem ao conjurador"
+        },
+        "Vitae": {
+            natureza: "vida, crescimento, invocação, regeneração e instinto orgânico",
+            funcao: "estimula células, desperta organismos e acelera ciclos biológicos",
+            aplicacao: "cura viva, botânica arcana, pactos com fauna, crescimento de matéria orgânica e restauração",
+            risco: "pode gerar crescimento desordenado, simbiose indesejada ou multiplicação de tecidos instáveis"
+        },
+        "Toxi": {
+            natureza: "degradação, doença, corrosão, veneno e mutação inevitável",
+            funcao: "quebra estruturas, contamina fluxos e transforma matéria por desgaste progressivo",
+            aplicacao: "alquimia, antídotos, venenos, deterioração controlada, estudo de pragas e guerra química arcana",
+            risco: "pode contaminar o usuário, persistir no ambiente ou converter cura em vetor de doença"
+        },
+        "Vis": {
+            natureza: "força bruta, cinética, pressão, potencial e energia sem forma",
+            funcao: "amplifica impacto, empurra limites físicos e converte intenção em potência direta",
+            aplicacao: "telecinese, impacto, compressão, deslocamento, reforço físico e ruptura de barreiras",
+            risco: "pode distorcer ossos, romper contenções ou transformar pequenas falhas em colapsos violentos"
+        }
+    };
+
+    const fusionTypeExplanations = {
+        "Combinatória": "Forma uma essência relativamente estável. A fusão cria uma nova matriz, com identidade própria, que pode ser estudada como fenômeno independente.",
+        "Reacionária": "Surge do choque entre matrizes. A fusão tende a acontecer como efeito, explosão, descarga, dispersão ou transformação momentânea, sendo mais instável e contextual."
+    };
+
+    function escapeHTML(value) {
+        return String(value ?? '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    function normalizeFusionType(typeText) {
+        return String(typeText || 'Tipo desconhecido').replace('.', '').trim();
+    }
+
+    function normalizePower(powerText) {
+        return String(powerText || 'Poder não catalogado')
+            .replace('Nível de Poder:', '')
+            .replace('.', '')
+            .trim();
+    }
+
+    function getPowerReading(powerLabel) {
+        const readings = {
+            "Baixo": "efeito localizado, útil para registros simples, práticas iniciais e fenômenos de baixa escala",
+            "Médio": "efeito consistente, com utilidade prática e boa presença em rituais, ofícios ou conflitos limitados",
+            "Alto": "efeito intenso, capaz de alterar o ambiente, pressionar defesas e mudar o curso de uma situação",
+            "Muito Alto": "fenômeno de grande impacto, normalmente associado a destruição ampla, alterações ambientais ou uso especializado",
+            "Extremo": "manifestação rara e perigosa, próxima de fenômenos catastróficos, proibidos ou de escala histórica"
+        };
+        return readings[powerLabel] || "efeito ainda sem escala totalmente definida nos registros do Amneritharion";
+    }
+
+    function getElementProfile(elementName) {
+        return fusionElementProfiles[elementName] || {
+            natureza: "natureza ainda não catalogada",
+            funcao: "atua de modo pouco documentado",
+            aplicacao: "aplicações ainda em estudo",
+            risco: "riscos ainda não documentados"
+        };
+    }
+
+    function cleanMechanicRecord(mechanicsText) {
+        const defaultText = elementalData?.complexElementMechanics?.default || '';
+        if (!mechanicsText || mechanicsText === defaultText) return "Sem anotação individual antiga. A leitura abaixo foi organizada a partir das matrizes elementais, do tipo mágico e do nível de poder registrado.";
+
+        return String(mechanicsText)
+            .split('\n')
+            .map(line => line.trim())
+            .filter(line => line && !line.includes('Custo de AP') && !line.includes('Custo de MP'))
+            .map(line => line
+                .replace(/^🔸\s*/g, '')
+                .replace(/^Dano:\s*/i, 'Manifestação registrada: ')
+                .replace(/^Efeito:\s*/i, '')
+            )
+            .join(' ');
+    }
+
+    function buildFusionTags(data, profile1, profile2) {
+        const source1 = elementalData.baseElements[data.parent1]?.manifestacoes || [];
+        const source2 = elementalData.baseElements[data.parent2]?.manifestacoes || [];
+        const tags = [
+            normalizeFusionType(data.type),
+            normalizePower(data.power),
+            ...source1.slice(0, 2),
+            ...source2.slice(0, 2)
+        ];
+        return [...new Set(tags)].filter(Boolean).slice(0, 8);
+    }
+
+    function getFusionBehavior(data, profile1, profile2, typeLabel, powerLabel) {
+        const sameElement = data.parent1 === data.parent2;
+        const isDispersal = data.name.toLowerCase().includes('dispersão');
+
+        if (isDispersal) {
+            const dispersed = data.parent1 === 'Eol' ? data.parent2 : data.parent1;
+            const dispersedProfile = getElementProfile(dispersed);
+            return `A fusão funciona como uma técnica de espalhamento: Eol não substitui a essência de ${dispersed}, mas a carrega pelo espaço, abrindo o raio de influência da matriz. Na prática enciclopédica, ${data.name} é entendida como ${dispersedProfile.natureza} projetada por correntes de movimento, criando alcance, contágio direcional e pressão sobre vários pontos do ambiente.`;
+        }
+
+        if (sameElement) {
+            return `${data.name} representa a saturação de ${data.parent1}: não é uma mistura entre forças diferentes, mas a mesma matriz comprimida até revelar uma forma superior. Seu comportamento principal é intensificar ${profile1.natureza}, transformando uma essência comum em um estado mais denso, simbólico e difícil de desfazer.`;
+        }
+
+        if (typeLabel === 'Reacionária') {
+            return `${data.name} acontece quando ${data.parent1} e ${data.parent2} entram em atrito. ${data.parent1} fornece ${profile1.funcao}; ${data.parent2} acrescenta ${profile2.funcao}. O resultado não costuma permanecer estável por muito tempo: manifesta-se como reação, ruptura, descarga ou alteração brusca do ambiente.`;
+        }
+
+        return `${data.name} nasce da integração entre ${data.parent1} e ${data.parent2}. ${data.parent1} contribui com ${profile1.natureza}; ${data.parent2} estrutura a fusão por meio de ${profile2.natureza}. Por ser combinatória, tende a formar uma essência reconhecível, com comportamento próprio e possível uso recorrente dentro dos registros de Ecliptari.`;
+    }
+
+    function getFusionApplications(data, profile1, profile2, typeLabel) {
+        const sameElement = data.parent1 === data.parent2;
+        if (sameElement) {
+            return `Aplicada principalmente quando se deseja levar ${data.parent1} ao limite: ${profile1.aplicacao}. Em registros de mundo, esse tipo de fusão costuma aparecer como técnica de mestres, rituais nacionais ou fenômenos raros ligados à matriz original.`;
+        }
+
+        if (typeLabel === 'Reacionária') {
+            return `Serve melhor para situações em que a mudança precisa ser rápida: interrupção, resposta imediata, transformação de campo ou desencadeamento de uma consequência arcana. Une usos de ${data.parent1}, como ${profile1.aplicacao}, com propriedades de ${data.parent2}, como ${profile2.aplicacao}.`;
+        }
+
+        return `Pode ser documentada como essência de uso contínuo: ${profile1.aplicacao}; ${profile2.aplicacao}. Por formar uma matriz mais estável, também pode aparecer em arquitetura arcana, relíquias, fauna adaptada, tradições regionais ou técnicas transmitidas por linhagens.`;
+    }
+
+    function getFusionRisks(data, profile1, profile2, typeLabel, powerLabel) {
+        const intensity = ['Muito Alto', 'Extremo'].includes(powerLabel)
+            ? 'Por estar em escala elevada, exige contenção rigorosa e costuma deixar resíduos mágicos difíceis de apagar.'
+            : 'Mesmo em escala menor, exige leitura correta das matrizes para evitar efeitos secundários.';
+
+        if (data.parent1 === data.parent2) {
+            return `${intensity} O maior risco vem da saturação: ${profile1.risco}.`;
+        }
+
+        if (typeLabel === 'Reacionária') {
+            return `${intensity} Como reação, pode ocorrer fora do tempo desejado ou em cadeia. Os riscos principais vêm de ${data.parent1}, que ${profile1.risco}, e de ${data.parent2}, que ${profile2.risco}.`;
+        }
+
+        return `${intensity} Como combinação, tende a ser mais previsível, mas pode fixar defeitos na própria essência. Os riscos herdados são: ${profile1.risco}; ${profile2.risco}.`;
+    }
+
+    function renderFusionCard(title, icon, body, accent, full = false) {
+        return `
+            <section class="fusion-explanation-card ${full ? 'full' : ''}" style="--accent-color: ${accent};">
+                <h3 class="fusion-explanation-title"><i class="${icon}"></i>${escapeHTML(title)}</h3>
+                <div class="fusion-explanation-body">${body}</div>
+            </section>
+        `;
+    }
+
+    function buildFusionExplanation(data) {
+        const profile1 = getElementProfile(data.parent1);
+        const profile2 = getElementProfile(data.parent2);
+        const typeLabel = normalizeFusionType(data.type);
+        const powerLabel = normalizePower(data.power);
+        const tags = buildFusionTags(data, profile1, profile2);
+        const behavior = getFusionBehavior(data, profile1, profile2, typeLabel, powerLabel);
+        const applications = getFusionApplications(data, profile1, profile2, typeLabel);
+        const risks = getFusionRisks(data, profile1, profile2, typeLabel, powerLabel);
+        const record = cleanMechanicRecord(data.mechanics);
+        const typeExplanation = fusionTypeExplanations[typeLabel] || 'Classificação ainda em revisão nos arquivos do Amneritharion.';
+        const powerReading = getPowerReading(powerLabel);
+
+        const relationLines = `
+            <div class="fusion-relation-line">
+                <div class="fusion-relation-name">${escapeHTML(data.parent1)}</div>
+                <div class="fusion-relation-text">${escapeHTML(profile1.natureza)}.</div>
+            </div>
+            <div class="fusion-relation-line">
+                <div class="fusion-relation-name">${escapeHTML(data.parent2)}</div>
+                <div class="fusion-relation-text">${escapeHTML(data.parent1 === data.parent2 ? 'Reforça e satura a mesma matriz, criando um estado superior da essência.' : profile2.natureza + '.')}</div>
+            </div>
+            <div class="fusion-relation-line">
+                <div class="fusion-relation-name">Resultado</div>
+                <div class="fusion-relation-text">${escapeHTML(data.desc)}</div>
+            </div>
+        `;
+
+        const tagHtml = `<div class="fusion-tags">${tags.map(tag => `<span class="fusion-tag">${escapeHTML(tag)}</span>`).join('')}</div>`;
+
+        return `
+            ${renderFusionCard('Síntese enciclopédica', 'fas fa-feather-alt', `<strong>${escapeHTML(data.name)}</strong> é registrada como uma fusão <strong>${escapeHTML(typeLabel)}</strong> de poder <strong>${escapeHTML(powerLabel)}</strong>. ${escapeHTML(data.desc)}`, data.color1, true)}
+            ${renderFusionCard('Como a fusão atua', 'fas fa-atom', escapeHTML(behavior), data.color1)}
+            ${renderFusionCard('Aplicações conhecidas', 'fas fa-compass', escapeHTML(applications), data.color2)}
+            ${renderFusionCard('Classificação e escala', 'fas fa-layer-group', `<p><strong>${escapeHTML(typeLabel)}:</strong> ${escapeHTML(typeExplanation)}</p><p class="mt-3"><strong>Escala ${escapeHTML(powerLabel)}:</strong> ${escapeHTML(powerReading)}.</p>`, data.color1)}
+            ${renderFusionCard('Limitações e riscos', 'fas fa-triangle-exclamation', escapeHTML(risks), data.color2)}
+            ${renderFusionCard('Matrizes envolvidas', 'fas fa-project-diagram', relationLines, data.color1, true)}
+            ${renderFusionCard('Marcadores de consulta', 'fas fa-tags', tagHtml, data.color2)}
+            ${renderFusionCard('Registro técnico anterior', 'fas fa-book-open', escapeHTML(record), data.color1)}
+        `;
+    }
+
+    // =========================================
     // LÓGICA DO MODAL MAJESTOSO DAS FUSÕES
     // =========================================
     const fusionModal = document.getElementById('fusion-modal');
@@ -921,7 +1167,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('fusion-modal-type-content').innerText = data.type;
         document.getElementById('fusion-modal-power-content').innerText = data.power;
 
-        document.getElementById('fusion-modal-mechanics-content').innerText = data.mechanics;
+        document.getElementById('fusion-modal-mechanics-content').innerHTML = buildFusionExplanation(data);
         
         const savedData = discoveredFusions[fusionName];
         const notesField = document.getElementById('fusion-notes');

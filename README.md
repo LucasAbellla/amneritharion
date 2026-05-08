@@ -17,11 +17,11 @@ O projeto contempla em sua página inicial um altar interativo onde o usuário p
 ### Exploração do Universo
 Acima do altar, o projeto disponibiliza botões de navegação que exploram detalhadamente o *worldbuilding* deste universo:
 
-*Nações:** Detalha o funcionamento, cultura, hierarquia e demais pontos sobre as nações principais: Aethelos, Jinsei, Jövirefolnr, Lîngyù, Moroyva, Praetorium, Py'aporã, Sui-Ryong e Sur'yaal.
-*Relíquias:** Uma janela dedicada a artefatos poderosos, revelando seus visuais detalhados e mistérios ocultos através de uma interface personalizada.
-**Bestiário:** Registros detalhados das criaturas de Gionyy *(mundo onde se passa a história)*l, compreendendo anatomias complexas e núcleos biológicos vitais.
-*Árvore Genealógica das Combinações:** Um mapa visual que destrincha a origem, as ramificações e os resultados de todas as fusões mágicas.
-*Tipagens Primárias:** A essência primordial de Ecliptari. Contém as anotações detalhadas e campos específicos para descrições técnicas de cada elemento.
+* **Nações:** Detalha o funcionamento, cultura, hierarquia e demais pontos sobre as nações principais: Aethelos, Jinsei, Jövirefolnr, Lîngyù, Moroyva, Praetorium, Py'aporã, Sui-Ryong e Sur'yaal.
+* **Relíquias:** Uma janela dedicada a artefatos poderosos, revelando seus visuais detalhados e mistérios ocultos através de uma interface personalizada.
+* **Bestiário:** Registros detalhados das criaturas de Gionyy *(mundo onde se passa a história)*l, compreendendo anatomias complexas e núcleos biológicos vitais.
+* **Árvore Genealógica das Combinações:** Um mapa visual que destrincha a origem, as ramificações e os resultados de todas as fusões mágicas.
+* **Tipagens Primárias:** A essência primordial de Ecliptari. Contém as anotações detalhadas e campos específicos para descrições técnicas de cada elemento.
 
 ##  Tecnologias Utilizadas
 

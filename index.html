@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grimório de Nahvvatzal Setup 1.0.0</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Quattrocento+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: file:; media-src 'self'; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+    <title>O Amneritharion 2.0.0</title>
+    <link rel="stylesheet" href="assets/css/tailwind.css">
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="assets/fonts/fonts.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="antialiased relative overflow-x-hidden">
@@ -22,10 +21,20 @@
         </button>
     </div>
 
-    <div id="loading-screen" class="fixed inset-0 z-[9999] bg-[#050508] flex flex-col items-center justify-center transition-opacity duration-1000">
-        <div class="text-red-900 text-8xl mb-6 animate-pulse" style="font-family: serif; text-shadow: 0 0 20px #4a1515;">⎊</div>
-        <div class="text-gray-500 tracking-[0.8em] text-sm uppercase animate-pulse" style="font-family: 'Cinzel', serif;">Despertando o Tomo...</div>
-    </div>
+    <button id="author-mode-toggle" class="author-mode-toggle" style="-webkit-app-region: no-drag;">
+        <i class="fas fa-feather-pointed"></i> Modo Autor
+    </button>
+
+    <aside id="author-toolbar" class="author-toolbar hidden">
+        <strong><i class="fas fa-feather-pointed"></i> Modo Autor ativo</strong>
+        <span>Alterações salvas neste dispositivo</span>
+        <div>
+            <button id="author-export"><i class="fas fa-file-export"></i> Exportar backup</button>
+            <button id="author-import"><i class="fas fa-file-import"></i> Importar</button>
+            <button id="author-reset" class="danger"><i class="fas fa-rotate-left"></i> Restaurar base</button>
+        </div>
+        <input id="author-import-input" type="file" accept="application/json,.json" hidden>
+    </aside>
 
     <div id="qoldjornesz-bg" class="fixed inset-0 z-[-2] pointer-events-none overflow-hidden opacity-20"></div>
     <div id="ambient-glow" class="fixed inset-0 z-[-1] pointer-events-none transition-all duration-1000"></div>
@@ -38,6 +47,18 @@
                 <p class="text-subheader mt-2 text-lg mb-6"></p>
                 
                 <div class="flex justify-center flex-wrap gap-4 md:gap-6">
+                    <button id="btn-open-characters" class="text-[#d69e9e] font-cinzel text-sm border border-[#d69e9e]/30 px-6 py-2 rounded-sm hover:bg-[#d69e9e] hover:text-black transition shadow-[0_0_15px_rgba(214,158,158,0.1)]" style="-webkit-app-region: no-drag;">
+                        <i class="fas fa-users mr-2"></i> Personagens
+                    </button>
+                    <button id="btn-open-events" class="text-[#d69e9e] font-cinzel text-sm border border-[#d69e9e]/30 px-6 py-2 rounded-sm hover:bg-[#d69e9e] hover:text-black transition shadow-[0_0_15px_rgba(214,158,158,0.1)]" style="-webkit-app-region: no-drag;">
+                        <i class="fas fa-hourglass-half mr-2"></i> Eventos Históricos
+                    </button>
+                    <button id="btn-open-atlas" class="text-[#d69e9e] font-cinzel text-sm border border-[#d69e9e]/30 px-6 py-2 rounded-sm hover:bg-[#d69e9e] hover:text-black transition shadow-[0_0_15px_rgba(214,158,158,0.1)]" style="-webkit-app-region: no-drag;">
+                        <i class="fas fa-map mr-2"></i> Atlas de Gionyyl
+                    </button>
+                    <button id="btn-open-universe" class="text-[#e6c3cb] font-cinzel text-sm border border-[#e6c3cb]/50 px-6 py-2 rounded-sm hover:bg-[#e6c3cb] hover:text-black transition shadow-[0_0_20px_rgba(230,195,203,0.12)]" style="-webkit-app-region: no-drag;">
+                        <i class="fas fa-circle-nodes mr-2"></i> Arquivo do Universo
+                    </button>
                     <button id="btn-open-bestiary" class="text-[#d69e9e] font-cinzel text-sm border border-[#d69e9e]/30 px-6 py-2 rounded-sm hover:bg-[#d69e9e] hover:text-black transition shadow-[0_0_15px_rgba(214,158,158,0.1)]" style="-webkit-app-region: no-drag;">
                         <i class="fas fa-dragon mr-2"></i> Bestiário
                     </button>
@@ -123,7 +144,7 @@
                 O Índice dos Sábios
             </h2>
             <div class="w-40 text-right text-slate-600 font-serif text-sm">
-                <span id="fusion-counter">0</span> / 121 Descobertas
+                <span id="fusion-counter">0</span> / <span id="fusion-total">65</span> Descobertas
             </div>
         </div>
         
@@ -214,6 +235,114 @@
         <p class="text-slate-400 mb-10 text-center max-w-2xl mx-auto font-serif">Os grandes impérios e territórios selvagens que moldam o cenário político e elemental do nosso mundo.</p>
         
         <div id="nations-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+
+    <div id="view-characters" class="view-section hidden pt-24 px-8 pb-12 max-w-7xl mx-auto relative z-20">
+        <div class="flex flex-col lg:flex-row justify-between items-center gap-6 mb-10 border-b border-[#2a3040] pb-6">
+            <button class="btn-back-altar text-slate-400 hover:text-white font-cinzel tracking-widest transition px-6 py-2 border border-transparent hover:border-slate-700 bg-[#0a0a0f]/80 rounded">
+                <i class="fas fa-arrow-left mr-2"></i> Retornar ao Altar
+            </button>
+            <div class="text-center">
+                <h2 class="text-4xl font-cinzel text-[#d69e9e] tracking-widest" style="text-shadow: 0 0 15px rgba(214,158,158,0.3);">Arquivo de Personagens</h2>
+                <p class="text-slate-500 font-serif mt-2">Vidas que atravessam e transformam a história de Ecliptari.</p>
+            </div>
+            <div class="w-40 text-right text-slate-600 font-serif text-sm"><span id="characters-counter">0 / 0</span> registros</div>
+        </div>
+
+        <div class="characters-toolbar">
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <input id="characters-search" type="search" placeholder="Buscar por nome, origem, tipagem, afiliação ou evento..." autocomplete="off">
+        </div>
+        <div id="characters-grid" class="characters-grid"></div>
+    </div>
+
+    <div id="view-events" class="view-section hidden pt-24 px-8 pb-12 max-w-7xl mx-auto relative z-20">
+        <div class="flex flex-col lg:flex-row justify-between items-center gap-6 mb-10 border-b border-[#2a3040] pb-6">
+            <button class="btn-back-altar text-slate-400 hover:text-white font-cinzel tracking-widest transition px-6 py-2 border border-transparent hover:border-slate-700 bg-[#0a0a0f]/80 rounded">
+                <i class="fas fa-arrow-left mr-2"></i> Retornar ao Altar
+            </button>
+            <div class="text-center">
+                <h2 class="text-4xl font-cinzel text-[#d69e9e] tracking-widest" style="text-shadow: 0 0 15px rgba(214,158,158,0.3);">Anais de Ecliptari</h2>
+                <p class="text-slate-500 font-serif mt-2">Eventos, causas e consequências que moldaram a história.</p>
+            </div>
+            <div class="w-40 text-right text-slate-600 font-serif text-sm"><span id="events-counter">0 / 0</span> registros</div>
+        </div>
+        <div class="events-actions">
+            <div class="events-toolbar"><i class="fas fa-search"></i><input id="events-search" type="search" placeholder="Buscar evento, era, data, local ou categoria..." autocomplete="off"></div>
+            <button id="create-event-button" class="author-only"><i class="fas fa-plus"></i> Novo evento</button>
+        </div>
+        <div id="events-grid" class="events-grid"></div>
+    </div>
+
+    <div id="view-atlas" class="view-section hidden pt-20 px-4 pb-8 max-w-[1600px] mx-auto relative z-20">
+        <header class="atlas-header">
+            <button class="btn-back-altar"><i class="fas fa-arrow-left"></i> Retornar ao Altar</button>
+            <div><span>Cartografia viva</span><h2>Atlas de Gionyyl</h2><p>Explore territórios, eventos e influências de Ecliptari.</p></div>
+            <strong id="atlas-marker-count">0 pontos</strong>
+        </header>
+        <div class="atlas-shell">
+            <aside class="atlas-sidebar">
+                <section><h3>Camadas</h3><div id="atlas-layers"></div></section>
+                <section class="atlas-author-panel author-only">
+                    <h3>Construção do mapa</h3>
+                    <button id="atlas-select-image"><i class="fas fa-image"></i> Selecionar imagem-base</button>
+                    <button id="atlas-add-marker"><i class="fas fa-location-dot"></i> Adicionar ponto</button>
+                    <small>Ative “Adicionar ponto” e clique na posição desejada.</small>
+                </section>
+                <section class="atlas-help"><h3>Controles</h3><p>Arraste para mover.<br>Use a roda para ampliar.<br>Clique nos pontos para abrir registros.</p><span id="atlas-background-name"></span></section>
+            </aside>
+            <main class="atlas-map-panel">
+                <div class="atlas-controls">
+                    <button id="atlas-zoom-out" title="Diminuir zoom"><i class="fas fa-minus"></i></button>
+                    <span id="atlas-status">100%</span>
+                    <button id="atlas-zoom-in" title="Aumentar zoom"><i class="fas fa-plus"></i></button>
+                    <button id="atlas-fit" title="Enquadrar mapa"><i class="fas fa-expand"></i></button>
+                </div>
+                <div id="atlas-viewport" class="atlas-viewport">
+                    <div id="atlas-stage" class="atlas-stage">
+                        <div id="atlas-background" class="atlas-background"></div>
+                        <div class="atlas-grid-overlay"></div>
+                        <div id="atlas-empty-state" class="atlas-empty-state">
+                            <i class="fas fa-map"></i><h3>O mundo aguarda sua cartografia</h3>
+                            <p>Ative o Modo Autor e selecione uma imagem-base de Gionyyl.<br>PNG, JPG ou WebP em proporção aproximada de 14:9.</p>
+                        </div>
+                        <div id="atlas-markers"></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div id="view-universe" class="view-section hidden pt-20 px-4 pb-10 max-w-[1500px] mx-auto relative z-20">
+        <header class="universe-header">
+            <button class="btn-back-altar"><i class="fas fa-arrow-left"></i> Retornar ao Altar</button>
+            <div><span>Amneritharion 2.0</span><h2>Arquivo do Universo</h2><p>História, vínculos, documentos e progresso de Ecliptari.</p></div>
+            <i class="fas fa-circle-nodes"></i>
+        </header>
+        <nav class="universe-tabs">
+            <button data-universe-tab="dashboard"><i class="fas fa-chart-pie"></i> Painel</button>
+            <button data-universe-tab="relationships"><i class="fas fa-share-nodes"></i> Relações</button>
+            <button data-universe-tab="genealogy"><i class="fas fa-people-roof"></i> Genealogia</button>
+            <button data-universe-tab="reading"><i class="fas fa-book-open"></i> Leitura</button>
+            <button data-universe-tab="gallery"><i class="fas fa-images"></i> Galeria</button>
+            <button data-universe-tab="discoveries"><i class="fas fa-key"></i> Descobertas</button>
+        </nav>
+        <main id="universe-hub" class="universe-hub">
+            <section id="universe-dashboard" class="universe-panel">
+                <div class="completion-hero"><div><span>Completude documentada</span><strong id="universe-completion-value">0%</strong><p>Calculada a partir dos campos preenchidos em todos os arquivos.</p></div><div class="completion-ring"><i class="fas fa-feather-pointed"></i></div></div>
+                <div class="completion-track"><span id="universe-completion-bar"></span></div>
+                <div id="universe-stats-grid" class="universe-stats-grid"></div>
+                <section class="universe-pending"><h3>Próximos registros a completar</h3><ul id="universe-pending-list"></ul></section>
+            </section>
+            <section id="universe-relationships" class="universe-panel"><header><span>Rede narrativa</span><h2>Grafo de Relacionamentos</h2><p>Cada ligação nasce das relações cadastradas nas fichas de personagens.</p></header><div id="relationship-graph" class="relationship-graph"></div></section>
+            <section id="universe-genealogy" class="universe-panel"><header><span>Linhagens</span><h2>Árvore Genealógica</h2><p>Parentesco inferido das relações “filha”, “filho”, “mãe”, “pai” e “esposa”.</p></header><div id="genealogy-tree-characters" class="genealogy-tree-characters"></div></section>
+            <section id="universe-reading" class="universe-panel">
+                <header class="reading-header"><div><span>Biblioteca narrativa</span><h2>Arcos e Capítulos</h2></div><div class="author-only"><button id="hub-add-arc"><i class="fas fa-plus"></i> Novo arco</button><button id="hub-add-chapter"><i class="fas fa-feather-pointed"></i> Novo capítulo</button></div></header>
+                <div class="reading-layout"><aside><h3>Arcos</h3><div id="reading-arcs"></div><h3>Capítulos</h3><div id="reading-chapters"></div></aside><article id="chapter-reader" class="chapter-reader"></article></div>
+            </section>
+            <section id="universe-gallery" class="universe-panel"><header class="reading-header"><div><span>Acervo visual e documental</span><h2>Galeria</h2></div><button id="hub-add-gallery" class="author-only"><i class="fas fa-plus"></i> Adicionar arquivo</button></header><div id="gallery-grid" class="gallery-grid"></div></section>
+            <section id="universe-discoveries" class="universe-panel"><header><span>Conhecimento revelado</span><h2>Descobertas</h2><p>Registros são revelados conforme você os abre no compêndio.</p></header><div id="discoveries-summary" class="discoveries-summary"></div><div id="discoveries-catalog" class="discoveries-catalog"></div></section>
+        </main>
     </div>
 
     <div id="relic-modal" class="fixed inset-0 z-[9999] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
@@ -421,7 +550,166 @@
             
         </div>
     </div>
+
+    <div id="character-modal" class="fixed inset-0 z-[9999] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
+        <div id="character-modal-bg" class="absolute inset-0 bg-black/90 backdrop-blur-md"></div>
+        <article class="character-modal-content custom-scrollbar">
+            <button id="close-character-modal" class="absolute top-6 right-6 text-slate-500 hover:text-[#d69e9e] transition-colors z-50" aria-label="Fechar ficha">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <button id="edit-character-button" class="author-edit-button author-only"><i class="fas fa-pen"></i> Editar ficha</button>
+
+            <header class="character-modal-header">
+                <div class="character-modal-portrait">
+                    <img id="character-modal-image" class="hidden" alt="">
+                </div>
+                <div>
+                    <span id="character-modal-status" class="character-status"></span>
+                    <h2 id="character-modal-name"></h2>
+                    <p id="character-modal-title"></p>
+                    <div class="character-vitals">
+                        <span><small>Origem</small><strong id="character-modal-origin"></strong></span>
+                        <span><small>Raça</small><strong id="character-modal-race"></strong></span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="character-modal-grid">
+                <section class="character-section character-section-wide">
+                    <h3><i class="fas fa-book-open"></i> Biografia</h3>
+                    <p id="character-modal-biography"></p>
+                </section>
+                <section class="character-section">
+                    <h3><i class="fas fa-flag"></i> Afiliações</h3>
+                    <div id="character-modal-affiliations" class="character-tags"></div>
+                </section>
+                <section class="character-section">
+                    <h3><i class="fas fa-wand-sparkles"></i> Tipagens</h3>
+                    <div id="character-modal-typings" class="character-tags"></div>
+                </section>
+                <section class="character-section character-section-wide">
+                    <h3><i class="fas fa-hourglass-half"></i> Participações históricas</h3>
+                    <div id="character-modal-events" class="character-tags"></div>
+                </section>
+                <section class="character-section character-section-wide">
+                    <h3><i class="fas fa-diagram-project"></i> Relacionamentos</h3>
+                    <div id="character-modal-relationships" class="character-relationships"></div>
+                </section>
+                <section class="character-section">
+                    <h3><i class="fas fa-brain"></i> Personalidade</h3>
+                    <p id="character-modal-personality"></p>
+                </section>
+                <section class="character-section">
+                    <h3><i class="fas fa-compass"></i> Motivações</h3>
+                    <p id="character-modal-motivations"></p>
+                </section>
+                <section class="character-section">
+                    <h3><i class="fas fa-burst"></i> Habilidades</h3>
+                    <div id="character-modal-abilities" class="character-tags"></div>
+                </section>
+                <section class="character-section">
+                    <h3><i class="fas fa-ring"></i> Relíquias</h3>
+                    <div id="character-modal-relics" class="character-tags"></div>
+                </section>
+                <section class="character-section character-section-wide author-notes">
+                    <h3><i class="fas fa-feather-pointed"></i> Notas da autora</h3>
+                    <p id="character-modal-notes"></p>
+                </section>
+            </div>
+        </article>
+    </div>
+
+    <div id="event-modal" class="fixed inset-0 z-[9999] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
+        <div id="event-modal-bg" class="absolute inset-0 bg-black/90 backdrop-blur-md"></div>
+        <article class="event-modal-content custom-scrollbar">
+            <button id="close-event-modal" class="absolute top-6 right-6 text-slate-500 hover:text-[#d69e9e] transition-colors z-50"><i class="fas fa-times text-2xl"></i></button>
+            <button id="edit-event-button" class="author-edit-button author-only"><i class="fas fa-pen"></i> Editar evento</button>
+            <header class="event-modal-header">
+                <span id="event-modal-status" class="event-status"></span>
+                <span id="event-modal-category" class="event-modal-category"></span>
+                <h2 id="event-modal-name"></h2>
+                <p id="event-modal-summary"></p>
+                <div class="event-vitals">
+                    <span><small>Era</small><strong id="event-modal-era"></strong></span>
+                    <span><small>Data</small><strong id="event-modal-date"></strong></span>
+                    <span><small>Local</small><strong id="event-modal-location"></strong></span>
+                </div>
+            </header>
+            <div class="event-modal-grid">
+                <section class="event-section event-section-wide"><h3>Registro histórico</h3><p id="event-modal-description"></p></section>
+                <section class="event-section"><h3>Causas</h3><div id="event-modal-causes" class="event-tags"></div></section>
+                <section class="event-section"><h3>Consequências</h3><div id="event-modal-consequences" class="event-tags"></div></section>
+                <section class="event-section event-section-wide"><h3>Participantes</h3><div id="event-modal-participants" class="event-tags"></div></section>
+                <section class="event-section"><h3>Nações relacionadas</h3><div id="event-modal-nations" class="event-tags"></div></section>
+                <section class="event-section"><h3>Tipagens relacionadas</h3><div id="event-modal-typings" class="event-tags"></div></section>
+                <section class="event-section event-section-wide author-notes"><h3>Notas da autora</h3><p id="event-modal-notes"></p></section>
+            </div>
+        </article>
+    </div>
+
+    <div id="author-editor-modal" class="fixed inset-0 z-[10000] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div id="author-editor-bg" class="absolute inset-0 bg-black/90 backdrop-blur-lg"></div>
+        <section class="author-editor-content custom-scrollbar">
+            <button id="close-author-editor" class="absolute top-5 right-5 text-slate-500 hover:text-white"><i class="fas fa-times text-2xl"></i></button>
+            <header><span>Modo Autor</span><h2 id="author-editor-title">Editar registro</h2><p>As alterações são salvas localmente. Exporte um backup regularmente.</p></header>
+            <form id="author-editor-form">
+                <div id="author-editor-fields" class="author-editor-fields"></div>
+                <p id="author-feedback" class="author-feedback"></p>
+                <footer><button id="author-cancel" type="button">Cancelar</button><button type="submit" class="primary"><i class="fas fa-floppy-disk"></i> Salvar alterações</button></footer>
+            </form>
+        </section>
+    </div>
     
+    <div id="atlas-marker-modal" class="fixed inset-0 z-[9999] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div id="atlas-marker-bg" class="absolute inset-0 bg-black/90 backdrop-blur-md"></div>
+        <article class="atlas-marker-content custom-scrollbar">
+            <button id="close-atlas-marker" class="absolute top-5 right-5 text-slate-500 hover:text-white"><i class="fas fa-times text-2xl"></i></button>
+            <button id="edit-atlas-marker" class="author-edit-button author-only"><i class="fas fa-pen"></i> Editar ponto</button>
+            <header><span id="atlas-marker-type"></span><span id="atlas-marker-layer"></span><h2 id="atlas-marker-name"></h2><p id="atlas-marker-description"></p></header>
+            <div class="atlas-marker-relations">
+                <section><h3>Nações</h3><div id="atlas-marker-nations"></div></section>
+                <section><h3>Personagens</h3><div id="atlas-marker-characters"></div></section>
+                <section><h3>Eventos</h3><div id="atlas-marker-events"></div></section>
+                <section><h3>Tipagens</h3><div id="atlas-marker-typings"></div></section>
+            </div>
+            <section class="atlas-marker-notes"><h3>Notas cartográficas</h3><p id="atlas-marker-notes"></p></section>
+        </article>
+    </div>
+
+    <div id="atlas-editor-modal" class="fixed inset-0 z-[10000] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div id="atlas-editor-bg" class="absolute inset-0 bg-black/90 backdrop-blur-lg"></div>
+        <section class="atlas-editor-content custom-scrollbar">
+            <button id="close-atlas-editor" class="absolute top-5 right-5 text-slate-500 hover:text-white"><i class="fas fa-times text-2xl"></i></button>
+            <header><span>Modo Autor · Cartografia</span><h2 id="atlas-editor-title">Adicionar ponto</h2></header>
+            <form id="atlas-editor-form">
+                <label><span>Nome</span><input name="name" required></label>
+                <label><span>Tipo</span><select name="type"><option value="city">Cidade</option><option value="landmark">Local importante</option><option value="danger">Zona de perigo</option><option value="event">Local de evento</option><option value="sanctuary">Santuário</option><option value="other">Outro</option></select></label>
+                <label><span>Camada</span><select name="layer"></select></label>
+                <div class="atlas-coordinate-fields"><label><span>Posição X (%)</span><input name="x" type="number" min="0" max="100" step="0.01"></label><label><span>Posição Y (%)</span><input name="y" type="number" min="0" max="100" step="0.01"></label></div>
+                <label class="wide"><span>Descrição</span><textarea name="description" rows="6"></textarea></label>
+                <label><span>Nações relacionadas</span><textarea name="nations" rows="4" placeholder="Uma por linha"></textarea></label>
+                <label><span>Personagens relacionados</span><textarea name="characters" rows="4" placeholder="Um nome ou ID por linha"></textarea></label>
+                <label><span>Eventos relacionados</span><textarea name="events" rows="4" placeholder="Um por linha"></textarea></label>
+                <label><span>Tipagens relacionadas</span><textarea name="typings" rows="4" placeholder="Uma por linha"></textarea></label>
+                <label class="wide"><span>Notas cartográficas</span><textarea name="notes" rows="4"></textarea></label>
+                <footer><button id="atlas-delete-marker" type="button" class="danger hidden"><i class="fas fa-trash"></i> Excluir</button><span></span><button id="atlas-editor-cancel" type="button">Cancelar</button><button type="submit" class="primary"><i class="fas fa-floppy-disk"></i> Salvar ponto</button></footer>
+            </form>
+        </section>
+    </div>
+
+    <div id="hub-editor-modal" class="fixed inset-0 z-[10000] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div id="hub-editor-bg" class="absolute inset-0 bg-black/90 backdrop-blur-lg"></div>
+        <section class="hub-editor-content custom-scrollbar">
+            <button id="close-hub-editor" class="absolute top-5 right-5 text-slate-500 hover:text-white"><i class="fas fa-times text-2xl"></i></button>
+            <header><span>Modo Autor · Arquivo do Universo</span><h2 id="hub-editor-title">Editar registro</h2></header>
+            <form id="hub-editor-form"><div id="hub-editor-fields"></div><footer><button id="hub-editor-cancel" type="button">Cancelar</button><button type="submit" class="primary"><i class="fas fa-floppy-disk"></i> Salvar</button></footer></form>
+        </section>
+    </div>
+    <div id="gallery-preview" class="fixed inset-0 z-[9999] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div id="gallery-preview-bg" class="absolute inset-0 bg-black/95 backdrop-blur-lg"></div>
+        <figure class="gallery-preview-content"><button id="close-gallery-preview"><i class="fas fa-times text-2xl"></i></button><img id="gallery-preview-image" alt=""><figcaption id="gallery-preview-title"></figcaption></figure>
+    </div>
+
     <div id="intro-glitch-overlay" class="fixed inset-0 z-[99999] bg-black opacity-0 pointer-events-none transition-opacity duration-100 flex items-center justify-center">
         <div id="intro-glitch-text" class="text-red-600 font-mono text-xl opacity-80 mix-blend-screen break-all overflow-hidden h-full w-full"></div>
     </div>
@@ -430,6 +718,20 @@
     <script src="data/bestiary-data.js"></script>
     <script src="data/nations-data.js"></script>
     <script src="data/relics-data.js"></script>
+    <script src="data/characters-data.js"></script>
+    <script src="data/events-data.js"></script>
+    <script src="data/atlas-data.js"></script>
+    <script src="data/narrative-data.js"></script>
+    <script src="data/gallery-data.js"></script>
+    <script src="js/content-store.js"></script>
+    <script src="js/audio-manager.js"></script>
+    <script src="js/desktop.js"></script>
+    <script src="js/fusion-catalog.js"></script>
+    <script src="js/characters.js"></script>
+    <script src="js/events.js"></script>
+    <script src="js/author-mode.js"></script>
+    <script src="js/atlas.js"></script>
+    <script src="js/universe-hub.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

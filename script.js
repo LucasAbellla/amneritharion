@@ -1,115 +1,16 @@
-const isElectron = typeof require !== 'undefined';
-let ipcRenderer = null;
+const { audioManager, initializeDesktopControls, createFusionCatalog } = window;
 
-if (isElectron) {
-    ipcRenderer = require('electron').ipcRenderer;
-}
+initializeDesktopControls();
+audioManager.init();
 
-window.addEventListener('DOMContentLoaded', () => {
-    const btnMinimize = document.getElementById('btn-minimize');
-    const btnClose = document.getElementById('btn-close');
-
-    if (isElectron && btnMinimize && btnClose) {
-        btnMinimize.addEventListener('click', () => ipcRenderer.send('minimize-window'));
-        btnClose.addEventListener('click', () => ipcRenderer.send('close-window'));
-    } else if (btnMinimize && btnClose) {
-        const controls = document.querySelector('.window-controls');
-        if(controls) controls.style.display = 'none';
-    }
-});
-
-const audioManager = {
-    ambient: new Audio('audio/ambient.mp3'),
-    click: new Audio('audio/click.mp3'),
-    fusion: new Audio('audio/fusion.mp3'),
-    glitch: new Audio('audio/glitch.mp3'),
-    started: false,
-    
-    init: function() {
-        this.ambient.loop = true;
-        this.ambient.volume = 0.15; 
-        this.click.volume = 0.5;
-        this.fusion.volume = 0.7;
-        this.glitch.volume = 0.6;
-        this.glitch.loop = true; 
-
-        document.body.addEventListener('click', () => {
-            if (!this.started) {
-                this.ambient.play().catch(e => console.log("Aguardando interação para o áudio..."));
-                this.started = true;
-            }
-        });
-    },
-    
-    playClick: function() {
-        this.click.currentTime = 0; 
-        this.click.play().catch(e => {});
-    },
-    
-    playFusion: function() {
-        this.fusion.currentTime = 0;
-        this.fusion.play().catch(e => {});
-    },
-    
-    playGlitch: function(state) {
-        if (state) {
-            this.glitch.play().catch(e => {});
-            this.ambient.volume = 0.05; 
-        } else {
-            this.glitch.pause();
-            this.ambient.volume = 0.15; 
-        }
-    }
-};
-
-audioManager.init(); 
-
-// =====================================
-// DADOS EXTERNOS
-// Os objetos abaixo foram movidos para /data/*.js.
-// Garanta que os arquivos de dados sejam carregados no index.html antes deste script.
-// =====================================
 const elementalData = window.elementalData;
 const bestiaryData = window.bestiaryData;
 const nationsData = window.nationsData;
 const relicsData = window.relicsData;
-window.addEventListener('load', () => {
-    const loader = document.getElementById('loading-screen');
-    if (loader) {
-        setTimeout(() => {
-            loader.classList.add('opacity-0', 'pointer-events-none');
-            setTimeout(() => loader.remove(), 1000); 
-        }, 2000); 
-    }
-});
-
+const charactersData = window.contentStore?.getCharacters() || window.charactersData || [];
+const eventsData = window.contentStore?.getEvents() || window.eventsData || [];
 let discoveredFusions = JSON.parse(localStorage.getItem('nahvvatzal_fusions')) || {};
-let allFusionsData = {}; 
-
-function initFusionsData() {
-    for (const [el1, combinations] of Object.entries(elementalData.combinations)) {
-        for (const [el2, fusionName] of Object.entries(combinations)) {
-            if (!allFusionsData[fusionName]) {
-                let mech = elementalData.complexElementMechanics["default"] || "Mecânica desconhecida.";
-                if(elementalData.complexElementMechanics[fusionName]) {
-                    mech = elementalData.complexElementMechanics[fusionName];
-                }
-                allFusionsData[fusionName] = {
-                    name: fusionName,
-                    parent1: el1,
-                    parent2: el2,
-                    color1: elementalData.baseElements[el1].color,
-                    color2: elementalData.baseElements[el2].color,
-                    desc: elementalData.complexElementDescriptions[fusionName] || "Descrição oculta.",
-                    type: elementalData.complexElementTypes[fusionName] || "Tipo desconhecido.",
-                    power: elementalData.complexElementPowers[fusionName] || "Poder oculto.",
-                    mechanics: mech
-                };
-            }
-        }
-    }
-}
-initFusionsData(); 
+const allFusionsData = createFusionCatalog(elementalData);
 
 document.addEventListener('DOMContentLoaded', () => {
     const selector1El = document.querySelector('#selector1 .grid');
@@ -473,7 +374,8 @@ document.addEventListener('DOMContentLoaded', () => {
             card.classList.add("card-amaldicoado");
         }
 
-        const conteudoIlustracao = data.imagem 
+        const hasImage = typeof data.imagem === 'string' && /\.(png|jpe?g|webp|gif)$/i.test(data.imagem);
+        const conteudoIlustracao = hasImage
             ? `<img src="${data.imagem}" alt="Ilustração de ${name}" class="w-full h-full object-cover opacity-80 mix-blend-lighten transition-transform duration-700 group-hover:scale-110">`
             : `<i class="fas fa-gem text-4xl opacity-40 transition-transform duration-700 group-hover:scale-125" style="color: ${data.color};"></i>`;
 
@@ -551,6 +453,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const viewBestiary = document.getElementById('view-bestiary');
     const viewNations = document.getElementById('view-nations');
     const viewRelics = document.getElementById('view-relics');
+    const viewCharacters = document.getElementById('view-characters');
+    const viewEvents = document.getElementById('view-events');
+    const viewAtlas = document.getElementById('view-atlas');
+    const viewUniverse = document.getElementById('view-universe');
     
     function switchView(fromView, toView) {
         if(!fromView || !toView) return;
@@ -568,6 +474,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-open-bestiary')?.addEventListener('click', () => switchView(viewAltar, viewBestiary));
     document.getElementById('btn-open-nations')?.addEventListener('click', () => switchView(viewAltar, viewNations));
     document.getElementById('btn-open-relics')?.addEventListener('click', () => switchView(viewAltar, viewRelics));
+    document.getElementById('btn-open-characters')?.addEventListener('click', () => switchView(viewAltar, viewCharacters));
+    document.getElementById('btn-open-events')?.addEventListener('click', () => switchView(viewAltar, viewEvents));
+    document.getElementById('btn-open-atlas')?.addEventListener('click', () => switchView(viewAltar, viewAtlas));
+    document.getElementById('btn-open-universe')?.addEventListener('click', () => switchView(viewAltar, viewUniverse));
 
     document.querySelectorAll('.btn-back-altar').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -575,6 +485,12 @@ document.addEventListener('DOMContentLoaded', () => {
             switchView(currentView, viewAltar);
         });
     });
+
+    window.initializeCharacters?.(charactersData);
+    window.initializeEvents?.(eventsData);
+    window.initializeAuthorMode?.();
+    window.initializeAtlas?.();
+    window.initializeUniverseHub?.();
 
     // =========================================
     // RELÍQUIAS
@@ -767,6 +683,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================
     const complexGrid = document.getElementById('complex-grid');
     const fusionCounter = document.getElementById('fusion-counter');
+    const fusionTotal = document.getElementById('fusion-total');
+    if (fusionTotal) fusionTotal.innerText = Object.keys(allFusionsData).length;
 
     function renderComplexGrid() {
         if (!complexGrid) return;

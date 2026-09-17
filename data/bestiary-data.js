@@ -24,7 +24,7 @@ window.bestiaryData = [
         peculiarity: "O seu núcleo emana um frio tão absoluto que congela instantaneamente a humidade do ar ao seu redor, criando uma armadura de gelo espessa e autorregenerativa.",
         desc: "Constructos adormecidos que despertam com o uso abusivo de magia.",
         fullDesc: "Armas de cerco gigantescas criadas numa era esquecida por mestres renegados de Crelix e Terrae. Os colossos são aglomerados massivos de rocha viva e gelo perene. Eles permanecem adormecidos como montanhas literais, e só despertam quando detetam picos extremos de manipulação mágica na sua vizinhança. Uma vez despertos, marcham em silêncio absoluto para erradicar a fonte do distúrbio com força brutal.",
-        image: "img/teste imagem.jpg",
+        image: "img/",
         icon: "fas fa-snowflake"
     },
     { 
@@ -38,7 +38,7 @@ window.bestiaryData = [
         peculiarity: "O seu núcleo emana um frio tão absoluto que congela instantaneamente a humidade do ar ao seu redor, criando uma armadura de gelo espessa e autorregenerativa.",
         desc: "Constructos adormecidos que despertam com o uso abusivo de magia.",
         fullDesc: "Armas de cerco gigantescas criadas numa era esquecida por mestres renegados de Crelix e Terrae. Os colossos são aglomerados massivos de rocha viva e gelo perene. Eles permanecem adormecidos como montanhas literais, e só despertam quando detetam picos extremos de manipulação mágica na sua vizinhança. Uma vez despertos, marcham em silêncio absoluto para erradicar a fonte do distúrbio com força brutal.",
-        image: "img/teste-iturfratsze.jpg",
+        image: "img/",
         icon: "fas fa-mountain"
     },
     { 
@@ -56,4 +56,3 @@ window.bestiaryData = [
         icon: "fas fa-pastafarianism"
     }
 ];
-

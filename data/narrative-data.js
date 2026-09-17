@@ -1,0 +1,4 @@
+window.narrativeData = {
+    arcs: [],
+    chapters: []
+};

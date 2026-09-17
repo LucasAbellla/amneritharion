@@ -1,0 +1,17 @@
+O Amneritharion inclui os seguintes recursos de terceiros:
+
+Tailwind CSS
+Copyright (c) Tailwind Labs, Inc.
+Licença MIT: https://github.com/tailwindlabs/tailwindcss/blob/master/LICENSE
+
+Font Awesome Free
+Ícones: CC BY 4.0; fontes: SIL OFL 1.1; código: MIT.
+Detalhes: https://fontawesome.com/license/free
+
+Cinzel
+Copyright dos respectivos autores.
+Distribuída sob a SIL Open Font License 1.1.
+
+Quattrocento Sans
+Copyright dos respectivos autores.
+Distribuída sob a SIL Open Font License 1.1.
